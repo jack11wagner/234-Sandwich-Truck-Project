@@ -1,17 +1,11 @@
 package com.example.sandwichtruckproject;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class MapController {
+public class  MapController{
 
-    @FXML
-    private Label tmTitle;
+@FXML
+private Label tmLabel;
 
-    @FXML
-    void generateMapClicked(ActionEvent event) {
-
-    }
-
-}
+        }
