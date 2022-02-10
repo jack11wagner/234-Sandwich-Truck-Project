@@ -25,7 +25,7 @@ public class Order {
 
     public void generateFields()
     {
-        generateRandomTimestamp();
+        setRandomTimestamp();
         setOrderContents();
         setFullOrderDetails();
     }
@@ -37,15 +37,14 @@ public class Order {
 
     }
 
-    public Timestamp generateRandomTimestamp()
+    public void setRandomTimestamp()
     {
         int hour = getRandomNumber(11,18);
         int min = getRandomNumber(0,60);
         int sec = getRandomNumber(0,60);
         String fullTimestamp;
         fullTimestamp =date + " " + hour +":" + min + ":" + sec;
-        Timestamp t = Timestamp.valueOf(fullTimestamp);
-        return t;
+        this.timestamp = Timestamp.valueOf(fullTimestamp);
     }
 
     public void setOrderContents()
@@ -56,7 +55,7 @@ public class Order {
 
     public void setFullOrderDetails()
     {
-        fullOrderDetails+= timestamp + " " + orderContents + " " + streetName;
+        fullOrderDetails+= this.getTimestamp() + " " + this.orderContents + " " + streetName;
     }
 
 
@@ -64,6 +63,9 @@ public class Order {
         return orderContents;
     }
 
+    public String getFullOrderDetails() {
+        return fullOrderDetails;
+    }
 
     public Timestamp getTimestamp() {
         return timestamp;
