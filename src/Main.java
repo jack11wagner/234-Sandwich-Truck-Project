@@ -1,6 +1,7 @@
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+    Order o = new Order("01/01/2022");
+    System.out.println(o);
     }
 }
