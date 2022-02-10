@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class OrderList {
@@ -10,6 +12,15 @@ public class OrderList {
     {
         orderList.add(e);
     }
+
+    public void writeOrdersToFile() throws IOException {
+        FileWriter writer = new FileWriter("orders.txt");
+        for(Order o : orderList) {
+            writer.write(o.getTimestamp()+","+ o.getOrderContents()+ System.lineSeparator());
+        }
+        writer.close();
+    }
+
 
     @Override
     public String toString() {
