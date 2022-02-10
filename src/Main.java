@@ -8,6 +8,6 @@ public class Main {
         ol.addOrder(new Order("2022-01-01"));
     }
     ol.writeOrdersToFile();
-
+    Window simWindow = new Window();
     }
 }
