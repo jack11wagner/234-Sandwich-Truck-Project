@@ -1,7 +1,8 @@
 import java.util.Random;
+import java.sql.Timestamp;
 
 public class Order {
-    private String timestamp;
+    private Timestamp timestamp;
     private String date;
     private String streetName;
     private int locationX;
@@ -12,7 +13,7 @@ public class Order {
 
     public Order(String date){
         this.date = date;
-        this.timestamp = "";
+        this.timestamp = Timestamp.valueOf("2000-01-01 0:0:0");
         this.locationX = 0;
         this.locationY = 0;
         this.orderContents = "";
@@ -36,13 +37,15 @@ public class Order {
 
     }
 
-    public String generateRandomTimestamp()
+    public Timestamp generateRandomTimestamp()
     {
         int hour = getRandomNumber(11,18);
         int min = getRandomNumber(0,60);
         int sec = getRandomNumber(0,60);
-        timestamp+=date + " " + hour +":" + min + ":" + sec;
-        return timestamp;
+        String fullTimestamp;
+        fullTimestamp =date + " " + hour +":" + min + ":" + sec;
+        Timestamp t = Timestamp.valueOf(fullTimestamp);
+        return t;
     }
 
     public void setOrderContents()
@@ -53,7 +56,7 @@ public class Order {
 
     public void setFullOrderDetails()
     {
-        fullOrderDetails+= timestamp + " "+ orderContents + " " + streetName;
+        fullOrderDetails+= timestamp + " " + orderContents + " " + streetName;
     }
 
 
@@ -62,7 +65,7 @@ public class Order {
     }
 
 
-    public String getTimestamp() {
+    public Timestamp getTimestamp() {
         return timestamp;
     }
 
