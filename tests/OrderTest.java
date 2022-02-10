@@ -16,18 +16,26 @@ class OrderTest {
     @Test
     public void testRandomTimestamp()
     {
-        Order o = new Order("1/1/2022");
-        System.out.println(o.generateRandomTimestamp());
+        Order o = new Order("2022-01-01");
+
     }
 
     @Test
     public void testRandomOrder()
     {
         ArrayList<String> orderList = makeOrderList();
-        Order o = new Order("1/1/2022");
+        Order o = new Order("2022-01-01");
         o.setOrderContents();
         assertTrue(orderList.contains(o.getOrderContents()));
     }
+
+    @Test
+    public void testMakingEmptyOrder()
+    {
+        Order o = new Order("2022-01-01");
+
+    }
+
 
 
 }
