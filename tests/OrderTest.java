@@ -29,5 +29,13 @@ class OrderTest {
         assertTrue(orderList.contains(o.getOrderContents()));
     }
 
+    @Test
+    public void testMakingEmptyOrder()
+    {
+        Order o = new Order("2022-01-01");
+
+    }
+
+
 
 }

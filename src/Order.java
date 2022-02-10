@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 public class Order {
     private Timestamp timestamp;
     private String date;
-    private String streetName;
+    private String address;
     private int locationX;
     private int locationY;
     private String orderContents;
@@ -18,16 +18,22 @@ public class Order {
         this.locationY = 0;
         this.orderContents = "";
         this.fullOrderDetails = "";
-        this.streetName = "";
-        generateFields();
+        this.address = "";
+        generateRandomFields();
 
     }
 
-    public void generateFields()
+    public void generateRandomFields()
     {
         setRandomTimestamp();
+        setRandomAddress();
         setOrderContents();
         setFullOrderDetails();
+    }
+
+    private void setRandomAddress() {
+        int[] streetList = {1,2,3,4,5,6,7,8,9,10};
+
     }
 
     public int getRandomNumber(int min , int max)
@@ -42,20 +48,19 @@ public class Order {
         int hour = getRandomNumber(11,18);
         int min = getRandomNumber(0,60);
         int sec = getRandomNumber(0,60);
-        String fullTimestamp;
-        fullTimestamp =date + " " + hour +":" + min + ":" + sec;
+        String fullTimestamp =date + " " + hour +":" + min + ":" + sec;
         this.timestamp = Timestamp.valueOf(fullTimestamp);
     }
 
     public void setOrderContents()
     {
-        String[] orderList = {"Sandwich", "Soup", "French Fries"};
+        String[] orderList = {"Sandwich", "Soup", "French Fries", ""};
         orderContents = orderList[new Random().nextInt(orderList.length)];
     }
 
     public void setFullOrderDetails()
     {
-        fullOrderDetails+= this.getTimestamp() + " " + this.orderContents + " " + streetName;
+        fullOrderDetails+= this.getTimestamp() + " " + this.orderContents + " " + this.address;
     }
 
 
@@ -88,7 +93,7 @@ public class Order {
         return "Order{" +
                 "timestamp='" + timestamp + '\'' +
                 ", date='" + date + '\'' +
-                ", streetName='" + streetName + '\'' +
+                ", streetName='" + address + '\'' +
                 ", locationX=" + locationX +
                 ", locationY=" + locationY +
                 ", orderContents='" + orderContents + '\'' +
