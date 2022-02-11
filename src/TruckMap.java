@@ -20,7 +20,6 @@ public class TruckMap extends JPanel{
 
         // draw roads
         float spacing = SimSettings.DIMENSION / (SimSettings.NUM_ROADS + 1);
-        System.out.println(spacing);  
         for (int i = 1; i < SimSettings.NUM_ROADS + 1; i++) { 
             g2D.drawLine((int) spacing*i, 0, (int) spacing*i, SimSettings.DIMENSION);// vertical
             g2D.drawLine(0, (int) spacing*i, SimSettings.DIMENSION, (int) spacing*i);// horizontal
