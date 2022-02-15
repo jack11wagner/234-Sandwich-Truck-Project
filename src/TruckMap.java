@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import java.awt.*;
 
 public class TruckMap extends JPanel{
-    private static int roadWidth = 20;
+    private static int roadWidth = SimSettings.DIMENSION / 35;
 
     TruckMap() {
         this.setPreferredSize(new Dimension(SimSettings.DIMENSION, SimSettings.DIMENSION));
