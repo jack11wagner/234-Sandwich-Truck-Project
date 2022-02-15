@@ -15,30 +15,15 @@ public class Order {
         this.orderContents = "";
         this.fullOrderDetails = "";
         this.address = "";
-        generateRandomFields();
-
     }
 
     public void generateRandomFields()
     {
         setRandomTimestamp();
         setRandomAddress();
-        setOrderContents();
+        setRandomOrderContents();
         setRandomAddress();
         setFullOrderDetails();
-
-    }
-
-    public void setRandomAddress() {
-        String[] streetList = {"1","2","3", "4","5","6", "7", "8", "9","10", "A","B", "C","D", "E", "F", "G","H","I", "J"};
-        ArrayList<String> houseNumbers = new ArrayList<>();
-        for (int i = 100;i<=1090;i+=10){
-            houseNumbers.add(String.valueOf(i));
-        }
-        String street = streetList[new Random().nextInt(streetList.length)];
-        String houseNumber = houseNumbers.get(new Random().nextInt(houseNumbers.size()));
-
-        this.address = houseNumber + " " + street + " St.";
 
     }
 
@@ -49,6 +34,23 @@ public class Order {
 
     }
 
+    private String getRandomStreetName(){
+        String[] streetList = {"1","2","3", "4","5","6", "7", "8", "9","10", "A","B", "C","D", "E", "F", "G","H","I", "J"};
+        return streetList[new Random().nextInt(streetList.length)];
+
+    }
+    private String getRandomHouseNumber(){
+        ArrayList<String> houseNumbers = new ArrayList<>();
+        for (int i = 100;i<=1090;i+=10)
+            houseNumbers.add(String.valueOf(i));
+        return houseNumbers.get(new Random().nextInt(houseNumbers.size()));
+    }
+
+    public void setRandomAddress() {
+        String houseNumber = this.getRandomHouseNumber();
+        String street = this.getRandomStreetName();
+        this.address = houseNumber + " " + street + " St.";
+    }
     public void setRandomTimestamp()
     {
         int hour = getRandomNumber(11,18);
@@ -58,7 +60,7 @@ public class Order {
         this.timestamp = Timestamp.valueOf(fullTimestamp);
     }
 
-    public void setOrderContents()
+    public void setRandomOrderContents()
     {
         String[] orderList = {"Italian Sandwich", "Ham and Cheese", "Bologna Sandwich", "Salami Sandwich"};
         orderContents = orderList[new Random().nextInt(orderList.length)];
@@ -92,13 +94,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
-                "timestamp='" + timestamp + '\'' +
-                ", date='" + date + '\'' +
-                ", streetName='" + address + '\'' +
-                ", orderContents='" + orderContents + '\'' +
-                ", fullOrderDetails='" + fullOrderDetails + '\'' +
-                '}';
+        return this.fullOrderDetails;
     }
 
 
