@@ -19,15 +19,15 @@ public class TruckMap extends JPanel{
         g2D.setStroke(new BasicStroke(roadWidth));
 
         // draw roads
-        float spacing = SimSettings.DIMENSION / (SimSettings.NUM_ROADS + 1);
-        for (int i = 1; i < SimSettings.NUM_ROADS + 1; i++) { 
+        float spacing = SimSettings.DIMENSION / (SimSettings.NUM_ROADS - 1);
+        for (int i = 0; i < SimSettings.NUM_ROADS; i++) {
             g2D.drawLine((int) spacing*i, 0, (int) spacing*i, SimSettings.DIMENSION);// vertical
             g2D.drawLine(0, (int) spacing*i, SimSettings.DIMENSION, (int) spacing*i);// horizontal
         }
 
         // line to separate buttons from map
-        g2D.setStroke(new BasicStroke(1));
-        g2D.drawLine(0, SimSettings.DIMENSION, SimSettings.DIMENSION, SimSettings.DIMENSION);
+//        g2D.setStroke(new BasicStroke(1));
+//        g2D.drawLine(0, SimSettings.DIMENSION, SimSettings.DIMENSION, SimSettings.DIMENSION);
 
 
     }
