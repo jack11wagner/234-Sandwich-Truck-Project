@@ -5,9 +5,7 @@ import java.sql.Timestamp;
 public class Order {
     private Timestamp timestamp;
     private String date;
-
     private String address;
-
     private String orderContents;
     private String fullOrderDetails;
 
