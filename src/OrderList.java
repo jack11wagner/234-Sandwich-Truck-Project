@@ -13,12 +13,23 @@ public class OrderList {
         orderList.add(e);
     }
 
-    public void writeOrdersToFile() throws IOException {
+    private void writeOrdersToFile() throws IOException {
         FileWriter writer = new FileWriter("orders.txt");
         for(Order o : orderList) {
-            writer.write(o.getTimestamp()+","+ o.getOrderContents()+ System.lineSeparator());
+            writer.write(o.getTimestamp()+","+ o.getAddress() + "," + o.getOrderContents() + System.lineSeparator());
         }
         writer.close();
+    }
+    public void generateOrders(int numOrders)
+    {
+        for(int i =0;i<numOrders;i++){
+            this.orderList.add(new Order("2022-01-01"));
+        }
+        try {
+            this.writeOrdersToFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
