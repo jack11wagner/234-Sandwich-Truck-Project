@@ -2,12 +2,12 @@ import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
     OrderList ol = new OrderList();
-    for(int i =0;i<15;i++){
-        ol.addOrder(new Order("2022-01-01"));
-    }
-    ol.writeOrdersToFile();
+    ol.generateOrders(100);
+
     Window simWindow = new Window();
+    Order o = new Order("2022-01-01");
     }
+
 }

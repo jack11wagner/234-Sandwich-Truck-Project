@@ -33,8 +33,28 @@ class OrderTest {
     public void testMakingEmptyOrder()
     {
         Order o = new Order("2022-01-01");
+        assertTrue(o.getOrderContents().equals(""));
 
     }
+
+    @Test
+    public void testRandomAddress()
+    {
+        Order o = new Order("2022-01-01");
+        o.setRandomAddress();
+        System.out.println(o.getAddress());
+    }
+
+    @Test
+    public void testGetFullOrderDetails()
+    {
+        Order o = new Order("2022-01-01");
+        o.generateRandomFields();
+        System.out.println(o.getFullOrderDetails());
+
+    }
+
+
 
 
 
