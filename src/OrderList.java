@@ -23,7 +23,9 @@ public class OrderList {
     public void generateOrders(int numOrders)
     {
         for(int i =0;i<numOrders;i++){
-            this.orderList.add(new Order("2022-01-01"));
+            Order o = new Order("2022-01-01");
+            o.generateRandomFields();
+            this.orderList.add(o);
         }
         try {
             this.writeOrdersToFile();
