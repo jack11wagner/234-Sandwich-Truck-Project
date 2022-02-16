@@ -35,21 +35,6 @@ public class Order {
         setFullOrderDetails();
 
     }
-    public void setRandomAddress() {
-        /**
-         *
-         */
-        String[] streetList = {"1","2","3", "4","5","6", "7", "8", "9","10", "A","B", "C","D", "E", "F", "G","H","I", "J"};
-        ArrayList<String> houseNumbers = new ArrayList<>();
-        for (int i = 100;i<=1090;i+=10){
-            houseNumbers.add(String.valueOf(i));
-        }
-        String street = streetList[new Random().nextInt(streetList.length)];
-        String houseNumber = houseNumbers.get(new Random().nextInt(houseNumbers.size()));
-
-        this.address = houseNumber + " " + street + " St.";
-
-    }
 
     private int getRandomNumber(int min , int max)
     {

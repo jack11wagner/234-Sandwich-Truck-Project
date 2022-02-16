@@ -50,6 +50,7 @@ class OrderTest {
         Order o = new Order("2022-01-01");
         o.setRandomAddress();
         String address = o.getAddress();
+
         String[] address_components = address.split(" ");
 
         assertTrue(houseNumberTestList.contains(address_components[0]));
