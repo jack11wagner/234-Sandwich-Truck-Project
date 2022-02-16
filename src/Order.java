@@ -3,6 +3,11 @@ import java.util.Random;
 import java.sql.Timestamp;
 
 public class Order {
+    /**
+     * Stores information about an Order
+     * Details such as timestamps, OrderContents, address are all randomly generated
+     *
+     */
     private Timestamp timestamp;
     private String date;
     private String address;
@@ -10,6 +15,7 @@ public class Order {
     private String fullOrderDetails;
 
     public Order(String date){
+
         this.date = date;
         this.timestamp = Timestamp.valueOf("2000-01-01 0:0:0");
         this.orderContents = "";
@@ -21,6 +27,9 @@ public class Order {
 
     public void generateRandomFields()
     {
+        /**
+         * Calls methods to create random values for each of the instance variables
+         */
         setRandomTimestamp();
         setRandomAddress();
         setOrderContents();
@@ -30,6 +39,9 @@ public class Order {
     }
 
     public void setRandomAddress() {
+        /**
+         *
+         */
         String[] streetList = {"1","2","3", "4","5","6", "7", "8", "9","10", "A","B", "C","D", "E", "F", "G","H","I", "J"};
         ArrayList<String> houseNumbers = new ArrayList<>();
         for (int i = 100;i<=1090;i+=10){
