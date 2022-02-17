@@ -35,4 +35,9 @@ public class Window extends JFrame {
 
         this.setVisible(true);
     }
+
+    public void repaintTruck(int x, int y) {
+        tMap.setNewTruckCoords(new int[]{x, y});
+        tMap.repaint();
+    }
 }
