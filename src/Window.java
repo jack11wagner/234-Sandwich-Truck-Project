@@ -35,4 +35,8 @@ public class Window extends JFrame {
 
         this.setVisible(true);
     }
+
+    public void repaintTruck() {
+        tMap.repaint();
+    }
 }
