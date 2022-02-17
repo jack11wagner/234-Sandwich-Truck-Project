@@ -1,100 +1,100 @@
-2022-01-01 17:09:16.0,410 I St.,Ham and Cheese
-2022-01-01 13:21:25.0,680 F St.,Salami Sandwich
-2022-01-01 15:00:00.0,430 4 St.,Salami Sandwich
-2022-01-01 11:02:34.0,320 H St.,Bologna Sandwich
-2022-01-01 15:57:27.0,180 3 St.,Bologna Sandwich
-2022-01-01 15:05:17.0,550 5 St.,Bologna Sandwich
-2022-01-01 13:09:08.0,910 C St.,Italian Sandwich
-2022-01-01 13:10:34.0,240 I St.,Salami Sandwich
-2022-01-01 14:03:42.0,790 6 St.,Bologna Sandwich
-2022-01-01 16:29:25.0,820 4 St.,Salami Sandwich
-2022-01-01 16:10:25.0,470 5 St.,Italian Sandwich
-2022-01-01 17:14:46.0,950 5 St.,Ham and Cheese
-2022-01-01 14:07:04.0,920 2 St.,Ham and Cheese
-2022-01-01 13:06:55.0,990 E St.,Ham and Cheese
-2022-01-01 17:15:02.0,530 C St.,Ham and Cheese
-2022-01-01 17:46:11.0,340 9 St.,Ham and Cheese
-2022-01-01 11:00:51.0,790 9 St.,Salami Sandwich
-2022-01-01 16:41:41.0,1070 J St.,Ham and Cheese
-2022-01-01 16:42:41.0,700 F St.,Ham and Cheese
-2022-01-01 13:19:16.0,630 8 St.,Bologna Sandwich
-2022-01-01 12:42:22.0,400 H St.,Bologna Sandwich
-2022-01-01 11:29:50.0,800 E St.,Italian Sandwich
-2022-01-01 15:58:18.0,880 E St.,Bologna Sandwich
-2022-01-01 12:03:38.0,790 4 St.,Bologna Sandwich
-2022-01-01 14:08:06.0,880 4 St.,Salami Sandwich
-2022-01-01 13:59:45.0,1060 F St.,Bologna Sandwich
-2022-01-01 13:11:42.0,300 B St.,Ham and Cheese
-2022-01-01 17:18:15.0,970 E St.,Italian Sandwich
-2022-01-01 17:24:53.0,650 I St.,Bologna Sandwich
-2022-01-01 14:10:13.0,550 4 St.,Salami Sandwich
-2022-01-01 11:46:44.0,1060 6 St.,Bologna Sandwich
-2022-01-01 16:36:30.0,730 I St.,Bologna Sandwich
-2022-01-01 17:11:40.0,980 2 St.,Italian Sandwich
-2022-01-01 17:22:13.0,250 7 St.,Bologna Sandwich
-2022-01-01 11:34:00.0,530 5 St.,Salami Sandwich
-2022-01-01 17:22:19.0,750 4 St.,Italian Sandwich
-2022-01-01 13:55:57.0,780 8 St.,Bologna Sandwich
-2022-01-01 11:32:02.0,930 6 St.,Bologna Sandwich
-2022-01-01 12:15:26.0,600 B St.,Ham and Cheese
-2022-01-01 13:49:04.0,490 G St.,Italian Sandwich
-2022-01-01 15:18:38.0,940 C St.,Italian Sandwich
-2022-01-01 12:06:49.0,1020 9 St.,Ham and Cheese
-2022-01-01 12:28:43.0,440 F St.,Ham and Cheese
-2022-01-01 17:07:12.0,810 F St.,Italian Sandwich
-2022-01-01 16:22:52.0,690 F St.,Ham and Cheese
-2022-01-01 11:00:12.0,940 C St.,Bologna Sandwich
-2022-01-01 15:54:26.0,600 H St.,Italian Sandwich
-2022-01-01 15:27:21.0,150 F St.,Ham and Cheese
-2022-01-01 16:52:59.0,720 G St.,Salami Sandwich
-2022-01-01 11:55:15.0,1080 10 St.,Salami Sandwich
-2022-01-01 13:43:13.0,1030 8 St.,Italian Sandwich
-2022-01-01 13:47:32.0,160 7 St.,Italian Sandwich
-2022-01-01 13:36:31.0,650 7 St.,Italian Sandwich
-2022-01-01 12:57:09.0,900 J St.,Italian Sandwich
-2022-01-01 16:50:06.0,280 3 St.,Bologna Sandwich
-2022-01-01 14:56:01.0,410 E St.,Bologna Sandwich
-2022-01-01 17:24:35.0,910 9 St.,Salami Sandwich
-2022-01-01 17:00:30.0,670 9 St.,Ham and Cheese
-2022-01-01 15:09:21.0,260 10 St.,Salami Sandwich
-2022-01-01 11:26:29.0,970 10 St.,Salami Sandwich
-2022-01-01 17:58:39.0,890 D St.,Ham and Cheese
-2022-01-01 13:14:56.0,960 G St.,Salami Sandwich
-2022-01-01 14:08:08.0,490 J St.,Italian Sandwich
-2022-01-01 11:52:31.0,280 8 St.,Bologna Sandwich
-2022-01-01 15:42:28.0,240 J St.,Ham and Cheese
-2022-01-01 13:22:27.0,700 C St.,Ham and Cheese
-2022-01-01 13:06:03.0,640 2 St.,Salami Sandwich
-2022-01-01 14:44:14.0,650 G St.,Ham and Cheese
-2022-01-01 11:05:55.0,740 6 St.,Ham and Cheese
-2022-01-01 13:13:50.0,860 H St.,Ham and Cheese
-2022-01-01 14:10:59.0,720 I St.,Bologna Sandwich
-2022-01-01 14:41:50.0,650 8 St.,Salami Sandwich
-2022-01-01 13:41:24.0,910 A St.,Italian Sandwich
-2022-01-01 14:22:50.0,800 1 St.,Bologna Sandwich
-2022-01-01 17:05:49.0,970 4 St.,Italian Sandwich
-2022-01-01 16:29:36.0,240 B St.,Italian Sandwich
-2022-01-01 12:57:27.0,890 E St.,Italian Sandwich
-2022-01-01 11:40:58.0,550 E St.,Italian Sandwich
-2022-01-01 17:09:46.0,940 2 St.,Bologna Sandwich
-2022-01-01 13:37:55.0,530 4 St.,Italian Sandwich
-2022-01-01 14:37:24.0,120 C St.,Ham and Cheese
-2022-01-01 16:20:05.0,350 7 St.,Bologna Sandwich
-2022-01-01 16:41:16.0,910 7 St.,Bologna Sandwich
-2022-01-01 11:14:27.0,290 I St.,Salami Sandwich
-2022-01-01 11:49:54.0,910 B St.,Bologna Sandwich
-2022-01-01 13:35:14.0,150 J St.,Italian Sandwich
-2022-01-01 13:31:11.0,1020 6 St.,Italian Sandwich
-2022-01-01 11:36:41.0,770 6 St.,Bologna Sandwich
-2022-01-01 16:38:47.0,830 1 St.,Bologna Sandwich
-2022-01-01 12:26:15.0,250 J St.,Salami Sandwich
-2022-01-01 12:07:09.0,140 7 St.,Salami Sandwich
-2022-01-01 13:37:01.0,350 4 St.,Ham and Cheese
-2022-01-01 16:07:50.0,240 3 St.,Bologna Sandwich
-2022-01-01 13:48:55.0,780 B St.,Ham and Cheese
-2022-01-01 14:43:46.0,690 3 St.,Bologna Sandwich
-2022-01-01 14:18:50.0,590 2 St.,Ham and Cheese
-2022-01-01 14:24:25.0,640 B St.,Italian Sandwich
-2022-01-01 15:15:08.0,610 J St.,Italian Sandwich
-2022-01-01 15:13:46.0,830 H St.,Italian Sandwich
-2022-01-01 17:10:07.0,750 2 St.,Bologna Sandwich
+2022-01-01 16:11:44.0,960 A St.,Italian Sandwich
+2022-01-01 17:08:35.0,570 8 St.,Bologna Sandwich
+2022-01-01 17:48:54.0,1020 D St.,Bologna Sandwich
+2022-01-01 14:56:14.0,340 D St.,Salami Sandwich
+2022-01-01 14:07:06.0,920 C St.,Bologna Sandwich
+2022-01-01 16:53:35.0,180 B St.,Bologna Sandwich
+2022-01-01 14:52:25.0,350 5 St.,Bologna Sandwich
+2022-01-01 15:50:08.0,740 3 St.,Ham and Cheese
+2022-01-01 17:14:24.0,100 J St.,Italian Sandwich
+2022-01-01 15:38:17.0,1020 I St.,Italian Sandwich
+2022-01-01 11:23:24.0,990 4 St.,Ham and Cheese
+2022-01-01 14:15:34.0,100 5 St.,Ham and Cheese
+2022-01-01 12:04:57.0,840 I St.,Salami Sandwich
+2022-01-01 12:50:47.0,100 9 St.,Italian Sandwich
+2022-01-01 17:10:55.0,980 H St.,Bologna Sandwich
+2022-01-01 15:52:27.0,790 D St.,Salami Sandwich
+2022-01-01 13:02:56.0,920 I St.,Bologna Sandwich
+2022-01-01 15:59:08.0,730 6 St.,Italian Sandwich
+2022-01-01 16:56:19.0,1080 8 St.,Salami Sandwich
+2022-01-01 14:31:16.0,300 5 St.,Salami Sandwich
+2022-01-01 13:42:33.0,290 C St.,Salami Sandwich
+2022-01-01 11:01:52.0,270 A St.,Ham and Cheese
+2022-01-01 14:37:15.0,410 I St.,Italian Sandwich
+2022-01-01 13:00:15.0,640 7 St.,Ham and Cheese
+2022-01-01 14:54:20.0,950 9 St.,Salami Sandwich
+2022-01-01 12:30:58.0,100 4 St.,Italian Sandwich
+2022-01-01 14:51:31.0,140 B St.,Salami Sandwich
+2022-01-01 14:52:30.0,170 4 St.,Bologna Sandwich
+2022-01-01 15:07:58.0,140 10 St.,Italian Sandwich
+2022-01-01 14:34:01.0,830 J St.,Ham and Cheese
+2022-01-01 16:15:30.0,230 2 St.,Salami Sandwich
+2022-01-01 12:58:27.0,700 F St.,Italian Sandwich
+2022-01-01 14:47:46.0,590 D St.,Bologna Sandwich
+2022-01-01 11:42:19.0,780 4 St.,Salami Sandwich
+2022-01-01 11:17:36.0,1090 8 St.,Italian Sandwich
+2022-01-01 13:45:58.0,310 E St.,Salami Sandwich
+2022-01-01 13:56:44.0,520 F St.,Bologna Sandwich
+2022-01-01 11:39:20.0,810 B St.,Ham and Cheese
+2022-01-01 15:42:55.0,570 C St.,Salami Sandwich
+2022-01-01 16:16:17.0,160 F St.,Bologna Sandwich
+2022-01-01 14:39:24.0,330 H St.,Italian Sandwich
+2022-01-01 12:51:59.0,230 2 St.,Italian Sandwich
+2022-01-01 11:19:12.0,1090 10 St.,Bologna Sandwich
+2022-01-01 14:20:35.0,820 1 St.,Bologna Sandwich
+2022-01-01 16:32:12.0,1070 H St.,Ham and Cheese
+2022-01-01 11:59:24.0,300 8 St.,Ham and Cheese
+2022-01-01 16:18:23.0,910 2 St.,Ham and Cheese
+2022-01-01 13:13:27.0,520 4 St.,Italian Sandwich
+2022-01-01 16:40:05.0,830 6 St.,Ham and Cheese
+2022-01-01 16:31:53.0,740 4 St.,Italian Sandwich
+2022-01-01 14:14:50.0,610 C St.,Ham and Cheese
+2022-01-01 17:36:05.0,410 C St.,Bologna Sandwich
+2022-01-01 12:40:27.0,320 E St.,Italian Sandwich
+2022-01-01 11:59:45.0,880 1 St.,Salami Sandwich
+2022-01-01 13:51:58.0,210 7 St.,Italian Sandwich
+2022-01-01 17:14:27.0,180 7 St.,Salami Sandwich
+2022-01-01 11:10:41.0,270 D St.,Ham and Cheese
+2022-01-01 12:59:10.0,300 F St.,Ham and Cheese
+2022-01-01 16:14:30.0,550 1 St.,Ham and Cheese
+2022-01-01 16:37:35.0,970 3 St.,Ham and Cheese
+2022-01-01 11:11:58.0,950 2 St.,Ham and Cheese
+2022-01-01 13:49:15.0,440 2 St.,Bologna Sandwich
+2022-01-01 12:48:11.0,550 B St.,Salami Sandwich
+2022-01-01 15:40:11.0,420 I St.,Salami Sandwich
+2022-01-01 15:19:27.0,290 G St.,Salami Sandwich
+2022-01-01 14:21:38.0,1000 F St.,Salami Sandwich
+2022-01-01 13:37:05.0,440 5 St.,Italian Sandwich
+2022-01-01 13:35:11.0,1040 E St.,Salami Sandwich
+2022-01-01 11:39:53.0,110 6 St.,Bologna Sandwich
+2022-01-01 12:27:28.0,280 G St.,Italian Sandwich
+2022-01-01 12:53:54.0,100 3 St.,Ham and Cheese
+2022-01-01 16:10:32.0,250 7 St.,Italian Sandwich
+2022-01-01 13:25:13.0,160 10 St.,Italian Sandwich
+2022-01-01 13:27:49.0,1090 B St.,Italian Sandwich
+2022-01-01 13:43:57.0,660 A St.,Italian Sandwich
+2022-01-01 12:51:55.0,770 4 St.,Italian Sandwich
+2022-01-01 11:48:12.0,710 4 St.,Salami Sandwich
+2022-01-01 15:19:48.0,840 5 St.,Bologna Sandwich
+2022-01-01 12:00:21.0,380 5 St.,Bologna Sandwich
+2022-01-01 14:47:40.0,1040 A St.,Bologna Sandwich
+2022-01-01 12:11:00.0,1050 9 St.,Italian Sandwich
+2022-01-01 11:14:20.0,150 6 St.,Italian Sandwich
+2022-01-01 14:04:36.0,540 6 St.,Italian Sandwich
+2022-01-01 15:02:40.0,190 F St.,Ham and Cheese
+2022-01-01 13:13:56.0,410 F St.,Salami Sandwich
+2022-01-01 11:42:06.0,840 E St.,Ham and Cheese
+2022-01-01 15:56:27.0,930 H St.,Bologna Sandwich
+2022-01-01 12:04:07.0,340 C St.,Bologna Sandwich
+2022-01-01 16:23:41.0,1060 E St.,Italian Sandwich
+2022-01-01 15:05:52.0,520 C St.,Salami Sandwich
+2022-01-01 12:30:53.0,270 G St.,Ham and Cheese
+2022-01-01 17:14:35.0,130 6 St.,Italian Sandwich
+2022-01-01 13:03:12.0,830 B St.,Salami Sandwich
+2022-01-01 15:44:36.0,840 3 St.,Bologna Sandwich
+2022-01-01 11:46:26.0,180 G St.,Italian Sandwich
+2022-01-01 17:37:46.0,570 7 St.,Bologna Sandwich
+2022-01-01 13:52:19.0,330 4 St.,Salami Sandwich
+2022-01-01 16:31:27.0,560 J St.,Ham and Cheese
+2022-01-01 15:50:50.0,220 E St.,Salami Sandwich
+2022-01-01 13:41:44.0,100 1 St.,Salami Sandwich
