@@ -15,7 +15,7 @@ public class AddressConverterTest {
     public void testLetterStreetAddress() {
         converter = new AddressConverter();
         order = "date, 250 E St., food";
-        System.out.printf(converter.convert(order));
+        System.out.print(converter.convert(order));
     }
 
 
