@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -23,9 +24,23 @@ class OrderTest {
     }
 
     @Test
-    public void testRandomTimestamp()
+    public void testRandomTimestampReturnsValidTimestamp()
     {
+        String date = "2022-01-01";
         Order o = new Order("2022-01-01");
+        o.setRandomTimestamp();
+        Timestamp testTimestamp = o.getOrderTimestamp();
+        assertEquals(Timestamp.class, testTimestamp.getClass());
+        assertTrue(testTimestamp.toString().startsWith(date));
+    }
+
+    @Test
+    public void testInvalidDateFormatThrowsIllegalArgumentException()
+    {
+        Order o = new Order("abcdef");
+        assertThrows(IllegalArgumentException.class, () -> o.setRandomTimestamp());
+        Order o2 = new Order("2021:01:01");
+        assertThrows(IllegalArgumentException.class, () -> o2.setRandomTimestamp());
 
     }
 
@@ -36,7 +51,7 @@ class OrderTest {
         Order o = new Order("2022-01-01");
 
         o.setRandomOrderContents();
-        assertTrue(o.getDate().equals("2022-01-01"));
+        assertTrue(o.getOrderDate().equals("2022-01-01"));
         assertTrue(orderList.contains(o.getOrderContents()));
 
     }
@@ -49,7 +64,8 @@ class OrderTest {
         ArrayList<String> houseNumberTestList = createHouseNumberTestList();
         Order o = new Order("2022-01-01");
         o.setRandomAddress();
-        String address = o.getAddress();
+        String address = o.getOrderAddress();
+
         String[] address_components = address.split(" ");
 
         assertTrue(houseNumberTestList.contains(address_components[0]));

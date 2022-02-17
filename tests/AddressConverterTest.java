@@ -36,8 +36,4 @@ public class AddressConverterTest {
         converter.convert(order);
         assertEquals(250, converter.getAddrNum());
         assertEquals("A", converter.getStreet());
-    }
-
-
-
 }
