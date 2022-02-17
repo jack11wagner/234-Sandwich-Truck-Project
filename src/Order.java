@@ -1,3 +1,10 @@
+/*
+Author: Jackson Wagner
+This Class stores information about an Order and generates
+random information for each order component including a ordertime, address and ordercontents
+
+Edits by:
+*/
 import java.util.ArrayList;
 import java.util.Random;
 import java.sql.Timestamp;
@@ -8,9 +15,9 @@ public class Order {
      * Details such as timestamps, OrderContents, address are all randomly generated
      *
      */
-    private Timestamp timestamp;
-    private String date;
-    private String address;
+    private Timestamp orderTimestamp;
+    private String orderDate;
+    private String orderAddress;
     private String orderContents;
     private String fullOrderDetails;
 
@@ -20,11 +27,11 @@ public class Order {
          * Instantiates all instance variables to default values
          * @param : String date - The date all timestamps will have since all orders should be on a certain day
          */
-        this.date = date;
-        this.timestamp = Timestamp.valueOf("2000-01-01 0:0:0");
+        this.orderDate = date;
+        this.orderTimestamp = Timestamp.valueOf("2000-01-01 0:0:0");
         this.orderContents = "";
         this.fullOrderDetails = "";
-        this.address = "";
+        this.orderAddress = "";
     }
 
     public void generateRandomFields()
@@ -83,20 +90,20 @@ public class Order {
          */
         String houseNumber = this.getRandomHouseNumber();
         String street = this.getRandomStreetName();
-        this.address = houseNumber + " " + street + " St.";
+        this.orderAddress = houseNumber + " " + street + " St.";
     }
     public void setRandomTimestamp()
     {
         /**
          * Generates Random Values for Hour, Min, and Seconds to generate a random timestamp
          * This method calls the getRandomNumber helper method in order to generate the random values for each time component
-         * Sets the instance variable timestamp to a Random Timestamp object
+         * Sets the instance variable orderTimestamp to a Random Timestamp object
          */
         int hour = getRandomNumber(11,18);
         int min = getRandomNumber(0,60);
         int sec = getRandomNumber(0,60);
-        String fullTimestamp =date + " " + hour +":" + min + ":" + sec;
-        this.timestamp = Timestamp.valueOf(fullTimestamp);
+        String fullTimestamp = orderDate + " " + hour +":" + min + ":" + sec;
+        this.orderTimestamp = Timestamp.valueOf(fullTimestamp);
     }
 
     public void setRandomOrderContents()
@@ -111,9 +118,9 @@ public class Order {
     public void setFullOrderDetails()
     {
         /**
-         * Sets fullOrderDetails to the concatenated string of Timestamp, address and OrderContents
+         * Sets fullOrderDetails to the concatenated string of orderTimestamp, orderAddress and OrderContents
          */
-        fullOrderDetails= this.getTimestamp() + " " + this.address +  " " + this.orderContents;
+        fullOrderDetails= this.getOrderTimestamp() + " " + this.orderAddress +  " " + this.orderContents;
     }
 
 
@@ -131,25 +138,25 @@ public class Order {
         return fullOrderDetails;
     }
 
-    public Timestamp getTimestamp() {
+    public Timestamp getOrderTimestamp() {
         /**
          * @returns timestamp instance variable
          */
-        return timestamp;
+        return orderTimestamp;
     }
 
-    public String getAddress() {
+    public String getOrderAddress() {
         /**
          * @returns address instance variable
          */
-        return address;
+        return orderAddress;
     }
 
-    public String getDate() {
+    public String getOrderDate() {
         /**
          * @returns date instance variable
          */
-        return date;
+        return orderDate;
     }
 
     @Override

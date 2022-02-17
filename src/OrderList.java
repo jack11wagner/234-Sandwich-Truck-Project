@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,7 +31,7 @@ public class OrderList {
          */
         FileWriter writer = new FileWriter("orders.txt");
         for(Order o : orderList) {
-            writer.write(o.getTimestamp()+","+ o.getAddress() + "," + o.getOrderContents() + System.lineSeparator());
+            writer.write(o.getOrderTimestamp()+","+ o.getOrderAddress() + "," + o.getOrderContents() + System.lineSeparator());
         }
         writer.close();
     }
