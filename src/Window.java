@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class Window extends JFrame {
     private TruckMap tMap = new TruckMap();
-    JButton start_button;
+    private JButton start_button;
 
     Window() {
         super();
