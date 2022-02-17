@@ -20,9 +20,15 @@ public class TruckMap extends JPanel {
     TruckMap() {
         this.setPreferredSize(new Dimension(SimSettings.DIMENSION, SimSettings.DIMENSION));
         try {
-            truckImage = ImageIO.read(new File("images/truck.png"));
+            truckImage = ImageIO.read(new File("ikmages/truck.png"));
         } catch (IOException e) {
-            truckImage = new BufferedImage(5, 5, 1);
+            truckImage = new BufferedImage(1, 1, 1);
+            int rgb = new Color(255,0,255).getRGB();
+            for (int i = 0; i < truckImage.getWidth(); i++) {
+                for (int j = 0; j < truckImage.getHeight(); j++) {
+                    truckImage.setRGB(i, j, rgb);
+                }
+            }
         }
         // Truck begins at the intersection of roads E5
         truckX = SimSettings.ROAD_SPACING * 4; // Road E
