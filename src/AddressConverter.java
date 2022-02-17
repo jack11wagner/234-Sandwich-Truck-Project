@@ -14,9 +14,7 @@ public class AddressConverter {
 
     private int addrNum;
     private String street;
-    private String orderDate;
     private String address;
-    private String foodOrder;
     private String[] splitOrderArray;
     private String[] splitAddressArray;
     private ArrayList<Integer> coordinates;
