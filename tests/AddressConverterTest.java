@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AddressConverterTest {
     
     private String order;
-    AddressConverter converter = new AddressConverter();
+    private final AddressConverter converter = new AddressConverter();
 
     @Test
     public void testLetterStreetAddress() {
@@ -36,4 +36,5 @@ public class AddressConverterTest {
         converter.convert(order);
         assertEquals(250, converter.getAddrNum());
         assertEquals("A", converter.getStreet());
+    }
 }
