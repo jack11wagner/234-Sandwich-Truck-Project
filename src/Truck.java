@@ -3,6 +3,7 @@ public class Truck {
     private int y;
     private Window window;
     private OrderList orderList;
+    private AddressConverter addConverter = new AddressConverter();
 
     Truck(Window window, OrderList orderList) {
         this.window = window;
