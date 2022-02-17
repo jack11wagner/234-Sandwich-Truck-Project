@@ -20,7 +20,7 @@ public class TruckMap extends JPanel {
     TruckMap() {
         this.setPreferredSize(new Dimension(SimSettings.DIMENSION, SimSettings.DIMENSION));
         try {
-            truckImage = ImageIO.read(new File("images/truck.jpeg"));
+            truckImage = ImageIO.read(new File("images/truck.png"));
         } catch (IOException e) {
             truckImage = new BufferedImage(5, 5, 1);
         }

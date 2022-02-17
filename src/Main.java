@@ -3,7 +3,7 @@ public class Main {
 
     public static void main(String[] args) {
         OrderList ol = new OrderList();
-        ol.generateOrders(100);
+//        ol.generateOrders(100);
 
         Window simWindow = new Window();
 
