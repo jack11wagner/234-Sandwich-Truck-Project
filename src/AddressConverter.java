@@ -41,6 +41,8 @@ public class AddressConverter {
         street = splitAddressArray[1];
     }
 
+    // decides which conversion to do based on the street type (letter or number) and then returns the 
+    // x and y coordinates for the address that correspond to the location on the truck map
     public ArrayList<Integer> convert(String order) {
         splitOrder(order);
         splitAddress();
