@@ -25,6 +25,9 @@ public class AddressConverter {
     private int yCoordinate;
 
     public AddressConverter() {
+        coordinates = new ArrayList<>();
+        letterStreets = new HashMap<>();
+        numberStreets = new HashMap<>();
         fillAddressMaps();
     }
 
@@ -36,7 +39,7 @@ public class AddressConverter {
 
     // splits address string into an address number (addrNum) and a street (street)
     private void splitAddress() {
-        splitAddressArray = address.split(" ");
+        splitAddressArray = address.trim().split(" ");
         addrNum = Integer.parseInt(splitAddressArray[0]);
         street = splitAddressArray[1];
     }
@@ -52,12 +55,13 @@ public class AddressConverter {
             convertLetterAddress();
         else
             //throw new Exception("Invalid Street Label");
-            System.out.printf("invalid street label");
+            System.out.println("invalid street label");
         coordinates.add(xCoordinate);
         coordinates.add(yCoordinate);
         return coordinates;
     }
 
+    // FIXME
     // if the address is on a number named street, calculates the x and y coordinates for the truck map
     private void convertNumberAddress() {
         
@@ -65,15 +69,17 @@ public class AddressConverter {
         int horizontalStreetNumber = (addrNum % 100) / 10;
         
         xCoordinate = (int)(spacing * (horizontalBlockNumber- 1) + (spacing / 11) * horizontalStreetNumber);
-        yCoordinate = (int)(spacing * numberStreets.get(street));
+        yCoordinate = (int)(spacing * (10 - numberStreets.get(street) - 1));
     }
 
+    // FIXME
+    // if the address is on a letter named street, calculates the x and y coordinates for the truck map
     private void convertLetterAddress() {
         int verticalBlockNumber = addrNum / 100;
         int verticalStreetNumber = (addrNum % 100) / 10;
 
-        xCoordinate = (int)(spacing * letterStreets.get(street));
-        yCoordinate = (int)(spacing * (verticalBlockNumber - 1) + (spacing / 11) * verticalStreetNumber);
+        xCoordinate = (int)(spacing * (letterStreets.get(street)));
+        yCoordinate = (int)(spacing * (10 - verticalBlockNumber - 1) + (spacing / 11) * (10 - verticalStreetNumber + 1));
     }
 
 
@@ -102,12 +108,15 @@ public class AddressConverter {
     }
 
 
-    
+    public int getAddrNum() {
+        return addrNum;
+    }
 
+    public String getStreet() {
+        return street;
+    }
 
-
-
-
-
-    
+    public String getAddress() {
+        return address;
+    }
 }
