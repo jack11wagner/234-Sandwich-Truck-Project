@@ -9,13 +9,18 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AddressConverterTest {
     
     private String order;
-    AddressConverter converter;
+    AddressConverter converter = new AddressConverter();
 
     @Test
     public void testLetterStreetAddress() {
-        converter = new AddressConverter();
         order = "date, 250 E St., food";
-        System.out.printf(converter.convert(order));
+        System.out.print(converter.convert(order));
+    }
+
+    @Test
+    public void testSplitOrder() {
+        order = "date, address, food";
+        //assertEquals();
     }
 
 
