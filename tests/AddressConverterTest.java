@@ -13,14 +13,29 @@ public class AddressConverterTest {
 
     @Test
     public void testLetterStreetAddress() {
-        order = "date, 250 E St., food";
-        System.out.print(converter.convert(order));
+        order = "date, 700 G St., food";
+        System.out.println("L: " + converter.convert(order));
+    }
+
+    @Test
+    public void testNumberStreetAddress() {
+        order = "date, 500 5 St., food";
+        System.out.println("N: " + converter.convert(order));
     }
 
     @Test
     public void testSplitOrder() {
-        order = "date, address, food";
-        //assertEquals();
+        order = "date, 250 A st., food";
+        converter.convert(order);
+        assertEquals(" 250 A st.", converter.getAddress());
+    }
+
+    @Test
+    public void testSplitAddress() {
+        order = "date, 250 A st., food";
+        converter.convert(order);
+        assertEquals(250, converter.getAddrNum());
+        assertEquals("A", converter.getStreet());
     }
 
 
