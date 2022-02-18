@@ -34,6 +34,19 @@ public class Order {
         this.orderAddress = "";
     }
 
+    public Order(String timestamp, String address, String orderContents){
+        /**
+         * Constructor for Order Class
+         * Instantiates all instance variables to default values
+         * @param : String date - The date all timestamps will have since all orders should be on a certain day
+         */
+        this.orderDate = "";
+        this.orderTimestamp = Timestamp.valueOf(timestamp);
+        this.orderContents = orderContents;
+        this.fullOrderDetails = timestamp + ", " + address + ", " + orderContents;
+        this.orderAddress = address;
+    }
+
     public void generateRandomFields()
     {
         /**
@@ -120,7 +133,7 @@ public class Order {
         /**
          * Sets fullOrderDetails to the concatenated string of orderTimestamp, orderAddress and OrderContents
          */
-        fullOrderDetails= this.getOrderTimestamp() + " " + this.orderAddress +  " " + this.orderContents;
+        fullOrderDetails= this.getOrderTimestamp() + ", " + this.orderAddress +  ", " + this.orderContents;
     }
 
 
