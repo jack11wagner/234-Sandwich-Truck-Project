@@ -1,39 +1,35 @@
 import org.junit.jupiter.api.Test;
 
-import java.beans.Transient;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AddressConverterTest {
     
-    private String order;
+    private String address;
     private final AddressConverter converter = new AddressConverter();
 
     @Test
     public void testLetterStreetAddress() {
-        order = "date, 700 G St., food";
-        System.out.println("L: " + converter.convert(order));
+        address = "700 G St.";
+        System.out.println("L: " + converter.convert(address));
     }
 
     @Test
     public void testNumberStreetAddress() {
-        order = "date, 500 5 St., food";
-        System.out.println("N: " + converter.convert(order));
+        address = "500 5 St.";
+        System.out.println("N: " + converter.convert(address));
     }
 
     @Test
     public void testSplitOrder() {
-        order = "date, 250 A st., food";
-        converter.convert(order);
-        assertEquals(" 250 A st.", converter.getAddress());
+        address = "250 A st.";
+        converter.convert(address);
+        assertEquals("250 A st.", converter.getAddress());
     }
 
     @Test
     public void testSplitAddress() {
-        order = "date, 250 A st., food";
-        converter.convert(order);
+        address = "250 A st.";
+        converter.convert(address);
         assertEquals(250, converter.getAddrNum());
         assertEquals("A", converter.getStreet());
     }
