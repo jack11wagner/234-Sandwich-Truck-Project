@@ -58,6 +58,8 @@ public class TruckMap extends JPanel {
         int offset = SimSettings.TRUCK_SIZE / 2;
         truckX -= offset;
         truckY -= offset;
+        truckX += SimSettings.ROAD_WIDTH / 2;
+        truckY += SimSettings.ROAD_WIDTH / 2;
 
         return new int[]{truckX, truckY};
     }
