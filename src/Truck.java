@@ -13,4 +13,10 @@ public class Truck {
     private void move() {
         window.repaintTruck(x, y);
     }
+
+    public int[] getTruckLocation()
+    {
+        return new int[]{x,y};
+    }
+
 }

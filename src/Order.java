@@ -133,7 +133,7 @@ public class Order {
         /**
          * Sets fullOrderDetails to the concatenated string of orderTimestamp, orderAddress and OrderContents
          */
-        fullOrderDetails= this.getOrderTimestamp() + ", " + this.orderAddress +  ", " + this.orderContents;
+        fullOrderDetails= this.getOrderTimestamp() + "," + this.orderAddress +  "," + this.orderContents;
     }
 
 
