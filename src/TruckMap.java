@@ -12,23 +12,20 @@ import java.io.File;
 import java.io.IOException;
 
 public class TruckMap extends JPanel {
-    private static int roadWidth = SimSettings.DIMENSION / 35;
     private static BufferedImage truckImage;
     private int truckX;
     private int truckY;
 
     TruckMap() {
         this.setPreferredSize(new Dimension(SimSettings.DIMENSION, SimSettings.DIMENSION));
+
+        // load the truck image
         try {
             truckImage = ImageIO.read(new File("images/truck.png"));
         } catch (IOException e) {
             truckImage = new BufferedImage(1, 1, 1);
             int rgb = new Color(255,0,255).getRGB();
-            for (int i = 0; i < truckImage.getWidth(); i++) {
-                for (int j = 0; j < truckImage.getHeight(); j++) {
-                    truckImage.setRGB(i, j, rgb);
-                }
-            }
+            truckImage.setRGB(0, 0, rgb);
         }
         // Truck begins at the intersection of roads E5
         truckX = SimSettings.ROAD_SPACING * 4; // Road E
@@ -37,12 +34,13 @@ public class TruckMap extends JPanel {
 
     public void paint(Graphics g) {
         Graphics2D g2D = (Graphics2D) g;
-        g2D.setStroke(new BasicStroke(roadWidth));
+        g2D.setStroke(new BasicStroke(SimSettings.ROAD_WIDTH));
+        int halfRoadWidth = SimSettings.ROAD_WIDTH / 2;
 
         // draw roads
         for (int i = 0; i < SimSettings.NUM_ROADS; i++) {
-            g2D.drawLine(SimSettings.ROAD_SPACING * i, 0, SimSettings.ROAD_SPACING * i, SimSettings.DIMENSION);// vertical
-            g2D.drawLine(0, SimSettings.ROAD_SPACING * i, SimSettings.DIMENSION, SimSettings.ROAD_SPACING * i);// horizontal
+            g2D.drawLine(SimSettings.ROAD_SPACING * i + halfRoadWidth, 0, SimSettings.ROAD_SPACING * i + halfRoadWidth, SimSettings.DIMENSION);// vertical
+            g2D.drawLine(0, SimSettings.ROAD_SPACING * i + halfRoadWidth, SimSettings.DIMENSION, SimSettings.ROAD_SPACING * i + halfRoadWidth);// horizontal
         }
         // adjust the drawing coordinates of the truck, so it appears centered in the road
         int[] coords = adjustCoords(new int[]{truckX, truckY});
