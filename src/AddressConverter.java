@@ -34,11 +34,6 @@ public class AddressConverter {
         fillAddressMaps();
     }
 
-//    // splits original order string on the commas into three seperate strings: orderDate, address, and foodOrder
-//    private void splitOrder(String order) {
-//        splitOrderArray = order.split(",");
-//        address =  splitOrderArray[1];
-//    }
 
     /**
      * helper method for convert method which splits the address, given to the convert method,
