@@ -2,12 +2,13 @@ public class Truck {
     private int x;
     private int y;
     private Window window;
-    private OrderList orderList;
     private AddressConverter addConverter = new AddressConverter();
+    private Strategy strat;
 
-    Truck(Window window, OrderList orderList) {
+    Truck(Window window, Strategy strat) {
         this.window = window;
-        this.orderList = orderList;
+//        this.orderList = orderList;
+        this.strat = strat;
     }
 
     private void move() {
