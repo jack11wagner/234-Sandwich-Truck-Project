@@ -16,7 +16,7 @@ CSCI 234 (Introduction to Software Engineering) - Spring 2022
 ### Sprint #1: 
 [Sprint 1 Backlog Spreadsheet](https://docs.google.com/spreadsheets/d/1dCywnvdkOuftok5vNE39xSt9anSWkck5EAbAx4W9aYU/edit?usp=sharing)
  
- ^<a href="https://ibb.co/LtdVQVn"><img src="https://i.ibb.co/d248b8G/Sandwich-Truck-UML-Diagram.png" alt="Sandwich-Truck-UML-Diagram" border="0"></a>
+ - UML Diagram![Sandwich Truck UML Diagram](https://user-images.githubusercontent.com/78323388/155171477-50b8818a-f18e-47ba-86a8-027e0e0f30be.png)
  
  - **Goal:** _Model the neighborhood and build the GUI foundation to display the neighborhood. Create a batch file of randomly generated orders._  
  
