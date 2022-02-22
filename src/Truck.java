@@ -19,4 +19,16 @@ public class Truck {
         return new int[]{x,y};
     }
 
+
+    // splits original order string on the commas into three seperate strings: orderDate, address, and foodOrder
+    private String[] splitOrder(String order) {
+        String[] splitOrderArray;
+        String address;
+        String foodOrder;
+        splitOrderArray = order.split(",");
+        address =  splitOrderArray[1];
+        foodOrder = splitOrderArray[2];
+        return new String[]{address, foodOrder};
+    }
+
 }
