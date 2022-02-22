@@ -22,6 +22,11 @@ public class AddressConverter {
     private int xCoordinate;
     private int yCoordinate;
 
+    /**
+     * Constructor for the AddressConverter Class
+     * Instantiates the data structures necessary to hold the output coordinates and maps
+     * to hold values corresponding to street addresses to help calculate the output coordinates
+     */
     public AddressConverter() {
         coordinates = new int[2];
         letterStreets = new HashMap<>();
@@ -35,15 +40,23 @@ public class AddressConverter {
 //        address =  splitOrderArray[1];
 //    }
 
-    // splits address string into an address number (addrNum) and a street (street)
+    /**
+     * helper method for convert method which splits the address, given to the convert method,
+     * into the address number and the street name and assigns them to the respective variables
+     */
     private void splitAddress() {
         splitAddressArray = address.trim().split(" ");
         addrNum = Integer.parseInt(splitAddressArray[0]);
         street = splitAddressArray[1];
     }
 
-    // decides which conversion to do based on the street type (letter or number) and then returns the 
-    // x and y coordinates for the address that correspond to the location on the truck map
+    /**
+     * decides if the address is on a street named after a number or letter and calls the appropriate helper method
+     * (convertNumberAddress or convertLetterAddress) to calculate the x and y pixel coordinates that correspond to
+     * a specific address location on the truck map
+     * @param: String address - the address for the delivery of a reepective order
+     * @returns: an array of two integers corresponding to the x pixel coordinate and the y pixel coordinate
+     */
     public int[] convert(String address) {
         this.address = address;
         splitAddress();
@@ -59,7 +72,11 @@ public class AddressConverter {
     }
 
     // FIXME
-    // if the address is on a number named street, calculates the x and y coordinates for the truck map
+    /**
+     * helper method for the convert method that calculates the x and y pixel coordinates corresponding to
+     * a specific address location on the truck map for streets named after numbers, and assigns the correct x
+     *      * and y values to the xCoordinate and yCoordinate instance variables
+     */
     private void convertNumberAddress() {
         
         int horizontalBlockNumber = addrNum / 100;
@@ -70,7 +87,11 @@ public class AddressConverter {
     }
 
     // FIXME
-    // if the address is on a letter named street, calculates the x and y coordinates for the truck map
+    /**
+     * helper method for the convert method that calculates the x and y pixel coordinates corresponding to
+     * a specific address location on the truck map for streets named after letters, and assigns the correct x
+     * and y values to the xCoordinate and yCoordinate instance variables
+     */
     private void convertLetterAddress() {
         int verticalBlockNumber = addrNum / 100;
         int verticalStreetNumber = (addrNum % 100) / 10;
@@ -80,6 +101,11 @@ public class AddressConverter {
     }
 
 
+    /**
+     * a helper method that populates the letterStreets and numberStreets hashMaps with numbers that
+     * correlate to specific street numbers or letter to aid in the conversion of addresses to x and y
+     * pixel coordinates
+     */
     private void fillAddressMaps() {
         letterStreets.put("A", 0);
         letterStreets.put("B", 1);
