@@ -1,3 +1,9 @@
+/*
+Made by: Jackson Wagner
+Class which handles storage of all orders as well as
+creating an array of orders from a filename
+Edits by:
+*/
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -16,7 +22,7 @@ public class OrderList {
          */
         orderList = new ArrayList<>();
     }
-    public OrderList(String filename) throws IOException {
+    public OrderList(String filename) throws IOException, FileFormatException {
         /**
          * Reads an order file and adds each order to the order list from a file
          * @throws: IOException if the file cannot be found/read
@@ -27,6 +33,7 @@ public class OrderList {
         while ( (line = in.readLine())!=null){
             line = line.trim();
             String[] orderLine = line.split(",");
+            if (orderLine.length!=3) throw new FileFormatException("Invalid file format");
             this.addOrder(new Order(orderLine[0], orderLine[1], orderLine[2]));
         }
     }

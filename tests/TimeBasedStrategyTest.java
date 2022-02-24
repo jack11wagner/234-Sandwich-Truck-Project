@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TimeBasedStrategyTest {
 
     @Test
-    public void testCreatingOrderQueueIsInAscendingOrder() throws IOException {
+    public void testCreatingOrderQueueIsInAscendingOrder() throws IOException, FileFormatException {
         OrderList ol = new OrderList("orders.txt");
         TimeBasedStrategy tbs = new TimeBasedStrategy(ol);
         tbs.createOrderQueue();
@@ -18,7 +18,7 @@ class TimeBasedStrategyTest {
 
     }
     @Test
-    public void testWhenGettingOrderNextOrderFromOrderQueueOrderQueueSizeIsDecreased() throws IOException {
+    public void testWhenGettingOrderNextOrderFromOrderQueueOrderQueueSizeIsDecreased() throws IOException, FileFormatException {
         OrderList ol = new OrderList("orders.txt");
         TimeBasedStrategy tbs = new TimeBasedStrategy(ol);
         tbs.createOrderQueue();
