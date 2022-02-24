@@ -1,3 +1,7 @@
+/*
+Author: Nikolas Kovacs
+Any project-wide variables are stored here
+ */
 public class SimSettings {
     public static final int DIMENSION = 700;
     public static final int NUM_ROADS = 10;
