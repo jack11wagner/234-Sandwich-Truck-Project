@@ -14,8 +14,11 @@ CSCI 234 (Introduction to Software Engineering) - Spring 2022
 - Creation of a software system that will run the business of a food delivery truck
 
 ### Sprint #1: 
-[Sprint 1 Backlog Spreadsheet](https://docs.google.com/spreadsheets/d/1dCywnvdkOuftok5vNE39xSt9anSWkck5EAbAx4W9aYU/edit?usp=sharing)
+*Documents*:
+ - [Sprint 1 Backlog Spreadsheet](https://docs.google.com/spreadsheets/d/1dCywnvdkOuftok5vNE39xSt9anSWkck5EAbAx4W9aYU/edit?usp=sharing)
+ - [Sandwich Truck UML Diagram](https://lucid.app/lucidchart/932988ef-f22d-4d04-b39d-3a65a11236fe/edit?invitationId=inv_91029a7d-43b5-4ddf-94fe-f16673a04c81&page=0_0#)
  
- - **Goal:** _Model the neighborhood and build the GUI foundation to display the neighborhood. Create a batch file of randomly generated orders._  
- 
-_UML Diagram_![Sandwich Truck UML Diagram](https://user-images.githubusercontent.com/78323388/155171477-50b8818a-f18e-47ba-86a8-027e0e0f30be.png)
+**Sprint Goal:** 
+ - _Model the neighborhood and build the GUI foundation to display the neighborhood. Create a batch file of randomly generated orders._  
+
+
