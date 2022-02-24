@@ -1,26 +1,39 @@
+/*
+Author: Nikolas Kovacs
+This class serves as the Truck in the simulator and contains the functionality of the sandwich truck as well
+as access to the window to update its position
+
+Edits by: Michael Shimer (added splitOrder method)
+ */
+
 public class Truck {
     private int x;
     private int y;
-    private Window window;
-    private OrderList orderList;
-    private AddressConverter addConverter = new AddressConverter();
+    private final Window window;
+    private final AddressConverter addConverter = new AddressConverter();
+    private final Strategy strat;
 
-    Truck(Window window, OrderList orderList) {
+    Truck(Window window, Strategy strat) {
         this.window = window;
-        this.orderList = orderList;
+        this.strat = strat;
     }
 
     private void move() {
         window.repaintTruck(x, y);
     }
 
-    public int[] getTruckLocation()
+    private int[] getTruckLocation()
     {
         return new int[]{x,y};
     }
 
 
-    // splits original order string on the commas into three seperate strings: orderDate, address, and foodOrder
+    /**
+     * spilts the order into individual strings for the address and food order, given in the whole order string,
+     * so that the address and food order can be used separately
+     * @param: String order - the whole string order that contains the time, address, and food order
+     * @returns: an array of two strings corresponding to the address string and the food order string
+     */
     private String[] splitOrder(String order) {
         String[] splitOrderArray;
         String address;

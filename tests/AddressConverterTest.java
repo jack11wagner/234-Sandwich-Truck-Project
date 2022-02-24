@@ -1,3 +1,10 @@
+/*
+Made by: Michael Shimer
+Testing class for AddressConverter class to test correct functionality
+of the class as a whole, as well as the methods within it
+
+Edits by:
+*/
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

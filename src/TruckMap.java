@@ -1,7 +1,8 @@
 /*
 Made by: Nikolas Kovacs
 Draws roads on a JPanel based on size of screen
-
+Draw the truck at its current location
+Draw a pin on the map for current order destination (soon)
 Edits by:
 */
 import javax.imageio.ImageIO;
@@ -29,18 +30,28 @@ public class TruckMap extends JPanel {
         }
         // Truck begins at the intersection of roads E5
         truckX = SimSettings.ROAD_SPACING * 4; // Road E
-        truckY = SimSettings.ROAD_SPACING * 4; // Road 5
+        truckY = SimSettings.ROAD_SPACING * 5; // Road 5
     }
 
     public void paint(Graphics g) {
         Graphics2D g2D = (Graphics2D) g;
         g2D.setStroke(new BasicStroke(SimSettings.ROAD_WIDTH));
         int halfRoadWidth = SimSettings.ROAD_WIDTH / 2;
+        int verticalRoadName = SimSettings.NUM_ROADS;
+        char horizontalRoadName = 'A';
 
-        // draw roads
         for (int i = 0; i < SimSettings.NUM_ROADS; i++) {
+            // draw roads
+            g2D.setPaint(Color.BLACK);
             g2D.drawLine(SimSettings.ROAD_SPACING * i + halfRoadWidth, 0, SimSettings.ROAD_SPACING * i + halfRoadWidth, SimSettings.DIMENSION);// vertical
             g2D.drawLine(0, SimSettings.ROAD_SPACING * i + halfRoadWidth, SimSettings.DIMENSION, SimSettings.ROAD_SPACING * i + halfRoadWidth);// horizontal
+
+            // draw road names
+            g2D.setPaint(Color.YELLOW);
+            g2D.drawString(Character.toString(horizontalRoadName), SimSettings.ROAD_SPACING * i + halfRoadWidth / 2, SimSettings.DIMENSION - 25);
+            horizontalRoadName++;
+            g2D.drawString(Integer.toString(verticalRoadName), SimSettings.ROAD_SPACING / 2 - 15, SimSettings.ROAD_SPACING * i + halfRoadWidth + 5);
+            verticalRoadName--;
         }
         // adjust the drawing coordinates of the truck, so it appears centered in the road
         int[] coords = adjustCoords(new int[]{truckX, truckY});
@@ -49,6 +60,7 @@ public class TruckMap extends JPanel {
         // draw the truck image with the new, adjusted coordinates
         g2D.drawImage(truckImage, truckX, truckY, SimSettings.TRUCK_SIZE, SimSettings.TRUCK_SIZE, null);
     }
+
 
     // this method is meant to offset the coordinates so the truck appears centered with the road.
     // Otherwise, the top-left corner of the truck is centered in the road instead.

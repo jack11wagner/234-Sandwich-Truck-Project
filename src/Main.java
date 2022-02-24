@@ -7,7 +7,7 @@ public class Main {
 
         Window simWindow = new Window();
 
-        Truck truck = new Truck(simWindow, ol);
+        Truck truck = new Truck(simWindow, new TimeBasedStrategy(ol));
 
     }
 }
