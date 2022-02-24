@@ -1,7 +1,8 @@
 /*
 Made by: Nikolas Kovacs
 Draws roads on a JPanel based on size of screen
-
+Draw the truck at its current location
+Draw a pin on the map for current order destination (soon)
 Edits by:
 */
 import javax.imageio.ImageIO;
