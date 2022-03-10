@@ -1,4 +1,4 @@
-/*
+/**
 Made by: Jackson Wagner
 Abstract class which handles strategies that the a truck should select when
 making deliveries

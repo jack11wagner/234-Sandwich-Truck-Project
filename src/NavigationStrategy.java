@@ -1,3 +1,7 @@
+/**
+ * Author: Nikolas Kovacs
+ * This is an abstract class that is meant to be inherited from in order to implement different navigation modes
+ */
 public abstract class NavigationStrategy {
     private Truck truck;
 

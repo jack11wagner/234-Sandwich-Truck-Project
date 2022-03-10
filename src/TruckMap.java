@@ -1,4 +1,4 @@
-/*
+/**
 Made by: Nikolas Kovacs
 Draws roads on a JPanel based on size of screen
 Draw the truck at its current location

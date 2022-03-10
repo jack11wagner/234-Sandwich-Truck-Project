@@ -1,4 +1,4 @@
-/*
+/**
 Author: Nikolas Kovacs
 This class serves as the Truck in the simulator and contains the functionality of the sandwich truck as well
 as access to the window to update its position
