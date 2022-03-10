@@ -7,15 +7,21 @@ Edits by: Michael Shimer (added splitOrder method)
  */
 
 public class Truck {
-    private int x;
-    private int y;
+    private int x = SimSettings.INITIAL_TRUCK_X;
+    private int y = SimSettings.INITIAL_TRUCK_Y;
     private final Window window;
     private final AddressConverter addConverter = new AddressConverter();
-    private final Strategy strat;
+    private final OrderStrategy orderStrat;
+    private final NavigationStrategy navStrat;
 
-    Truck(Window window, Strategy strat) {
+    Truck(Window window, OrderStrategy orderStrat, NavigationStrategy navStrat) {
         this.window = window;
-        this.strat = strat;
+        this.orderStrat = orderStrat;
+        this.navStrat = navStrat;
+    }
+
+    public void start() {
+
     }
 
     private void move() {
