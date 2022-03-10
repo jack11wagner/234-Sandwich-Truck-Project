@@ -4,4 +4,7 @@ public class StandardNavigation implements NavigationStrategy{
 
     @Override
     public void moveToDestination() {}
+
+    @Override
+    public void setTruck() {}
 }
