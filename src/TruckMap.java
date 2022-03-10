@@ -29,8 +29,8 @@ public class TruckMap extends JPanel {
             truckImage.setRGB(0, 0, rgb);
         }
         // Truck begins at the intersection of roads E5
-        truckX = SimSettings.ROAD_SPACING * 4; // Road E
-        truckY = SimSettings.ROAD_SPACING * 5; // Road 5
+        truckX = SimSettings.INITIAL_TRUCK_X;
+        truckY = SimSettings.INITIAL_TRUCK_Y;
     }
 
     public void paint(Graphics g) {

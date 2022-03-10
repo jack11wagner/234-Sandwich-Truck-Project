@@ -7,8 +7,8 @@ Edits by: Michael Shimer (added splitOrder method)
  */
 
 public class Truck {
-    private int x;
-    private int y;
+    private int x = SimSettings.INITIAL_TRUCK_X;
+    private int y = SimSettings.INITIAL_TRUCK_Y;
     private final Window window;
     private final AddressConverter addConverter = new AddressConverter();
     private final OrderStrategy orderStrat;
@@ -18,6 +18,10 @@ public class Truck {
         this.window = window;
         this.orderStrat = orderStrat;
         this.navStrat = navStrat;
+    }
+
+    public void start() {
+
     }
 
     private void move() {
