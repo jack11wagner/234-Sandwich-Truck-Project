@@ -12,10 +12,12 @@ public class Truck {
     private final Window window;
     private final AddressConverter addConverter = new AddressConverter();
     private final OrderStrategy orderStrat;
+    private final NavigationStrategy navStrat;
 
-    Truck(Window window, OrderStrategy strat) {
+    Truck(Window window, OrderStrategy orderStrat, NavigationStrategy navStrat) {
         this.window = window;
-        this.orderStrat = strat;
+        this.orderStrat = orderStrat;
+        this.navStrat = navStrat;
     }
 
     private void move() {
