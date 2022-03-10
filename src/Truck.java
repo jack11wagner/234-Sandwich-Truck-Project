@@ -11,11 +11,11 @@ public class Truck {
     private int y;
     private final Window window;
     private final AddressConverter addConverter = new AddressConverter();
-    private final OrderStrategy strat;
+    private final OrderStrategy orderStrat;
 
     Truck(Window window, OrderStrategy strat) {
         this.window = window;
-        this.strat = strat;
+        this.orderStrat = strat;
     }
 
     private void move() {
