@@ -11,9 +11,9 @@ public class Truck {
     private int y;
     private final Window window;
     private final AddressConverter addConverter = new AddressConverter();
-    private final Strategy strat;
+    private final OrderStrategy strat;
 
-    Truck(Window window, Strategy strat) {
+    Truck(Window window, OrderStrategy strat) {
         this.window = window;
         this.strat = strat;
     }
