@@ -3,7 +3,7 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-public class TimeBasedStrategy extends Strategy{
+public class TimeBasedStrategy extends OrderStrategy{
     private final PriorityQueue<Order> orderQueue;
     private final ArrayList<Order> orderList;
 
