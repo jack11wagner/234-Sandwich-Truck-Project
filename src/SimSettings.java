@@ -1,4 +1,4 @@
-/*
+/**
 Author: Nikolas Kovacs
 Any project-wide variables are stored here
  */

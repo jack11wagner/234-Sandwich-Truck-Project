@@ -1,4 +1,4 @@
-/*
+/**
 Author: Nikolas Kovacs
 This Class contains all the components to create and draw on the GUI
 
@@ -37,6 +37,12 @@ public class Window extends JFrame {
     }
 
     public void repaintTruck(int x, int y) {
+        /**
+         * This method is meant to be called from the Truck class so that it can update its location on the map
+         * when it moves
+         * :param1: int x, new x coordinate of truck
+         * :param2: int y, new y coordinate of truck
+         */
         tMap.setNewTruckCoords(new int[]{x, y});
         tMap.repaint();
     }

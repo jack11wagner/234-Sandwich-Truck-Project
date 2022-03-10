@@ -34,6 +34,9 @@ public class TruckMap extends JPanel {
     }
 
     public void paint(Graphics g) {
+        /**
+         * This method paints everything on the gui, including the roads, road names, truck, houses and location pins.
+         */
         Graphics2D g2D = (Graphics2D) g;
         g2D.setStroke(new BasicStroke(SimSettings.ROAD_WIDTH));
         int halfRoadWidth = SimSettings.ROAD_WIDTH / 2;
@@ -65,6 +68,12 @@ public class TruckMap extends JPanel {
     // this method is meant to offset the coordinates so the truck appears centered with the road.
     // Otherwise, the top-left corner of the truck is centered in the road instead.
     private int[] adjustCoords(int[] coords) {
+        /**
+         * This method offsets the coordinates of an image before drawing it to the screen to ensure
+         * that it is centered on the road
+         * :param: array of coordinates to be adjusted
+         * :return: array of adjusted coordinates
+         */
         int truckX = coords[0];
         int truckY = coords[1];
         int offset = SimSettings.TRUCK_SIZE / 2;
@@ -78,6 +87,11 @@ public class TruckMap extends JPanel {
 
     // Set new location of Truck
     public void setNewTruckCoords(int[] coords) {
+        /**
+         * This method is intended to be called from outside of the TruckMap class in order to update the location
+         * of the truck on the screen
+         * :param: array of coordinates
+         */
         this.truckX = coords[0];
         this.truckY = coords[1];
     }
