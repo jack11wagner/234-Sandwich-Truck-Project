@@ -1,10 +1,6 @@
-public class StandardNavigationStrategy implements NavigationStrategy{
-
-    public StandardNavigationStrategy() {}
+public class StandardNavigationStrategy extends NavigationStrategy{
 
     @Override
     public void moveToDestination() {}
-
-    @Override
-    public void setTruck() {}
+    }
 }
