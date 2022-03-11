@@ -14,5 +14,5 @@ public abstract class NavigationStrategy {
 //        this.truck = truck;
 //    }
 
-    public abstract void calculateNavInstructions(int[] coords);
+    public abstract void calculateNavInstructions(int[] begCoords, int[] destCoords);
 }

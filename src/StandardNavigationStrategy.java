@@ -4,6 +4,5 @@
  */
 public class StandardNavigationStrategy extends NavigationStrategy{
 
-    @Override
-    public void moveToDestination() {}
+    public void calculateNavInstructions(int[] begCoords, int[] destCoords) {}
 }
