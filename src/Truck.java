@@ -1,3 +1,9 @@
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 /**
 Author: Nikolas Kovacs
 This class serves as the Truck in the simulator and contains the functionality of the sandwich truck as well
@@ -17,19 +23,63 @@ public class Truck {
     Truck(Window window, OrderStrategy orderStrat, NavigationStrategy navStrat) {
         this.window = window;
         this.orderStrat = orderStrat;
+        this.orderStrat.createOrderQueue();
+
         this.navStrat = navStrat;
     }
 
     public void start() {
+        /**
+         * This method is to be called when the start button is pressed in the window
+         */
+        ArrayList<int[]> orderDestinationsInOrder = new ArrayList<>();
+        Order nextOrder;
+        String address;
+        //String foodOrder; // food order commented out until future
+
+        // populate orderDestinationsInOrder list according to the OrderStrategy
+        while ((nextOrder = orderStrat.getNextOrder()) != null) { // fetch next order, null means empty
+            String[] splittedOrder = splitOrder(nextOrder.toString()); // split the order into the address and food order
+            address = splittedOrder[0];
+            //foodOrder = splittedOrder[1]; // food order commented out until future
+            orderDestinationsInOrder.add(addConverter.convert(address)); // convert the address into a pair of coordinates and append
+        }
+
+        for (int[] orderCoords : orderDestinationsInOrder) {
+            int newX = orderCoords[0];
+            int newY = orderCoords[1];
+
+            Collection<int[]> navInstructions = navStrat.calculateNavInstructions(getTruckLocation(), new int[]{newX, newY});
+            move(navInstructions);
+        }
 
     }
 
-    private void move() {
+    private void move(Collection<int[]> navInstructions) {
         /**
-         * Calls the repaintTruck method from the window class with the current or new
+         * Calls the repaintTruck method repreatedly from the window class with the current or new
          * truck x, y coordinates to move the truck
          */
-        window.repaintTruck(x, y);
+        for (int[] instruction : navInstructions) {
+            int direction = instruction[0]; // X or Y
+            int distance = instruction[1];
+            int posOrNeg = distance / Math.abs(distance); // 1 = right or down, -1 = left or up
+
+            // how many steps the truck has to take to reach dest,
+            // could be negative to signal differentiate between left/right up/down
+            int distance_steps = distance / SimSettings.TRUCK_SPEED;
+
+
+            for (int i = 0; i < Math.abs(distance_steps); i++) {
+                if (direction == 0) { // X
+                    x += SimSettings.TRUCK_SPEED * posOrNeg; // update x coordinate
+                } else { // Y
+                    y += SimSettings.TRUCK_SPEED * posOrNeg; // update y coordinate
+                }
+                window.repaintTruck(x, y);
+
+            }
+        }
     }
 
     private int[] getTruckLocation() {
