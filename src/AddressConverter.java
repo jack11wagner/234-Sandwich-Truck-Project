@@ -4,7 +4,7 @@ Allows orders to be split into sections: orderDate, address, and foodOrder and
 uses the address string to convert the address into x and y coordinates used to
 display locations on the truck map
 
-Edits by: Jackson Wagner
+Edits by: Jackson Wagner, Nikolas Kovacs
 */
 
 import java.util.HashMap;
@@ -110,7 +110,6 @@ public class AddressConverter {
             numberStreets.put(Integer.toString(i + 1), i);
         }
     }
-
 
     public int getAddrNum() {
         return addrNum;
