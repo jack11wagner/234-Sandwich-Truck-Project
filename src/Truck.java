@@ -77,7 +77,7 @@ public class Truck {
                     y += SimSettings.TRUCK_SPEED * posOrNeg; // update y coordinate
                 }
                 window.repaintTruck(x, y);
-
+                SimSettings.cycle();
             }
         }
     }
