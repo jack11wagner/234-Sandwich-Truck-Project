@@ -9,5 +9,6 @@ public class Main {
 
         Truck truck = new Truck(simWindow, new TimeBasedStrategy(ol), new StandardNavigationStrategy());
 
+        truck.start();
     }
 }
