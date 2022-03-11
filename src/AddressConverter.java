@@ -18,7 +18,7 @@ public class AddressConverter {
     private int[] coordinates;
     private HashMap<String, Integer> letterStreets;
     private HashMap<String, Integer> numberStreets;
-    private double spacing = SimSettings.DIMENSION / (SimSettings.NUM_ROADS - 1);
+    private double spacing = SimSettings.ROAD_SPACING;
     private int xCoordinate;
     private int yCoordinate;
 
@@ -100,6 +100,7 @@ public class AddressConverter {
      * a helper method that populates the letterStreets and numberStreets hashMaps with numbers that
      * correlate to specific street numbers or letter to aid in the conversion of addresses to x and y
      * pixel coordinates
+     * Edits: Nikolas Kovacs - make method dynamic to SimSettings.NUM_ROADS
      */
     private void fillAddressMaps() {
 //        letterStreets.put("A", 0);
