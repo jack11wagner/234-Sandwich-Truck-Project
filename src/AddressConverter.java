@@ -14,11 +14,10 @@ public class AddressConverter {
     private int addrNum;
     private String street;
     private String address;
-    private String[] splitAddressArray;
     private int[] coordinates;
-    private HashMap<String, Integer> letterStreets;
-    private HashMap<String, Integer> numberStreets;
-    private double spacing = SimSettings.ROAD_SPACING;
+    private final HashMap<String, Integer> letterStreets;
+    private final HashMap<String, Integer> numberStreets;
+    private final double spacing = SimSettings.ROAD_SPACING;
     private int xCoordinate;
     private int yCoordinate;
 
@@ -40,7 +39,7 @@ public class AddressConverter {
      * into the address number and the street name and assigns them to the respective variables
      */
     private void splitAddress() {
-        splitAddressArray = address.trim().split(" ");
+        String[] splitAddressArray = address.trim().split(" ");
         addrNum = Integer.parseInt(splitAddressArray[0]);
         street = splitAddressArray[1];
     }
