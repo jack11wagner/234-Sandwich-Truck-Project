@@ -14,6 +14,7 @@ import java.io.IOException;
 
 public class TruckMap extends JPanel {
     private static BufferedImage truckImage;
+    private static BufferedImage pinImage;
     private int truckX;
     private int truckY;
 
@@ -24,13 +25,25 @@ public class TruckMap extends JPanel {
         try {
             truckImage = ImageIO.read(new File("images/truck.png"));
         } catch (IOException e) {
-            truckImage = new BufferedImage(1, 1, 1);
-            int rgb = new Color(255,0,255).getRGB();
-            truckImage.setRGB(0, 0, rgb);
+            setBackupImage(truckImage);
         }
+
+        // load pin_for_location.png
+        try {
+            pinImage = ImageIO.read(new File("images/pin_for_location.png"));
+        } catch (IOException e) {
+            setBackupImage(pinImage);
+        }
+
         // Truck begins at the intersection of roads E5
         truckX = SimSettings.INITIAL_TRUCK_X;
         truckY = SimSettings.INITIAL_TRUCK_Y;
+    }
+
+    private void setBackupImage(BufferedImage image) {
+        image = new BufferedImage(1, 1, 1);
+        int rgb = new Color(255, 0, 255).getRGB();
+        image.setRGB(0, 0, rgb);
     }
 
     public void paint(Graphics g) {
