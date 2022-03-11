@@ -102,27 +102,6 @@ public class AddressConverter {
      * Edits: Nikolas Kovacs - make method dynamic to SimSettings.NUM_ROADS
      */
     private void fillAddressMaps() {
-//        letterStreets.put("A", 0);
-//        letterStreets.put("B", 1);
-//        letterStreets.put("C", 2);
-//        letterStreets.put("D", 3);
-//        letterStreets.put("E", 4);
-//        letterStreets.put("F", 5);
-//        letterStreets.put("G", 6);
-//        letterStreets.put("H", 7);
-//        letterStreets.put("I", 8);
-//        letterStreets.put("J", 9);
-//
-//        numberStreets.put("1", 0);
-//        numberStreets.put("2", 1);
-//        numberStreets.put("3", 2);
-//        numberStreets.put("4", 3);
-//        numberStreets.put("5", 4);
-//        numberStreets.put("6", 5);
-//        numberStreets.put("7", 6);
-//        numberStreets.put("8", 7);
-//        numberStreets.put("9", 8);
-//        numberStreets.put("10", 9);
         for (char i = 'A'; i < (char)SimSettings.NUM_ROADS + 65; i++) {
             letterStreets.put(Character.toString(i), (int)i-65);
         }
