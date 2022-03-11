@@ -1,3 +1,5 @@
+import java.util.Collection;
+
 /**
  * Author: Nikolas Kovacs
  * This is an abstract class that is meant to be inherited from in order to implement different navigation modes
@@ -14,5 +16,5 @@ public abstract class NavigationStrategy {
 //        this.truck = truck;
 //    }
 
-    public abstract void calculateNavInstructions(int[] begCoords, int[] destCoords);
+    public abstract Collection<int[]> calculateNavInstructions(int[] begCoords, int[] destCoords);
 }
