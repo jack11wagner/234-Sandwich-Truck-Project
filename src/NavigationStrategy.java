@@ -6,5 +6,5 @@ import java.util.Collection;
  */
 public abstract class NavigationStrategy {
 
-    public abstract Collection<int[]> calculateNavInstructions(int[] begCoords, int[] destCoords);
+    public abstract Collection<int[]> calculateNavInstructions(int[] begCoords, Collection<int[]> destCoords);
 }
