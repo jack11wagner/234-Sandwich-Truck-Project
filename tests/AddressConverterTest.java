@@ -7,6 +7,8 @@ Edits by:
 */
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AddressConverterTest {
@@ -16,14 +18,14 @@ public class AddressConverterTest {
 
     @Test
     public void testLetterStreetAddress() {
-        address = "700 G St.";
-        System.out.println("L: " + converter.convert(address));
+        address = "500 G St.";
+        System.out.println("L: " + Arrays.toString(converter.convert(address)));
     }
 
     @Test
     public void testNumberStreetAddress() {
-        address = "500 5 St.";
-        System.out.println("N: " + converter.convert(address));
+        address = "700 5 St.";
+        System.out.println("N: " + Arrays.toString(converter.convert(address)));
     }
 
     @Test
