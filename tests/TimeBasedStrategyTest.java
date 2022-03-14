@@ -13,12 +13,12 @@ class TimeBasedStrategyTest {
         TimeBasedStrategy tbs = new TimeBasedStrategy(ol);
         tbs.createOrderQueue();
         Timestamp testOrder1Timestamp = tbs.getNextOrder().getOrderTimestamp();
-        Timestamp testOrder2Timestamp = tbs.getNextOrder().getOrderTimestamp();
-        assertTrue(testOrder1Timestamp.compareTo(testOrder2Timestamp)<0);
+        for(Order orderToCompare: tbs.getOrderQueue())
+            assertFalse(testOrder1Timestamp.compareTo(orderToCompare.getOrderTimestamp()) >= 0);
 
     }
     @Test
-    public void testWhenGettingOrderNextOrderFromOrderQueueOrderQueueSizeIsDecreased() throws IOException, FileFormatException {
+    public void testWhenGettingNextOrderFromOrderQueueOrderQueueSizeIsDecreased() throws IOException, FileFormatException {
         OrderList ol = new OrderList("orders.txt");
         TimeBasedStrategy tbs = new TimeBasedStrategy(ol);
         tbs.createOrderQueue();
