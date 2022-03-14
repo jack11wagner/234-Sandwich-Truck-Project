@@ -4,8 +4,8 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class TimeBasedStrategy extends OrderStrategy{
-    private final PriorityQueue<Order> orderQueue;
-    private final ArrayList<Order> orderList;
+    private PriorityQueue<Order> orderQueue;
+    private ArrayList<Order> orderList;
 
     public TimeBasedStrategy(OrderList orderList){
         orderQueue = new PriorityQueue<>(new TimeComparator());
