@@ -15,6 +15,7 @@ public class AddressConverter {
     private String street;
     private String address;
     private int[] coordinates;
+    private int[] defaultCoordinate;
     private final HashMap<String, Integer> letterStreets;
     private final HashMap<String, Integer> numberStreets;
     private final double spacing = SimSettings.ROAD_SPACING;
@@ -27,6 +28,7 @@ public class AddressConverter {
      * to hold values corresponding to street addresses to help calculate the output coordinates
      */
     public AddressConverter() {
+        defaultCoordinate = new int[]{305, 456};
         coordinates = new int[2];
         letterStreets = new HashMap<>();
         numberStreets = new HashMap<>();
@@ -52,17 +54,22 @@ public class AddressConverter {
      * @returns: an array of two integers corresponding to the x pixel coordinate and the y pixel coordinate
      */
     public int[] convert(String address) {
-        this.address = address;
-        splitAddress();
-        if (numberStreets.containsKey(street))
-            convertNumberAddress();
-        else if (letterStreets.containsKey(street))
-            convertLetterAddress();
-        else
-            //throw new Exception("Invalid Street Label");
-            System.out.println("invalid street label");
-        coordinates = new int[]{xCoordinate, yCoordinate};
-        return coordinates;
+        try {
+            this.address = address;
+            splitAddress();
+            if (numberStreets.containsKey(street))
+                convertNumberAddress();
+            else if (letterStreets.containsKey(street))
+                convertLetterAddress();
+            else
+                throw new InvalidAddressException("Invalid Street Label");
+            coordinates = new int[]{xCoordinate, yCoordinate};
+            return coordinates;
+        }
+        catch(InvalidAddressException e) {
+            System.out.println(e.getMessage());
+            return defaultCoordinate;
+        }
     }
 
     // FIXME
@@ -72,10 +79,10 @@ public class AddressConverter {
      *      * and y values to the xCoordinate and yCoordinate instance variables
      */
     private void convertNumberAddress() {
-        
+
         int horizontalBlockNumber = addrNum / 100;
         int horizontalStreetNumber = (addrNum % 100) / 10;
-        
+
         xCoordinate = (int)(spacing * (horizontalBlockNumber- 1) + (spacing / 11) * horizontalStreetNumber);
         yCoordinate = (int)(spacing * (10 - numberStreets.get(street) - 1));
     }
@@ -121,5 +128,14 @@ public class AddressConverter {
 
     public String getAddress() {
         return address;
+    }
+
+
+    public HashMap<String, Integer> getLetterStreets() {
+        return letterStreets;
+    }
+
+    public HashMap<String, Integer> getNumberStreets() {
+        return numberStreets;
     }
 }
