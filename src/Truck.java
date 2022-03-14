@@ -1,8 +1,5 @@
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
 Author: Nikolas Kovacs
@@ -48,10 +45,13 @@ public class Truck {
         for (int[] orderCoords : orderDestinationsInOrder) {
             int newX = orderCoords[0];
             int newY = orderCoords[1];
-
-            Collection<int[]> navInstructions = navStrat.calculateNavInstructions(getTruckLocation(), new int[]{newX, newY});
-            move(navInstructions);
+            window.addNewPinToMap(newX, newY);
         }
+
+
+        Collection<int[]> navInstructions = navStrat.calculateNavInstructions(getTruckLocation(), orderDestinationsInOrder);
+        move(navInstructions);
+
 
     }
 

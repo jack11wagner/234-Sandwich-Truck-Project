@@ -46,4 +46,8 @@ public class Window extends JFrame {
         tMap.setNewTruckCoords(new int[]{x, y});
         tMap.repaint();
     }
+
+    public void addNewPinToMap(int x, int y) {
+        tMap.addPinLocation(new int[]{x, y});
+    }
 }
