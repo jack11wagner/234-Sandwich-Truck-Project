@@ -63,7 +63,12 @@ public class Truck {
         for (int[] instruction : navInstructions) {
             int direction = instruction[0]; // X or Y
             int distance = instruction[1];
-            int posOrNeg = distance / Math.abs(distance); // 1 = right or down, -1 = left or up
+            int posOrNeg;
+            try {
+                posOrNeg = distance / Math.abs(distance); // 1 = right or down, -1 = left or up
+            } catch (ArithmeticException e) {
+                posOrNeg = 0;
+            }
 
             // how many steps the truck has to take to reach dest,
             // could be negative to signal differentiate between left/right up/down
