@@ -150,5 +150,10 @@ public class RightTurnNavigationStrategy extends NavigationStrategy{
          */
         return this.direction;
     }
+
+    @Override
+    public Collection<int[]> calculateNavInstructions(int[] begCoords, Collection<int[]> destCoords) {
+        return null;
+    }
 }
 
