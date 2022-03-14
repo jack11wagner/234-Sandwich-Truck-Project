@@ -46,6 +46,7 @@ public class Truck {
             int newX = orderCoords[0];
             int newY = orderCoords[1];
             window.addNewPinToMap(newX, newY);
+
         }
 
 
