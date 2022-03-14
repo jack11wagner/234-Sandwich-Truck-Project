@@ -91,7 +91,7 @@ public class Order {
          * @returns: a house number based on a random element in the houseNumbers ArrayList
          */
         ArrayList<String> houseNumbers = new ArrayList<>();
-        for (int i = 100;i<=1090;i+=10)
+        for (int i = 100;i<=1000;i+=10)
             houseNumbers.add(String.valueOf(i));
         return houseNumbers.get(new Random().nextInt(houseNumbers.size()));
     }
