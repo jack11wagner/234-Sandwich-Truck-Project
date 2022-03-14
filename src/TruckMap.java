@@ -11,15 +11,20 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class TruckMap extends JPanel {
     private static BufferedImage truckImage;
     private static BufferedImage pinImage;
     private int truckX;
     private int truckY;
+    private Collection<int[]> pinLocations;
 
     TruckMap() {
         this.setPreferredSize(new Dimension(SimSettings.DIMENSION, SimSettings.DIMENSION));
+
+        pinLocations = new ArrayList<>();
 
         // load the truck image
         try {
@@ -70,25 +75,36 @@ public class TruckMap extends JPanel {
             verticalRoadName--;
         }
         // adjust the drawing coordinates of the truck, so it appears centered in the road
-        int[] coords = adjustCoords(new int[]{truckX, truckY});
+        int[] coords = adjustTruckCoords(new int[]{truckX, truckY});
         truckX = coords[0];
         truckY = coords[1];
         // draw the truck image with the new, adjusted coordinates
         g2D.drawImage(truckImage, truckX, truckY, SimSettings.TRUCK_SIZE, SimSettings.TRUCK_SIZE, null);
+
+        // draw all location pins with number
+//        int i = 0;
+        for (int[] pinCoords : pinLocations) {
+            pinCoords = adjustPinCoords(pinCoords);
+            int pinX = pinCoords[0];
+            int pinY = pinCoords[1];
+
+            g2D.drawImage(pinImage, pinX, pinY, SimSettings.PIN_SIZE, SimSettings.PIN_SIZE, null);
+//            g2D.drawString(Integer.toString(i + 1), pinX + SimSettings.PIN_SIZE / 4, SimSettings.PIN_SIZE / 4);
+        }
     }
 
 
     // this method is meant to offset the coordinates so the truck appears centered with the road.
     // Otherwise, the top-left corner of the truck is centered in the road instead.
-    private int[] adjustCoords(int[] coords) {
+    private int[] adjustTruckCoords(int[] coords) {
         /**
-         * This method offsets the coordinates of an image before drawing it to the screen to ensure
+         * This method offsets the coordinates of the truck before drawing it to the screen to ensure
          * that it is centered on the road
          * :param: array of coordinates to be adjusted
          * :return: array of adjusted coordinates
          */
-        int truckX = coords[0];
-        int truckY = coords[1];
+        truckX = coords[0];
+        truckY = coords[1];
         int offset = SimSettings.TRUCK_SIZE / 2;
         truckX -= offset;
         truckY -= offset;
@@ -96,6 +112,24 @@ public class TruckMap extends JPanel {
         truckY += SimSettings.ROAD_WIDTH / 2;
 
         return new int[]{truckX, truckY};
+    }
+
+    private int[] adjustPinCoords(int[] coords) {
+        /**
+         * This method offsets the coordinates of the pin before drawing it to the screen to ensure
+         * that it is centered on the road
+         * :param: array of coordinates to be adjusted
+         * :return: array of adjusted coordinates
+         */
+        int X = coords[0];
+        int Y = coords[1];
+        int offset = SimSettings.PIN_SIZE / 2;
+        X -= offset;
+        Y -= offset;
+        X += SimSettings.ROAD_WIDTH / 2;
+        Y += SimSettings.ROAD_WIDTH / 2;
+
+        return new int[]{X, Y};
     }
 
     // Set new location of Truck
@@ -107,6 +141,10 @@ public class TruckMap extends JPanel {
          */
         this.truckX = coords[0];
         this.truckY = coords[1];
+    }
+
+    public void addPinLocation(int[] coords) {
+        pinLocations.add(coords);
     }
 }
 
