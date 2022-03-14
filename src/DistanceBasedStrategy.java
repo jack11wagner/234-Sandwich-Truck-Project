@@ -10,8 +10,8 @@ public class DistanceBasedStrategy extends OrderStrategy{
     public DistanceBasedStrategy(OrderList orderList) {
         this.orderQueue = new LinkedList<>();
         this.orderList = orderList.getOrderList();
-        dummytruckx = 5;
-        dummytrucky = 5;
+        dummytruckx = SimSettings.INITIAL_TRUCK_X;
+        dummytrucky = SimSettings.INITIAL_TRUCK_Y;
 
     }
 
