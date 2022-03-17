@@ -4,6 +4,8 @@ import java.util.LinkedList;
 /**
  * Author: Michael Shimer
  * This class implements the NavigationStrategy for right turn only navigation
+ *
+ * Edits:
  */
 public class RightTurnNavigationStrategy extends NavigationStrategy{
 
@@ -13,6 +15,8 @@ public class RightTurnNavigationStrategy extends NavigationStrategy{
     private int begY;
     private int destX;
     private int destY;
+    private int currentX;
+    private int currentY;
     private int xDistance;
     private int yDistance;
     LinkedList<int[]> navigationInstructions;
@@ -27,31 +31,43 @@ public class RightTurnNavigationStrategy extends NavigationStrategy{
         navigationInstructions = new LinkedList<>();
     }
 
-    public Collection<int[]> calculateNavInstructions(int[] begCoords, int[] destCoords) {
+    @Override
+    public Collection<int[]> calculateNavInstructions(int[] begCoords, Collection<int[]> destCoords) {
         // example element (0,2) move right 2, (1,2) move down two, (0, -2) move left 2, (1, -2) move up 2
 
         this.begX = begCoords[0];
         this.begY = begCoords[1];
-        this.destX = destCoords[0];
-        this.destY = destCoords[1];
+        this.currentX = begX;
+        this.currentY = begY;
 
-        goToNextIntersection();
+        for (int[] destination : destCoords) {
 
+            this.destX = destination[0];
+            this.destY = destination[1];
 
+            goToFirstIntersection();
+
+        }
         return navigationInstructions;
     }
 
     //TODO
-    private void goToNextIntersection() {
+    private void goToFirstIntersection() {
+
+        int intersectionX;
+        int intersectionY;
+
         // if on letter road, move in y direction to next intersection
         if (isOnLetterRoad()) {
             // determine the coordinate of the next intersection (must be in the direction that the truck is facing)
             // subtract current location from destination so that the sign of the direction is correct
             if (isDirectionDown()) {
-
+                //intersectionY =
+                //yDistance = intersectionY - currentY;
             }
             if (isDirectionUp()) {
-
+                //intersectionY =
+                //yDistance = intersectionY - currentY;
             }
 
             navigationInstructions.add(new int[]{1, yDistance});
@@ -63,10 +79,12 @@ public class RightTurnNavigationStrategy extends NavigationStrategy{
             // determine the coordinate of the next intersection (must be in the direction that the truck is facing)
             // subtract destination from current location so that the sign of the direction is correct
             if (isDirectionLeft()) {
-
+                //intersectionX =
+                //xDistance = currentX - intersectionX;
             }
             if (isDirectionRight()) {
-
+                //intersectionX =
+                //xDistance = currentX - intersectionX;
             }
 
 
@@ -149,11 +167,6 @@ public class RightTurnNavigationStrategy extends NavigationStrategy{
          * @returns: a double data type correlating to the radian angle in which the truck is facing
          */
         return this.direction;
-    }
-
-    @Override
-    public Collection<int[]> calculateNavInstructions(int[] begCoords, Collection<int[]> destCoords) {
-        return null;
     }
 }
 
