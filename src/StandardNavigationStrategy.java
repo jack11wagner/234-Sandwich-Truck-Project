@@ -26,5 +26,6 @@ public class StandardNavigationStrategy extends NavigationStrategy {
 
 
         }
+        return navigationInstructions;
     }
 }
