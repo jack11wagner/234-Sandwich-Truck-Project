@@ -7,7 +7,7 @@ Edits by:
 */
 import java.util.*;
 
-public class TimeBasedStrategy extends OrderStrategy{
+public class TimeBasedStrategy implements OrderStrategy{
     private PriorityQueue<Order> orderQueue;
     private ArrayList<Order> orderList;
 
@@ -55,6 +55,7 @@ public class TimeBasedStrategy extends OrderStrategy{
         return orderQueue.poll();
     }
 
+    @Override
     public int getNumberOfRemainingOrders()
     {
         /**

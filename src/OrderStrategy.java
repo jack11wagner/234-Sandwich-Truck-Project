@@ -4,8 +4,9 @@ Abstract class which handles strategies that the truck should select when
 making deliveries
 Edits by:
 */
-public abstract class OrderStrategy {
-    public abstract void createOrderQueue();
-    public abstract Order getNextOrder();
-    public abstract boolean queueIsEmpty();
+public interface OrderStrategy {
+    public void createOrderQueue();
+    public Order getNextOrder();
+    public boolean queueIsEmpty();
+    public int getNumberOfRemainingOrders();
 }

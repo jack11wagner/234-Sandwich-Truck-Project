@@ -7,11 +7,11 @@ Edits by:
 */
 import java.util.*;
 
-public class DistanceBasedStrategy extends OrderStrategy{
+public class DistanceBasedStrategy implements OrderStrategy{
     private Queue<Order> orderQueue;
     private ArrayList<Order> orderList;
-    private int dummytruckx;
-    private int dummytrucky;
+    private int simTruckX;
+    private int simTruckY;
 
 
     public DistanceBasedStrategy(OrderList orderList) {
@@ -24,8 +24,8 @@ public class DistanceBasedStrategy extends OrderStrategy{
 
         this.orderQueue = new LinkedList<>();
         this.orderList = orderList.getOrderList();
-        dummytruckx = SimSettings.INITIAL_TRUCK_X;
-        dummytrucky = SimSettings.INITIAL_TRUCK_Y;
+        simTruckX = SimSettings.INITIAL_TRUCK_X;
+        simTruckY = SimSettings.INITIAL_TRUCK_Y;
 
     }
 
@@ -40,7 +40,7 @@ public class DistanceBasedStrategy extends OrderStrategy{
          *
          */
         AddressConverter ac = new AddressConverter();
-        int[] truck_coords = {dummytruckx, dummytrucky};
+        int[] truck_coords = {simTruckX, simTruckY};
 
         double minDist = Integer.MAX_VALUE;
         Order minOrder =orderList.get(0);
@@ -51,10 +51,20 @@ public class DistanceBasedStrategy extends OrderStrategy{
                 minOrder = o;
             }
         }
-        dummytruckx = ac.convert(minOrder.getOrderAddress())[0];
-        dummytrucky = ac.convert(minOrder.getOrderAddress())[1];
+        simTruckX = ac.convert(minOrder.getOrderAddress())[0];
+        simTruckY = ac.convert(minOrder.getOrderAddress())[1];
         return minOrder;
 
+    }
+
+    public Queue<Order> getOrderQueue()
+    {
+        /**
+         * Method that returns the entire orderQueue
+         * Mainly to help with ease of testing
+         * @returns: Queue object which represents the entire Queue data structure
+         */
+        return orderQueue;
     }
 
     public void createOrderQueue()
@@ -78,16 +88,6 @@ public class DistanceBasedStrategy extends OrderStrategy{
         return orderQueue.poll();
     }
 
-    public Queue<Order> getOrderQueue()
-    {
-        /**
-         * Method that returns the entire orderQueue
-         * Mainly to help with ease of testing
-         * @returns: Queue object which represents the entire Queue data structure
-         */
-        return orderQueue;
-    }
-
     public double getDistance(int[] location1, int[] location2) {
         /**
          * Returns the distance between two coordinates from an Order address
@@ -101,6 +101,7 @@ public class DistanceBasedStrategy extends OrderStrategy{
         return (Math.abs(x1 - x2) + Math.abs(y1 - y2));
     }
 
+    @Override
     public int getNumberOfRemainingOrders()
     {
         /**

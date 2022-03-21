@@ -87,7 +87,7 @@ public class Order {
         /**
          * Private Helper Function for setRandomAddress()
          * Selects a random house number from an ArrayList of possible house numbers
-         * House numbers range from 100 to 1090 in increments of 10 so this Array List contains all the possible house numbers
+         * House numbers range from 100 to 1000 in increments of 10 so this Array List contains all the possible house numbers
          * @returns: a house number based on a random element in the houseNumbers ArrayList
          */
         ArrayList<String> houseNumbers = new ArrayList<>();

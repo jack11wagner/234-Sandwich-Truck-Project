@@ -5,6 +5,7 @@ import java.util.LinkedList;
  * Author: Nikolas Kovacs
  * This class implements the NavigationStrategy for Standard Navigation behavior
  */
+
 public class StandardNavigationStrategy extends NavigationStrategy {
     private int currX;
     private int currY;
