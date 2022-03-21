@@ -7,6 +7,6 @@ Edits by:
 public interface OrderStrategy {
     public void createOrderQueue();
     public Order getNextOrder();
-    public abstract boolean queueIsEmpty();
+    public boolean queueIsEmpty();
     public int getNumberOfRemainingOrders();
 }

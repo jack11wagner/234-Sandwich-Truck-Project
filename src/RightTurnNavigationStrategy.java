@@ -5,7 +5,7 @@ import java.util.LinkedList;
  * Author: Michael Shimer
  * This class implements the NavigationStrategy for right turn only navigation
  */
-public class RightTurnNavigationStrategy extends NavigationStrategy{
+public class RightTurnNavigationStrategy implements NavigationStrategy{
 
     private final double spacing = SimSettings.ROAD_SPACING;
     private double direction;
