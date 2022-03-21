@@ -7,4 +7,5 @@ import java.util.Collection;
 public interface NavigationStrategy {
 
     public Collection<int[]> calculateNavInstructions(int[] begCoords, Collection<int[]> destCoords);
+
 }
