@@ -55,407 +55,408 @@ public class RightTurnNavigationStrategy2 implements NavigationStrategy {
             goToFirstIntersection();
 
             //while ((currentX != destX) || (currentY != destY)) {
-            // destination to the left of truck
-            if (currentX > destX) {
-                // facing wrong direction
-                if (isDirectionRight()) {
-                    // truck already on correct number street
-                    if (currentY == destY) {
-                        turnAround();
-                        // go to the intersection just past the destination and turn right
-                        while (currentX > destX) {
-                            goToNextIntersection();
+          
+                    // destination to the left of truck
+                    if (currentX > destX) {
+                        // facing wrong direction
+                        if (isDirectionRight()) {
+                            // truck already on correct number street
+                            if (currentY == destY) {
+                                turnAround();
+                                // go to the intersection just past the destination and turn right
+                                while (currentX > destX) {
+                                    goToNextIntersection();
+                                }
+                                turnRight();
+                                // go to the intersection where destination on street and turn right
+                                goToNextIntersection();
+                                turnRight();
+                                // go to destination
+                                addXInstruction(destX - currentX);
+                            }
+
+                            // destination above current location
+                            else if (currentY > destY) {
+                                turnAround();
+                                // go to the intersection just past the destination and turn right
+                                while (currentX > destX) {
+                                    goToNextIntersection();
+                                }
+                                turnRight();
+                                // go to the intersection where destination on street and turn right
+                                addYInstruction(destY - currentY);
+                                // if destination on number street turn right and go to destination
+                                if (currentX < destX) {
+                                    turnRight();
+                                    // go to destination
+                                    addXInstruction(destX - currentX);
+                                }
+                            }
+
+                            // destination below current location
+                            else if (currentY < destY) {
+                                turnRight();
+                                // go to intersection where destination is and turn right
+                                while (currentY < destY) {
+                                    goToNextIntersection();
+                                }
+                                turnRight();
+                                // go to destination
+                                addXInstruction(destX - currentX);
+                                // if destination on letter street turn right and go to destination
+                                if (currentY > destY) {
+                                    turnRight();
+                                    // go to destination
+                                    addYInstruction(destY - currentY);
+                                }
+                            }
                         }
-                        turnRight();
-                        // go to the intersection where destination on street and turn right
-                        goToNextIntersection();
-                        turnRight();
-                        // go to destination
-                        addXInstruction(destX - currentX);
+
+                        // facing correct direction
+                        else if (isDirectionLeft()) {
+                            // already on correct number street
+                            if (currentY == destY) {
+                                addXInstruction(destX - currentX);
+                            }
+                            // destination above current location
+                            else if (currentY > destY) {
+                                // go to the intersection just past the destination and turn right
+                                while (currentX > destX) {
+                                    goToNextIntersection();
+                                }
+                                turnRight();
+                                // go to the intersection of the street of the destination and turn right
+                                addYInstruction(destY - currentY);
+                                // if destination on number street turn right and go to destination
+                                if (currentX < destX) {
+                                    turnRight();
+                                    // go to destination
+                                    addXInstruction(destX - currentX);
+                                }
+
+                            }
+                            // destination below current location
+                            else if (currentY < destY) {
+                                // correctly orient truck using only right turns
+                                turnAround();
+                                goToNextIntersection();
+                                turnRight();
+                                // go to the intersection of the street of the destination and turn right
+                                while (currentY < destY) {
+                                    goToNextIntersection();
+                                    turnRight();
+                                }
+                                // go to destination
+                                addXInstruction(destX - currentX);
+                                // if destination on letter street turn right and go to destination
+                                if (currentY > destY) {
+                                    turnRight();
+                                    // go to destination
+                                    addYInstruction(destY - currentY);
+                                }
+                            }
+                        }
                     }
 
-                    // destination above current location
+                    // destination to the right of truck
+                    else if (currentX < destX) {
+                        // facing correct direction
+                        if (isDirectionRight()) {
+                            // already on correct number street
+                            if (currentY == destY) {
+                                // go straight to destination
+                                addXInstruction(destX - currentX);
+                            }
+                            // destination above current location
+                            else if (currentY > destY) {
+                                // orient truck to travel up
+                                turnAround();
+                                goToNextIntersection();
+                                turnRight();
+                                // go up to intersection of street of destination and turn right
+                                while (currentY > destY) {
+                                    goToNextIntersection();
+                                }
+                                turnRight();
+                                // go straight to destination
+                                addXInstruction(destX - currentX);
+                                // if destination on letter street turn right and go to destination
+                                if (currentY < destY) {
+                                    turnRight();
+                                    // go to destination
+                                    addYInstruction(destY - currentY);
+                                }
+                            }
+                            // destination below current location
+                            else if (currentY < destY) {
+                                // go to intersection just past the destination and turn right
+                                while (currentX < destX) {
+                                    goToNextIntersection();
+                                }
+                                turnRight();
+                                // go down to intersection of street with destination and turn right
+                                addYInstruction(destY - currentY);
+                                // if destination on number street turn right and go to destination
+                                if (currentX > destX) {
+                                    turnRight();
+                                    // go straight to destination
+                                    addXInstruction(destX - currentX);
+                                }
+                            }
+                        }
+
+                        // facing wrong direction
+                        else if (isDirectionLeft()) {
+                            // already on correct number street
+                            if (currentY == destY) {
+                                turnAround();
+                                // go to intersection just past the destination and turn right
+                                while (currentX < destX) {
+                                    goToNextIntersection();
+                                }
+                                turnRight();
+                                // go to intersection of street with destination and turn right
+                                goToNextIntersection();
+                                turnRight();
+                                // go straight to destination
+                                addXInstruction(destX - currentX);
+                            }
+                            // destination above current location
+                            else if (currentY > destY) {
+                                turnRight();
+                                // go up to intersection of street with destination and turn right
+                                while (currentY > destY) {
+                                    goToNextIntersection();
+                                }
+                                turnRight();
+                                // go straight to destination
+                                addXInstruction(destX - currentX);
+                                // if destination on letter street turn right and go to destination
+                                if (currentY < destY) {
+                                    turnRight();
+                                    addYInstruction(destY - currentY);
+                                }
+                            }
+                            // destination below current location
+                            else if (currentY < destY) {
+                                turnAround();
+                                // go to intersection just past destination and turn right
+                                while (currentX < destX) {
+                                    goToNextIntersection();
+                                }
+                                turnRight();
+                                // go down to intersection of street with destination and turn right
+                                addYInstruction(destY - currentY);
+                                // if destination on number street turn right and go to destination
+                                if (currentX > destX) {
+                                    turnRight();
+                                    // go straight to destination
+                                    addXInstruction(destX - currentX);
+                                }
+                            }
+                        }
+                    }
+
+                    // destination above the current location
                     else if (currentY > destY) {
-                        turnAround();
-                        // go to the intersection just past the destination and turn right
-                        while (currentX > destX) {
-                            goToNextIntersection();
+                        // facing correct direction
+                        if (isDirectionUp()) {
+                            // already on correct letter street
+                            if (currentX == destX) {
+                                addYInstruction(destY - currentY);
+                            }
+                            // destination to the left of location
+                            else if (currentX > destX) {
+                                // orient truck to move up to destination
+                                turnAround();
+                                goToNextIntersection();
+                                turnRight();
+                                // go to intersection just past the destination and turn right
+                                while (currentX > destX) {
+                                    goToNextIntersection();
+                                }
+                                turnRight();
+                                // go up to intersection of street with destination and turn right
+                                addYInstruction(destY - currentY);
+                                // if destination on number street turn right and go to destination
+                                if (currentX < destX) {
+                                    turnRight();
+                                    // go straight to destination
+                                    addXInstruction(destX - currentX);
+                                }
+                            }
+                            // destination to the right of location
+                            else if (currentX < destX) {
+                                // go up to intersection of street with destination and turn right
+                                while (currentY > destY) {
+                                    goToNextIntersection();
+                                }
+                                turnRight();
+                                // go straight to destination
+                                addXInstruction(destX - currentX);
+                                // if destination on letter street turn right and go to destination
+                                if (currentY < destY) {
+                                    turnRight();
+                                    // go to destination
+                                    addYInstruction(destY - currentY);
+                                }
+                            }
                         }
-                        turnRight();
-                        // go to the intersection where destination on street and turn right
-                        addYInstruction(destY - currentY);
-                        // if destination on number street turn right and go to destination
-                        if (currentX < destX) {
-                            turnRight();
-                            // go to destination
-                            addXInstruction(destX - currentX);
-                        }
-                    }
 
+                        // facing wrong direction
+                        else if (isDirectionDown()) {
+                            // on correct letter street
+                            if (currentX == destX) {
+                                turnAround();
+                                // go up to intersection of street with destination and turn right
+                                while (currentY > destY) {
+                                    goToNextIntersection();
+                                }
+                                turnRight();
+                                // go straight to destination
+                                addXInstruction(destX - currentX);
+                                // if destination on letter street turn right and go to destination
+                                if (currentY < destY) {
+                                    turnRight();
+                                    // go to destination
+                                    addYInstruction(destY - currentY);
+                                }
+                            }
+                            // destination to the left of location
+                            else if (currentX > destX) {
+                                turnRight();
+                                // go to intersection just past the destination and turn right
+                                while (currentX > destX) {
+                                    goToNextIntersection();
+                                }
+                                turnRight();
+                                // go up to intersection of street with destination and turn right
+                                addYInstruction(destY - currentY);
+                                // if destination on number street turn right and go to destination
+                                if (currentX < destX) {
+                                    turnRight();
+                                    // go straight to destination
+                                    addXInstruction(destX - currentX);
+                                }
+                            }
+                            // destination to the right of location
+                            else if (currentX < destX) {
+                                turnAround();
+                                // go up to intersection of street with destination and turn right
+                                while (currentY > destY) {
+                                    goToNextIntersection();
+                                }
+                                turnRight();
+                                // go straight to destination
+                                addYInstruction(destY - currentY);
+                                // if destination on letter street turn right and go to destination
+                                if (currentY < destY) {
+                                    turnRight();
+                                    // go to destination
+                                    addYInstruction(destY - currentY);
+                                }
+                            }
+                        }
+
+                    }
+                    // FIXME Up until here
                     // destination below current location
                     else if (currentY < destY) {
-                        turnRight();
-                        // go to intersection where destination is and turn right
-                        while (currentY < destY) {
-                            goToNextIntersection();
+                        // facing wrong direction
+                        if (isDirectionUp()) {
+                            // on correct letter street
+                            if (currentX == destX) {
+                                turnAround();
+                                // go down to intersection just past destination and turn right
+                                while (currentY < destY) {
+                                    goToNextIntersection();
+                                }
+                                turnRight();
+                                // go to intersection of street with destination and turn right
+                                addXInstruction(destX - currentX);
+                                turnRight();
+                                // go straight to destination
+                                addYInstruction(destY - currentY);
+                            }
+                            // destination is to the left of location
+                            else if (currentX > destX) {
+                                turnAround();
+                                // go down to intersection just past destination and turn right
+                                while (currentY < destY) {
+                                    goToNextIntersection();
+                                }
+                                turnRight();
+                                // go to intersection of street with destination and turn right
+                                addXInstruction(destX - currentX);
+                                // if destination on letter street turn right and go to destination
+                                if (currentY != destY) {
+                                    turnRight();
+                                    // go straight to destination
+                                    addYInstruction(destY - currentY);
+                                }
+                            }
+                            // destination is to the right of location
+                            else if (currentX < destX) {
+                                turnRight();
+                                // go to intersection just past destination and turn right
+                                while (currentX < destX) {
+                                    goToNextIntersection();
+                                }
+                                // go down to intersection of street with destination and turn right
+                                addYInstruction(destY - currentY);
+                                // if destination on number street turn right and go to destination
+                                if (currentX != destX) {
+                                    turnRight();
+                                    // go straight to destination
+                                    addXInstruction(destX - currentX);
+                                }
+                            }
                         }
-                        turnRight();
-                        // go to destination
-                        addXInstruction(destX - currentX);
-                        // if destination on letter street turn right and go to destination
-                        if (currentY > destY) {
-                            turnRight();
-                            // go to destination
-                            addYInstruction(destY - currentY);
-                        }
-                    }
-                }
 
-                // facing correct direction
-                else if (isDirectionLeft()) {
-                    // already on correct number street
-                    if (currentY == destY) {
-                        addXInstruction(destX - currentX);
-                    }
-                    // destination above current location
-                    else if (currentY > destY) {
-                        // go to the intersection just past the destination and turn right
-                        while (currentX > destX) {
-                            goToNextIntersection();
-                        }
-                        turnRight();
-                        // go to the intersection of the street of the destination and turn right
-                        addYInstruction(destY - currentY);
-                        // if destination on number street turn right and go to destination
-                        if (currentX < destX) {
-                            turnRight();
-                            // go to destination
-                            addXInstruction(destX - currentX);
-                        }
-
-                    }
-                    // destination below current location
-                    else if (currentY < destY) {
-                        // correctly orient truck using only right turns
-                        turnAround();
-                        goToNextIntersection();
-                        turnRight();
-                        // go to the intersection of the street of the destination and turn right
-                        while (currentY < destY) {
-                            goToNextIntersection();
-                            turnRight();
-                        }
-                        // go to destination
-                        addXInstruction(destX - currentX);
-                        // if destination on letter street turn right and go to destination
-                        if (currentY > destY) {
-                            turnRight();
-                            // go to destination
-                            addYInstruction(destY - currentY);
-                        }
-                    }
-                }
-            }
-
-            // destination to the right of truck
-            else if (currentX < destX) {
-                // facing correct direction
-                if (isDirectionRight()) {
-                    // already on correct number street
-                    if (currentY == destY) {
-                        // go straight to destination
-                        addXInstruction(destX - currentX);
-                    }
-                    // destination above current location
-                    else if (currentY > destY) {
-                        // orient truck to travel up
-                        turnAround();
-                        goToNextIntersection();
-                        turnRight();
-                        // go up to intersection of street of destination and turn right
-                        while (currentY > destY) {
-                            goToNextIntersection();
-                        }
-                        turnRight();
-                        // go straight to destination
-                        addXInstruction(destX - currentX);
-                        // if destination on letter street turn right and go to destination
-                        if (currentY < destY) {
-                            turnRight();
-                            // go to destination
-                            addYInstruction(destY - currentY);
+                        // facing correct direction
+                        else if (isDirectionDown()) {
+                            // on correct letter street
+                            if (currentX == destX) {
+                                addYInstruction(destY - currentY);
+                            }
+                            // destination is to the left of location
+                            else if (currentX > destX) {
+                                // go down to intersection of street with destination and turn right
+                                while (currentY < destY) {
+                                    goToNextIntersection();
+                                }
+                                turnRight();
+                                // go straight to destination
+                                addXInstruction(destX - currentX);
+                                // if on letter street
+                                if (currentY != destY) {
+                                    turnRight();
+                                    // go up to destination
+                                    addYInstruction(destY - currentY);
+                                }
+                            }
+                            // destination is to the right of location
+                            else if (currentX < destX) {
+                                // orient truck
+                                turnAround();
+                                goToNextIntersection();
+                                turnRight();
+                                // go to intersection just past destination and turn right
+                                while (currentX < destX) {
+                                    goToNextIntersection();
+                                }
+                                turnRight();
+                                // go to intersection of street with destination and turn right
+                                addYInstruction(destY - currentY);
+                                //if on number street turn right and go to destination
+                                if (currentX != destX) {
+                                    turnRight();
+                                    // go straight to destination
+                                    addXInstruction(destX - currentX);
+                                }
+                            }
                         }
                     }
-                    // destination below current location
-                    else if (currentY < destY) {
-                        // go to intersection just past the destination and turn right
-                        while (currentX < destX) {
-                            goToNextIntersection();
-                        }
-                        turnRight();
-                        // go down to intersection of street with destination and turn right
-                        addYInstruction(destY - currentY);
-                        // if destination on number street turn right and go to destination
-                        if (currentX > destX) {
-                            turnRight();
-                            // go straight to destination
-                            addXInstruction(destX - currentX);
-                        }
-                    }
-                }
-
-                // facing wrong direction
-                else if (isDirectionLeft()) {
-                    // already on correct number street
-                    if (currentY == destY) {
-                        turnAround();
-                        // go to intersection just past the destination and turn right
-                        while (currentX < destX) {
-                            goToNextIntersection();
-                        }
-                        turnRight();
-                        // go to intersection of street with destination and turn right
-                        goToNextIntersection();
-                        turnRight();
-                        // go straight to destination
-                        addXInstruction(destX - currentX);
-                    }
-                    // destination above current location
-                    else if (currentY > destY) {
-                        turnRight();
-                        // go up to intersection of street with destination and turn right
-                        while (currentY > destY) {
-                            goToNextIntersection();
-                        }
-                        turnRight();
-                        // go straight to destination
-                        addXInstruction(destX - currentX);
-                        // if destination on letter street turn right and go to destination
-                        if (currentY < destY) {
-                            turnRight();
-                            addYInstruction(destY - currentY);
-                        }
-                    }
-                    // destination below current location
-                    else if (currentY < destY) {
-                        turnAround();
-                        // go to intersection just past destination and turn right
-                        while (currentX < destX) {
-                            goToNextIntersection();
-                        }
-                        turnRight();
-                        // go down to intersection of street with destination and turn right
-                        addYInstruction(destY - currentY);
-                        // if destination on number street turn right and go to destination
-                        if (currentX > destX) {
-                            turnRight();
-                            // go straight to destination
-                            addXInstruction(destX - currentX);
-                        }
-                    }
-                }
-            }
-
-            // destination above the current location
-            else if (currentY > destY) {
-                // facing correct direction
-                if (isDirectionUp()) {
-                    // already on correct letter street
-                    if (currentX == destX) {
-                        addYInstruction(destY - currentY);
-                    }
-                    // destination to the left of location
-                    else if (currentX > destX) {
-                        // orient truck to move up to destination
-                        turnAround();
-                        goToNextIntersection();
-                        turnRight();
-                        // go to intersection just past the destination and turn right
-                        while (currentX > destX) {
-                            goToNextIntersection();
-                        }
-                        turnRight();
-                        // go up to intersection of street with destination and turn right
-                        addYInstruction(destY - currentY);
-                        // if destination on number street turn right and go to destination
-                        if (currentX < destX) {
-                            turnRight();
-                            // go straight to destination
-                            addXInstruction(destX - currentX);
-                        }
-                    }
-                    // destination to the right of location
-                    else if (currentX < destX) {
-                        // go up to intersection of street with destination and turn right
-                        while (currentY > destY) {
-                            goToNextIntersection();
-                        }
-                        turnRight();
-                        // go straight to destination
-                        addXInstruction(destX - currentX);
-                        // if destination on letter street turn right and go to destination
-                        if (currentY < destY) {
-                            turnRight();
-                            // go to destination
-                            addYInstruction(destY - currentY);
-                        }
-                    }
-                }
-
-                // facing wrong direction
-                else if (isDirectionDown()) {
-                    // on correct letter street
-                    if (currentX == destX) {
-                        turnAround();
-                        // go up to intersection of street with destination and turn right
-                        while (currentY > destY) {
-                            goToNextIntersection();
-                        }
-                        turnRight();
-                        // go straight to destination
-                        addXInstruction(destX - currentX);
-                        // if destination on letter street turn right and go to destination
-                        if (currentY < destY) {
-                            turnRight();
-                            // go to destination
-                            addYInstruction(destY - currentY);
-                        }
-                    }
-                    // destination to the left of location
-                    else if (currentX > destX) {
-                        turnRight();
-                        // go to intersection just past the destination and turn right
-                        while (currentX > destX) {
-                            goToNextIntersection();
-                        }
-                        turnRight();
-                        // go up to intersection of street with destination and turn right
-                        addYInstruction(destY - currentY);
-                        // if destination on number street turn right and go to destination
-                        if (currentX < destX) {
-                            turnRight();
-                            // go straight to destination
-                            addXInstruction(destX - currentX);
-                        }
-                    }
-                    // destination to the right of location
-                    else if (currentX < destX) {
-                        turnAround();
-                        // go up to intersection of street with destination and turn right
-                        while (currentY > destY) {
-                            goToNextIntersection();
-                        }
-                        turnRight();
-                        // go straight to destination
-                        addYInstruction(destY - currentY);
-                        // if destination on letter street turn right and go to destination
-                        if (currentY < destY) {
-                            turnRight();
-                            // go to destination
-                            addYInstruction(destY - currentY);
-                        }
-                    }
-                }
-
-            }
-            // FIXME Up until here
-            // destination below current location
-            else if (currentY < destY) {
-                // facing wrong direction
-                if (isDirectionUp()) {
-                    // on correct letter street
-                    if (currentX == destX) {
-                        turnAround();
-                        // go down to intersection just past destination and turn right
-                        while (currentY < destY) {
-                            goToNextIntersection();
-                        }
-                        turnRight();
-                        // go to intersection of street with destination and turn right
-                        addXInstruction(destX - currentX);
-                        turnRight();
-                        // go straight to destination
-                        addYInstruction(destY - currentY);
-                    }
-                    // destination is to the left of location
-                    else if (currentX > destX) {
-                        turnAround();
-                        // go down to intersection just past destination and turn right
-                        while (currentY < destY) {
-                            goToNextIntersection();
-                        }
-                        turnRight();
-                        // go to intersection of street with destination and turn right
-                        addXInstruction(destX - currentX);
-                        // if destination on letter street turn right and go to destination
-                        if (currentY != destY) {
-                            turnRight();
-                            // go straight to destination
-                            addYInstruction(destY - currentY);
-                        }
-                    }
-                    // destination is to the right of location
-                    else if (currentX < destX) {
-                        turnRight();
-                        // go to intersection just past destination and turn right
-                        while (currentX < destX) {
-                            goToNextIntersection();
-                        }
-                        // go down to intersection of street with destination and turn right
-                        addYInstruction(destY - currentY);
-                        // if destination on number street turn right and go to destination
-                        if (currentX != destX) {
-                            turnRight();
-                            // go straight to destination
-                            addXInstruction(destX - currentX);
-                        }
-                    }
-                }
-
-                // facing correct direction
-                else if (isDirectionDown()) {
-                    // on correct letter street
-                    if (currentX == destX) {
-                        addYInstruction(destY - currentY);
-                    }
-                    // destination is to the left of location
-                    else if (currentX > destX) {
-                        // go down to intersection of street with destination and turn right
-                        while (currentY < destY) {
-                            goToNextIntersection();
-                        }
-                        turnRight();
-                        // go straight to destination
-                        addXInstruction(destX - currentX);
-                        // if on letter street
-                        if (currentY != destY) {
-                            turnRight();
-                            // go up to destination
-                            addYInstruction(destY - currentY);
-                        }
-                    }
-                    // destination is to the right of location
-                    else if (currentX < destX) {
-                        // orient truck
-                        turnAround();
-                        goToNextIntersection();
-                        turnRight();
-                        // go to intersection just past destination and turn right
-                        while (currentX < destX) {
-                            goToNextIntersection();
-                        }
-                        turnRight();
-                        // go to intersection of street with destination and turn right
-                        addYInstruction(destY - currentY);
-                        //if on number street turn right and go to destination
-                        if (currentX != destX) {
-                            turnRight();
-                            // go straight to destination
-                            addXInstruction(destX - currentX);
-                        }
-                    }
-                }
-            }
             //}
 
         }
@@ -655,4 +656,5 @@ public class RightTurnNavigationStrategy2 implements NavigationStrategy {
 
 
 }
+
 
