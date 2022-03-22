@@ -5,6 +5,7 @@ the next closest order tot the truck
 
 Edits by:
 */
+import java.awt.*;
 import java.util.*;
 
 public class DistanceBasedStrategy implements OrderStrategy{
@@ -26,7 +27,6 @@ public class DistanceBasedStrategy implements OrderStrategy{
         this.orderList = orderList.getOrderList();
         simTruckX = SimSettings.INITIAL_TRUCK_X;
         simTruckY = SimSettings.INITIAL_TRUCK_Y;
-
     }
 
     private Order getClosestOrder()
@@ -51,8 +51,10 @@ public class DistanceBasedStrategy implements OrderStrategy{
                 minOrder = o;
             }
         }
-        simTruckX = ac.convert(minOrder.getOrderAddress())[0];
-        simTruckY = ac.convert(minOrder.getOrderAddress())[1];
+        int [] minOrderCoords = ac.convert(minOrder.getOrderAddress());
+
+        simTruckX = minOrderCoords[0];
+        simTruckY = minOrderCoords[1];
         return minOrder;
 
     }
@@ -74,8 +76,7 @@ public class DistanceBasedStrategy implements OrderStrategy{
          *
          */
         for(int i=0 ;i< orderList.size();i++){
-            Order closest = getClosestOrder();
-            orderQueue.add(closest);
+            orderQueue.add(getClosestOrder());
         }
     }
 
@@ -91,6 +92,7 @@ public class DistanceBasedStrategy implements OrderStrategy{
     public double getDistance(int[] location1, int[] location2) {
         /**
          * Returns the distance between two coordinates from an Order address
+         * Manhattan Distance
          */
         int x1, y1, x2, y2;
         x1 = location1[0];

@@ -20,11 +20,14 @@ public class TruckMap extends JPanel {
     private int truckX;
     private int truckY;
     private Collection<int[]> pinLocations;
+    private ArrayList<int[]> roadCoords;
+
 
     TruckMap() {
         this.setPreferredSize(new Dimension(SimSettings.DIMENSION, SimSettings.DIMENSION));
 
         pinLocations = new ArrayList<>();
+        roadCoords = new ArrayList<>();
 
         // load the truck image
         try {

@@ -72,7 +72,6 @@ public class AddressConverter {
         }
     }
 
-    // FIXME
     /**
      * helper method for the convert method that calculates the x and y pixel coordinates corresponding to
      * a specific address location on the truck map for streets named after numbers, and assigns the correct x
@@ -83,7 +82,7 @@ public class AddressConverter {
         int horizontalBlockNumber = addrNum / 100;
         int horizontalStreetNumber = (addrNum % 100) / 10;
 
-        xCoordinate = (int)(spacing * (horizontalBlockNumber- 1) + (spacing / 11) * horizontalStreetNumber);
+        xCoordinate = (int)(spacing * (horizontalBlockNumber - 1) + (spacing / 11) * horizontalStreetNumber);
         yCoordinate = (int)(spacing * (10 - numberStreets.get(street) - 1));
     }
 
@@ -98,7 +97,7 @@ public class AddressConverter {
         int verticalStreetNumber = (addrNum % 100) / 10;
 
         xCoordinate = (int)(spacing * (letterStreets.get(street)));
-        yCoordinate = (int)(spacing * (10 - verticalBlockNumber - 1) + (spacing / 11) * (10 - verticalStreetNumber + 1));
+        yCoordinate = (int)(spacing * (10 - verticalBlockNumber - 1) + (spacing / 11) * (10 - verticalStreetNumber + 1)-10);
     }
 
 

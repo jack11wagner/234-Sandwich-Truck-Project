@@ -26,7 +26,18 @@ public class StandardNavigationStrategy implements NavigationStrategy {
         for (int[] location : locations) {
 
 
+
+
         }
         return navigationInstructions;
     }
+
+    private int getStartDirection(){
+        return 0;
+    }
+    public boolean isSameDirection()
+    {
+        return false;
+    }
+
 }
