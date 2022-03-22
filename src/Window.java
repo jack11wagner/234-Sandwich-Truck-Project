@@ -50,4 +50,8 @@ public class Window extends JFrame {
     public void addNewPinToMap(int x, int y) {
         tMap.addPinLocation(new int[]{x, y});
     }
+
+    public void removePin() {
+        tMap.removePin();
+    }
 }

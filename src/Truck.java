@@ -12,6 +12,7 @@ Edits by: Michael Shimer (added splitOrder method)
 public class Truck {
     private int x = SimSettings.INITIAL_TRUCK_X;
     private int y = SimSettings.INITIAL_TRUCK_Y;
+    private int direction = -1;
     private final Window window;
     private final AddressConverter addConverter = new AddressConverter();
     private final OrderStrategy orderStrat;
@@ -50,10 +51,8 @@ public class Truck {
         }
 
 
-        Collection<int[]> navInstructions = navStrat.calculateNavInstructions(getTruckLocation(), orderDestinationsInOrder);
+        Collection<int[]> navInstructions = navStrat.calculateNavInstructions(direction, getTruckLocation(), orderDestinationsInOrder);
         move(navInstructions);
-
-
     }
 
     private void move(Collection<int[]> navInstructions) {
@@ -62,25 +61,25 @@ public class Truck {
          * truck x, y coordinates to move the truck
          */
         for (int[] instruction : navInstructions) {
-            int direction = instruction[0]; // X or Y
-            int distance = instruction[1];
-            int posOrNeg;
-            try {
-                posOrNeg = distance / Math.abs(distance); // 1 = right or down, -1 = left or up
-            } catch (ArithmeticException e) {
-                posOrNeg = 0;
+            if (instruction[1] == -1) {
+                window.removePin();
+                continue;
             }
+            direction = instruction[0]; // 0 - right, 1 - down, 2 - left, 3 - up
+            int distance = instruction[1];
 
-            // how many steps the truck has to take to reach dest,
-            // could be negative to signal differentiate between left/right up/down
+            // how many steps the truck has to take to reach dest (or partial dest),
             int distance_steps = distance / SimSettings.TRUCK_SPEED;
 
-
             for (int i = 0; i < Math.abs(distance_steps); i++) {
-                if (direction == 0) { // X
-                    x += SimSettings.TRUCK_SPEED * posOrNeg; // update x coordinate
-                } else { // Y
-                    y += SimSettings.TRUCK_SPEED * posOrNeg; // update y coordinate
+                if (direction == 0) { // right
+                    x += SimSettings.TRUCK_SPEED;
+                } else if (direction == 2) { // left
+                    x -= SimSettings.TRUCK_SPEED;
+                } else if (direction == 1) { // down
+                    y += SimSettings.TRUCK_SPEED;
+                } else { // up
+                    y -= SimSettings.TRUCK_SPEED;
                 }
                 window.repaintTruck(x, y);
                 SimSettings.cycle();
@@ -95,8 +94,6 @@ public class Truck {
          */
         return new int[]{x,y};
     }
-
-
 
     private String[] splitOrder(String order) {
         /**
