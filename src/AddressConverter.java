@@ -83,9 +83,13 @@ public class AddressConverter {
 
         int horizontalBlockNumber = addrNum / 100;
         int horizontalStreetNumber = (addrNum % 100) / 10;
-      
-        xCoordinate = (int)(spacing * (horizontalBlockNumber-1)) + (int)roadWidth + (int)((horizontalStreetNumber)*houseSpacing);
-        yCoordinate = (int)(spacing * (10 - numberStreets.get(street) -1)) + 10;
+
+        xCoordinate = (int)(spacing * (horizontalBlockNumber - 1) + (spacing / 11) * horizontalStreetNumber);
+        yCoordinate = (int)(spacing * (10 - numberStreets.get(street) - 1));
+
+        //xCoordinate = (int)(spacing * (horizontalBlockNumber-1)) + (int)roadWidth + (int)((horizontalStreetNumber)*houseSpacing);
+        //yCoordinate = (int)(spacing * (10 - numberStreets.get(street) -1)) + 10;
+
     }
 
     // FIXME
@@ -98,8 +102,11 @@ public class AddressConverter {
         int verticalBlockNumber = addrNum / 100;
         int verticalStreetNumber = (addrNum % 100) / 10;
 
-        xCoordinate = (int)(spacing * (letterStreets.get(street))) + 10;
-        yCoordinate = (int)(spacing * (10-verticalBlockNumber-1)) + (int)roadWidth + (int)(houseSpacing * (10-verticalStreetNumber-1));
+        xCoordinate = (int)(spacing * (letterStreets.get(street)));
+        yCoordinate = (int)(spacing * (10 - verticalBlockNumber - 1) + (spacing / 11) * (10 - verticalStreetNumber + 1)-10);
+
+        //xCoordinate = (int)(spacing * (letterStreets.get(street))) + 10;
+        //yCoordinate = (int)(spacing * (10-verticalBlockNumber-1)) + (int)roadWidth + (int)(houseSpacing * (10-verticalStreetNumber-1));
     }
 
 
