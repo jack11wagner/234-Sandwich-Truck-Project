@@ -27,13 +27,13 @@ public class AddressConverterTest {
 
     @Test
     public void testLetterStreetAddress() {
-        address = "500 G St.";
+        address = "950 F St.";
         System.out.println("L: " + Arrays.toString(converter.convert(address)));
     }
 
     @Test
     public void testNumberStreetAddress() {
-        address = "700 5 St.";
+        address = "930 2 St.";
         System.out.println("N: " + Arrays.toString(converter.convert(address)));
     }
 

@@ -54,8 +54,7 @@ public class RightTurnNavigationStrategy2 implements NavigationStrategy {
 
             goToFirstIntersection();
 
-            while ((currentX != destX) & (currentY != destY)) {
-                if (currentX != destX) {
+            //while ((currentX != destX) || (currentY != destY)) {
                     // destination to the left of truck
                     if (currentX > destX) {
                         // facing wrong direction
@@ -113,7 +112,7 @@ public class RightTurnNavigationStrategy2 implements NavigationStrategy {
                         }
 
                         // facing correct direction
-                        if (isDirectionLeft()) {
+                        else if (isDirectionLeft()) {
                             // already on correct number street
                             if (currentY == destY) {
                                 addXInstruction(destX - currentX);
@@ -159,7 +158,7 @@ public class RightTurnNavigationStrategy2 implements NavigationStrategy {
                     }
 
                     // destination to the right of truck
-                    if (currentX < destX) {
+                    else if (currentX < destX) {
                         // facing correct direction
                         if (isDirectionRight()) {
                             // already on correct number street
@@ -206,7 +205,7 @@ public class RightTurnNavigationStrategy2 implements NavigationStrategy {
                         }
 
                         // facing wrong direction
-                        if (isDirectionLeft()) {
+                        else if (isDirectionLeft()) {
                             // already on correct number street
                             if (currentY == destY) {
                                 turnAround();
@@ -256,11 +255,9 @@ public class RightTurnNavigationStrategy2 implements NavigationStrategy {
                             }
                         }
                     }
-                }
 
-                if (currentY != destY) {
                     // destination above the current location
-                    if (currentY > destY) {
+                    else if (currentY > destY) {
                         // facing correct direction
                         if (isDirectionUp()) {
                             // already on correct letter street
@@ -268,7 +265,7 @@ public class RightTurnNavigationStrategy2 implements NavigationStrategy {
                                 addYInstruction(destY - currentY);
                             }
                             // destination to the left of location
-                            if (currentX > destX) {
+                            else if (currentX > destX) {
                                 // orient truck to move up to destination
                                 turnAround();
                                 goToNextIntersection();
@@ -288,7 +285,7 @@ public class RightTurnNavigationStrategy2 implements NavigationStrategy {
                                 }
                             }
                             // destination to the right of location
-                            if (currentX < destX) {
+                            else if (currentX < destX) {
                                 // go up to intersection of street with destination and turn right
                                 while (currentY > destY) {
                                     goToNextIntersection();
@@ -306,7 +303,7 @@ public class RightTurnNavigationStrategy2 implements NavigationStrategy {
                         }
 
                         // facing wrong direction
-                        if (isDirectionDown()) {
+                        else if (isDirectionDown()) {
                             // on correct letter street
                             if (currentX == destX) {
                                 turnAround();
@@ -325,7 +322,7 @@ public class RightTurnNavigationStrategy2 implements NavigationStrategy {
                                 }
                             }
                             // destination to the left of location
-                            if (currentX > destX) {
+                            else if (currentX > destX) {
                                 turnRight();
                                 // go to intersection just past the destination and turn right
                                 while (currentX > destX) {
@@ -342,7 +339,7 @@ public class RightTurnNavigationStrategy2 implements NavigationStrategy {
                                 }
                             }
                             // destination to the right of location
-                            if (currentX < destX) {
+                            else if (currentX < destX) {
                                 turnAround();
                                 // go up to intersection of street with destination and turn right
                                 while (currentY > destY) {
@@ -363,7 +360,7 @@ public class RightTurnNavigationStrategy2 implements NavigationStrategy {
                     }
                     // FIXME Up until here
                     // destination below current location
-                    if (currentY < destY) {
+                    else if (currentY < destY) {
                         // facing wrong direction
                         if (isDirectionUp()) {
                             // on correct letter street
@@ -381,7 +378,7 @@ public class RightTurnNavigationStrategy2 implements NavigationStrategy {
                                 addYInstruction(destY - currentY);
                             }
                             // destination is to the left of location
-                            if (currentX > destX) {
+                            else if (currentX > destX) {
                                 turnAround();
                                 // go down to intersection just past destination and turn right
                                 while (currentY < destY) {
@@ -398,7 +395,7 @@ public class RightTurnNavigationStrategy2 implements NavigationStrategy {
                                 }
                             }
                             // destination is to the right of location
-                            if (currentX < destX) {
+                            else if (currentX < destX) {
                                 turnRight();
                                 // go to intersection just past destination and turn right
                                 while (currentX < destX) {
@@ -416,13 +413,13 @@ public class RightTurnNavigationStrategy2 implements NavigationStrategy {
                         }
 
                         // facing correct direction
-                        if (isDirectionDown()) {
+                        else if (isDirectionDown()) {
                             // on correct letter street
                             if (currentX == destX) {
                                 addYInstruction(destY - currentY);
                             }
                             // destination is to the left of location
-                            if (currentX > destX) {
+                            else if (currentX > destX) {
                                 // go down to intersection of street with destination and turn right
                                 while (currentY < destY) {
                                     goToNextIntersection();
@@ -438,7 +435,7 @@ public class RightTurnNavigationStrategy2 implements NavigationStrategy {
                                 }
                             }
                             // destination is to the right of location
-                            if (currentX < destX) {
+                            else if (currentX < destX) {
                                 // orient truck
                                 turnAround();
                                 goToNextIntersection();
@@ -458,12 +455,8 @@ public class RightTurnNavigationStrategy2 implements NavigationStrategy {
                                 }
                             }
                         }
-
                     }
-
-                }
-
-            }
+            //}
 
         }
 
