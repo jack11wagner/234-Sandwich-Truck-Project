@@ -40,7 +40,7 @@ public class RightTurnNavigationStrategy2 implements NavigationStrategy {
 
 
     @Override
-    public Collection<int[]> calculateNavInstructions(int[] begCoords, Collection<int[]> destCoords) {
+    public Collection<int[]> calculateNavInstructions(int begDirection, int[] begCoords, Collection<int[]> destCoords) {
 
         this.begX = begCoords[0];
         this.begY = begCoords[1];
