@@ -13,18 +13,19 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 
 public class TruckMap extends JPanel {
     private static BufferedImage truckImage;
     private static BufferedImage pinImage;
     private int truckX;
     private int truckY;
-    private Collection<int[]> pinLocations;
+    private LinkedList<int[]> pinLocations;
 
     TruckMap() {
         this.setPreferredSize(new Dimension(SimSettings.DIMENSION, SimSettings.DIMENSION));
 
-        pinLocations = new ArrayList<>();
+        pinLocations = new LinkedList<>();
 
         // load the truck image
         try {
@@ -145,6 +146,10 @@ public class TruckMap extends JPanel {
 
     public void addPinLocation(int[] coords) {
         pinLocations.add(coords);
+    }
+
+    public void removePin() {
+        pinLocations.remove(0);
     }
 }
 
