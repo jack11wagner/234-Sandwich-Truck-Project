@@ -12,7 +12,7 @@ Edits by: Michael Shimer (added splitOrder method)
 public class Truck {
     private int x = SimSettings.INITIAL_TRUCK_X;
     private int y = SimSettings.INITIAL_TRUCK_Y;
-    private int truckDir = 3;
+    private int direction = -1;
     private final Window window;
     private final AddressConverter addConverter = new AddressConverter();
     private final OrderStrategy orderStrat;
@@ -51,7 +51,7 @@ public class Truck {
         }
 
 
-        Collection<int[]> navInstructions = navStrat.calculateNavInstructions(truckDir, getTruckLocation(), orderDestinationsInOrder);
+        Collection<int[]> navInstructions = navStrat.calculateNavInstructions(direction, getTruckLocation(), orderDestinationsInOrder);
         move(navInstructions);
     }
 
@@ -61,7 +61,11 @@ public class Truck {
          * truck x, y coordinates to move the truck
          */
         for (int[] instruction : navInstructions) {
-            int direction = instruction[0]; // 0 - right, 1 - down, 2 - left, 3 - up
+            if (instruction[1] == -1) {
+                window.removePin();
+                continue;
+            }
+            direction = instruction[0]; // 0 - right, 1 - down, 2 - left, 3 - up
             int distance = instruction[1];
 
             // how many steps the truck has to take to reach dest (or partial dest),
