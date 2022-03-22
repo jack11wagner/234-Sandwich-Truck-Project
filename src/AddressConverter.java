@@ -86,6 +86,9 @@ public class AddressConverter {
 
         xCoordinate = (int)(spacing * (horizontalBlockNumber - 1) + (spacing / 11) * horizontalStreetNumber);
         yCoordinate = (int)(spacing * (10 - numberStreets.get(street) - 1));
+
+        //xCoordinate = (int)(spacing * (horizontalBlockNumber-1)) + (int)roadWidth + (int)((horizontalStreetNumber)*houseSpacing);
+        //yCoordinate = (int)(spacing * (10 - numberStreets.get(street) -1)) + 10;
     }
 
     // FIXME
