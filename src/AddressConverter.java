@@ -19,6 +19,8 @@ public class AddressConverter {
     private final HashMap<String, Integer> letterStreets;
     private final HashMap<String, Integer> numberStreets;
     private final double spacing = SimSettings.ROAD_SPACING;
+    private final double roadWidth = SimSettings.ROAD_WIDTH;
+    private final double houseSpacing = (spacing - roadWidth) / 9;
     private int xCoordinate;
     private int yCoordinate;
 
