@@ -68,7 +68,6 @@ public class StandardNavigationStrategy implements NavigationStrategy {
                     }
                 }
             }
-
             navigationInstructions.add(new int[]{-1,-1}); // signifies that a destination has been reached
         }
         return navigationInstructions;
@@ -298,4 +297,5 @@ public class StandardNavigationStrategy implements NavigationStrategy {
          */
         return destY - currY;
     }
+
 }

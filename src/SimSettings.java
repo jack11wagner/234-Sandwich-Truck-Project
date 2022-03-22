@@ -11,6 +11,7 @@ public class SimSettings {
     public static final int TRUCK_SPEED = 1; // unit = pixels per cycle (defined below)
     public static final int PIN_SIZE = DIMENSION / 25;
     public static final int NUMBER_OF_ORDERS = 100;
+    public static final String SERVICE_CENTER = "550 E St.";
 
     private static final int[] initial_truck_xy = new AddressConverter().convert("550 5 St.");
     public static final int INITIAL_TRUCK_X = initial_truck_xy[0];

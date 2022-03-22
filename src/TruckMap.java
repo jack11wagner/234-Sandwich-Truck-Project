@@ -24,6 +24,7 @@ public class TruckMap extends JPanel {
     private int truckY;
     private LinkedList<int[]> pinLocations;
 
+
     TruckMap() {
         this.setPreferredSize(new Dimension(SimSettings.DIMENSION, SimSettings.DIMENSION));
 
