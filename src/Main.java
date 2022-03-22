@@ -9,6 +9,7 @@ public class Main {
         Window simWindow = new Window();
 
         Truck truck = new Truck(simWindow, new DistanceBasedStrategy(ol), new StandardNavigationStrategy());
+        //Truck truck = new Truck(simWindow, new DistanceBasedStrategy(ol), new RightTurnNavigationStrategy2());
 
         truck.start();
 

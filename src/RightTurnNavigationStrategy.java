@@ -47,6 +47,82 @@ public class RightTurnNavigationStrategy implements NavigationStrategy{
 
             goToFirstIntersection();
 
+            // navigationInstructions.add(new int[]{1, yDistance});
+
+            while ((currentX != destX) & (currentY != destY)) {
+
+                // see if on correct letter street
+                if (currentX != destX) {
+
+                    if (currentX > destX) {
+
+                        // truck facing correct direction
+                        if (isDirectionLeft()){
+                            xDistance = destX - currentX;
+                            navigationInstructions.add(new int[]{0, xDistance});
+                        }
+
+                        // truck is facing wrong direction
+                        if (isDirectionRight()){
+                            turnAround();
+                        }
+                    }
+
+                    if (currentX < destX) {
+
+                        // truck is facing wrong direction
+                        if (isDirectionLeft()){
+                            turnAround();
+                        }
+
+                        // truck is facing correct direction
+                        if (isDirectionRight()){
+                            xDistance = destX - currentX;
+                            navigationInstructions.add(new int[]{0, xDistance});
+                        }
+                    }
+                }
+
+                // see if on correct number street
+                if (currentY != destY) {
+
+                    if (currentY > destY) {
+
+                        // truck is facing correct direction
+                        if (isDirectionUp()){
+                            yDistance =  destY - currentY;
+                            navigationInstructions.add(new int[]{1, yDistance});
+
+                        }
+
+                        // truck is facing wrong direction
+                        if (isDirectionDown()){
+                            turnAround();
+
+                        }
+                    }
+
+                    if (currentY < destY) {
+
+                        // truck is facing wrong direction
+                        if (isDirectionUp()){
+                            turnAround();
+                        }
+
+                        // truck is facing correct direction
+                        if (isDirectionDown()){
+                            yDistance =  destY - currentY;
+                            navigationInstructions.add(new int[]{1, yDistance});
+                        }
+                    }
+
+                }
+
+                turnRight();
+
+            }
+
+
         }
         return navigationInstructions;
     }
@@ -56,20 +132,22 @@ public class RightTurnNavigationStrategy implements NavigationStrategy{
 
         int intersectionX;
         int intersectionY;
+        int intSpace = (int)spacing;
 
         // if on letter road, move in y direction to next intersection
         if (isOnLetterRoad()) {
             // determine the coordinate of the next intersection (must be in the direction that the truck is facing)
             // subtract current location from destination so that the sign of the direction is correct
             if (isDirectionDown()) {
-                //intersectionY =
-                //yDistance = intersectionY - currentY;
+                // find next intersection with larger y coordinate
+                intersectionY = (intSpace * (currentY / intSpace)) + intSpace;
+                yDistance = intersectionY - currentY;
             }
             if (isDirectionUp()) {
-                //intersectionY =
-                //yDistance = intersectionY - currentY;
+                // find next intersection with smaller y coordinate
+                intersectionY = (intSpace * (currentY / intSpace));
+                yDistance = intersectionY - currentY;
             }
-
             navigationInstructions.add(new int[]{1, yDistance});
         }
 
@@ -79,16 +157,67 @@ public class RightTurnNavigationStrategy implements NavigationStrategy{
             // determine the coordinate of the next intersection (must be in the direction that the truck is facing)
             // subtract destination from current location so that the sign of the direction is correct
             if (isDirectionLeft()) {
-                //intersectionX =
-                //xDistance = currentX - intersectionX;
+                // find next intersection with smaller x coordinate
+                intersectionX = (intSpace * (currentX / intSpace));
+                xDistance = intersectionX - currentX;
             }
             if (isDirectionRight()) {
-                //intersectionX =
-                //xDistance = currentX - intersectionX;
+                // find next intersection with larger x coordinate
+                intersectionX = (intSpace * (currentX / intSpace)) + intSpace;
+                xDistance = intersectionX - currentX;
             }
-
-
             navigationInstructions.add(new int[]{0, xDistance});
+        }
+    }
+
+    // turns truck around by going to next intersection and making a right turn (2x)
+    private void turnAround() {
+        if (isOnLetterRoad()) {
+            turnRight();
+            goToNextIntersection();
+            turnRight();
+
+        }
+
+        if (isOnNumberRoad()) {
+            turnRight();
+            goToNextIntersection();
+            turnRight();
+
+        }
+    }
+
+    // moves truck to the intersection it is facing
+    private void goToNextIntersection() {
+        int nextIntersection;
+        int intSpace = (int)spacing;
+
+        if (isOnNumberRoad()) {
+            if (isDirectionLeft()) {
+                // move left to next intersection
+                nextIntersection = currentX - intSpace;
+                xDistance = currentX - nextIntersection;
+            }
+            if (isDirectionRight()) {
+                // move right to the next intersection
+                nextIntersection = currentX + intSpace;
+                xDistance = currentX - nextIntersection;
+            }
+            navigationInstructions.add(new int[]{0, xDistance});
+        }
+
+        if (isOnLetterRoad()) {
+            if (isDirectionDown()) {
+                // find next intersection with larger y coordinate
+                nextIntersection = currentY + intSpace;
+                yDistance = nextIntersection - currentY;
+            }
+            if (isDirectionUp()) {
+                // find next intersection with smaller y coordinate
+                nextIntersection = currentY - intSpace;
+                yDistance = nextIntersection - currentY;
+            }
+            navigationInstructions.add(new int[]{1, yDistance});
         }
     }
 
