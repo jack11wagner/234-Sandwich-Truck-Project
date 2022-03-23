@@ -19,6 +19,10 @@ public class Truck {
     private final NavigationStrategy navStrat;
 
     Truck(Window window, OrderStrategy orderStrat, NavigationStrategy navStrat) {
+        /**
+         * Truck constructor which initializes the instance variables based on the Main instantiation
+         * Also sets the navigation strategy as well
+         */
         this.window = window;
         this.orderStrat = orderStrat;
         this.orderStrat.createOrderQueue();
@@ -69,12 +73,12 @@ public class Truck {
         for (int[] instruction : navInstructions) {
             if (instruction[1] == -1) {
                 window.removePin();
+                // slight delay for when Truck reaches order coordinates
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
                 continue;
             }
             direction = instruction[0]; // 0 - right, 1 - down, 2 - left, 3 - up
@@ -102,7 +106,7 @@ public class Truck {
     private int[] getTruckLocation() {
         /**
          * Gets the current location coordinates of the truck
-         * :return: array of coordinates
+         * @return: array of coordinates
          */
         return new int[]{x,y};
     }
@@ -112,7 +116,7 @@ public class Truck {
          * spilts the order into individual strings for the address and food order, given in the whole order string,
          * so that the address and food order can be used separately
          * @param: String order - the whole string order that contains the time, address, and food order
-         * @returns: an array of two strings corresponding to the address string and the food order string
+         * @return: an array of two strings corresponding to the address string and the food order string
          */
         String[] splitOrderArray;
         String address;

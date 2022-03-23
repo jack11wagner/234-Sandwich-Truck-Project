@@ -13,7 +13,6 @@ public class Window extends JFrame implements ActionListener {
     private TruckMap tMap = new TruckMap();
     private JButton start_button;
     private JButton new_order_button;
-    private boolean start_truck = false;
     private boolean isReady = false;
 
     Window() {

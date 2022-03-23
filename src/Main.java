@@ -14,7 +14,6 @@ public class Main {
         while (!simWindow.isReady()) {
             SimSettings.cycle();
         }
-        SimSettings.cycle();
         truck.start();
 
     }

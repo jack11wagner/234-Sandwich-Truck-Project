@@ -1,14 +1,16 @@
 /*
 Author: Jackson Wagner
-This Class stores represents the strategy for creating the Order Queue based on
-the next closest order tot the truck
+This Class represents the strategy for creating the Order Queue based on
+the next closest order to the truck
 
 Edits by:
 */
-import java.awt.*;
 import java.util.*;
 
 public class DistanceBasedStrategy implements OrderStrategy{
+    /**
+     * This class implements the Strategy Design Pattern
+     */
     private Queue<Order> orderQueue;
     private ArrayList<Order> orderList;
     private int simTruckX;
@@ -45,7 +47,7 @@ public class DistanceBasedStrategy implements OrderStrategy{
         double minDist = Integer.MAX_VALUE;
         Order minOrder =orderList.get(0);
         for(Order o: orderList){
-            double dist = getDistance(truck_coords, ac.convert(o.getOrderAddress()));
+            double dist = Math.abs(getDistance(truck_coords, ac.convert(o.getOrderAddress())));
             if (dist<minDist && !orderQueue.contains(o)) {
                 minDist = dist;
                 minOrder = o;
