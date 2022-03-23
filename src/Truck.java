@@ -51,6 +51,15 @@ public class Truck {
         }
         addPinsToMap(orderDestinationsInOrder);
         Collection<int[]> navInstructions = navStrat.calculateNavInstructions(direction, getTruckLocation(), orderDestinationsInOrder);
+        window.repaintTruck(x,y);
+        try
+        {
+            Thread.sleep(750);
+        }
+        catch(InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
+        }
         move(navInstructions);
     }
 
@@ -73,12 +82,6 @@ public class Truck {
         for (int[] instruction : navInstructions) {
             if (instruction[1] == -1) {
                 window.removePin();
-                // slight delay for when Truck reaches order coordinates
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 continue;
             }
             direction = instruction[0]; // 0 - right, 1 - down, 2 - left, 3 - up
