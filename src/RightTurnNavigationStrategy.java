@@ -24,18 +24,37 @@ public class RightTurnNavigationStrategy implements NavigationStrategy {
     LinkedList<int[]> navigationInstructions;
 
 
+
+    /**
+     * default constructor method for the right turn navigation strategy
+     */
     public RightTurnNavigationStrategy() {
         this.direction = 0;
         navigationInstructions = new LinkedList<>();
     }
 
 
+    /**
+     * constructor method for the right turn navigation strategy that takes an initial direction
+     * as a parameter
+     */
     public RightTurnNavigationStrategy(double initialDirection) {
         this.direction = initialDirection;
         navigationInstructions = new LinkedList<>();
     }
 
 
+    /**
+     * main method that executes an algorithm to make the truck go from one destination
+     * to the next while only making right turns. The truck executes a different set of instructions
+     * depending on where the next destination is in relation to its current location
+     * @params: and integer begDirection which correlates to the initial direction the truck
+     * is facing at the start of the program, an integer array begCoords which hold the initial
+     * coordinates of the truck on the map, and a collection of integer arrays destCoords which holds all
+     * coordinates of each destination the truck needs to go to
+     * @returns: returns a collection of integer arrays which hold the instructions to
+     * correctly navigate the map
+     */
     @Override
     public Collection<int[]> calculateNavInstructions(int begDirection, int[] begCoords, Collection<int[]> destCoords) {
 
@@ -403,7 +422,10 @@ public class RightTurnNavigationStrategy implements NavigationStrategy {
         return navigationInstructions;
     }
 
-    // turns truck around by going to next intersection and making a right turn (2x)
+    /**
+     * helper method that executes instructions such that the truck turns around by
+     * turning right, going to the next block, and turning right again
+     */
     private void turnAround() {
         turnRight();
         goToNextIntersection();
