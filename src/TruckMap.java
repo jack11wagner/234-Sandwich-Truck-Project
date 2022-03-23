@@ -56,6 +56,7 @@ public class TruckMap extends JPanel {
         truckY = SimSettings.INITIAL_TRUCK_Y;
     }
 
+
     private void setBackupImage(BufferedImage image) {
         /**
          * This method sets a colored square as the backup image if the file cannot be found
