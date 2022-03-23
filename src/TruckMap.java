@@ -26,6 +26,9 @@ public class TruckMap extends JPanel {
 
 
     TruckMap() {
+        /**
+         * Constructor for the TruckMap mainly just reading in our image files and setting Map settings
+         */
         this.setPreferredSize(new Dimension(SimSettings.DIMENSION, SimSettings.DIMENSION));
 
         pinLocations = new LinkedList<>();
@@ -98,8 +101,8 @@ public class TruckMap extends JPanel {
 
 
         boolean firstPin = true;
-        for (int[] pinCoords : pinLocations) {
-            pinCoords = adjustPinCoords(pinCoords);
+        for (int i =0; i<pinLocations.size();i++) {
+            int [] pinCoords = adjustPinCoords(pinLocations.get(i));
             int pinX = pinCoords[0];
             int pinY = pinCoords[1];
 

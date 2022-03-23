@@ -49,7 +49,7 @@ public class OrderList {
         orderList.add(e);
     }
 
-    private void writeOrdersToFile() throws IOException {
+    public void writeOrdersToFile() throws IOException {
         /**
          * Private helper method for generateOrders
          * Writes the contents of an OrderList to a file named orders.txt

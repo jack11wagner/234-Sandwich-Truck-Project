@@ -24,7 +24,7 @@ public class RightTurnNavigationStrategy implements NavigationStrategy {
     LinkedList<int[]> navigationInstructions;
 
 
-
+    
     /**
      * default constructor method for the right turn navigation strategy
      */
@@ -421,6 +421,9 @@ public class RightTurnNavigationStrategy implements NavigationStrategy {
         }
         return navigationInstructions;
     }
+
+
+
 
     /**
      * helper method that executes instructions such that the truck turns around by

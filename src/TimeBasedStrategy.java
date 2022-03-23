@@ -1,6 +1,6 @@
 /*
 Author: Jackson Wagner
-This Class stores represents the strategy for creating the Order Queue based on
+This Class represents the strategy for creating the Order Queue based on
 the earliest time of an Order
 
 Edits by:
@@ -8,6 +8,9 @@ Edits by:
 import java.util.*;
 
 public class TimeBasedStrategy implements OrderStrategy{
+    /**
+     * This class implements the Strategy Design Pattern
+     */
     private PriorityQueue<Order> orderQueue;
     private ArrayList<Order> orderList;
 

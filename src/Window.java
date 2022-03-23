@@ -6,12 +6,20 @@ Edits by:
 */
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Window extends JFrame {
+public class Window extends JFrame implements ActionListener {
     private TruckMap tMap = new TruckMap();
     private JButton start_button;
+    private JButton new_order_button;
+    private boolean isReady = false;
 
     Window() {
+        /**
+         * Handles the basic settings of the window including dimensions of the window, default closing,
+         * This Constructor also adds the buttons, titles, and various panels seen on the Window GUI
+         */
         super();
         this.setSize(SimSettings.DIMENSION, SimSettings.DIMENSION + 100);
         this.setTitle("Sandwich Truck Simulator");
@@ -31,7 +39,14 @@ public class Window extends JFrame {
         start_button = new JButton("Start");
         start_button.setBounds(10, SimSettings.DIMENSION + 10, 100, 80);
         control_panel.add(start_button, BorderLayout.WEST);
-        
+        start_button.addActionListener(this);
+
+
+        new_order_button = new JButton("Create New Order");
+        new_order_button.setBounds(30, SimSettings.DIMENSION + 10, 100, 80);
+        control_panel.add(new_order_button, BorderLayout.WEST);
+        new_order_button.addActionListener(this);
+
 
         this.setVisible(true);
     }
@@ -54,4 +69,20 @@ public class Window extends JFrame {
     public void removePin() {
         tMap.removePin();
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+//        if (e.getSource() == new_order_button){
+//            OrderInterface myFrame = new OrderInterface();
+//        }
+        if (e.getSource() == start_button){
+            isReady = true;
+        }
+
+    }
+    public boolean isReady() {
+        return isReady;
+    }
+
+
 }
