@@ -103,7 +103,7 @@ public class AddressConverter {
         int verticalStreetNumber = (addrNum % 100) / 10;
 
         xCoordinate = (int)(spacing * (letterStreets.get(street)));
-        yCoordinate = (int)(spacing * (10 - verticalBlockNumber - 1) + (spacing / 11) * (10 - verticalStreetNumber + 1)-10);
+        yCoordinate = (int)(spacing * (SimSettings.NUM_ROADS - verticalBlockNumber - 1) + (spacing / (SimSettings.NUM_ROADS + 1)) * (SimSettings.NUM_ROADS - verticalStreetNumber + 1)-SimSettings.NUM_ROADS);
 
         //xCoordinate = (int)(spacing * (letterStreets.get(street))) + 10;
         //yCoordinate = (int)(spacing * (10-verticalBlockNumber-1)) + (int)roadWidth + (int)(houseSpacing * (10-verticalStreetNumber-1));
