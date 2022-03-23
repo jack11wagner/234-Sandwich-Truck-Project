@@ -54,9 +54,15 @@ public class StandardNavigationStrategy implements NavigationStrategy {
                             setXDir();
                             while (currX != destX)
                                 moveToIntersection();
+                        } else {
+                            setXDir();
+                            moveToIntersection();
                         }
                         setYDir();
-                        moveToDestStraightAhead();
+                        if (destIsOnSameRoad() && destAndTruckInSameDirection())
+                            moveToDestStraightAhead();
+                        else
+                            moveToIntersection();
                     } else if (destOnHorizontalRoad()) {
                         if (!destIsOnSameRoad()) {
                             setYDir();
