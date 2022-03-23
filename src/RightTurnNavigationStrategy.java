@@ -24,7 +24,7 @@ public class RightTurnNavigationStrategy implements NavigationStrategy {
     LinkedList<int[]> navigationInstructions;
 
 
-    
+
     /**
      * default constructor method for the right turn navigation strategy
      */
