@@ -6,10 +6,13 @@ Edits by:
 */
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Window extends JFrame {
+public class Window extends JFrame implements ActionListener {
     private TruckMap tMap = new TruckMap();
     private JButton start_button;
+    private JButton new_order_button;
 
     Window() {
         super();
@@ -31,8 +34,13 @@ public class Window extends JFrame {
         start_button = new JButton("Start");
         start_button.setBounds(10, SimSettings.DIMENSION + 10, 100, 80);
         control_panel.add(start_button, BorderLayout.WEST);
-        
+        start_button.addActionListener(this);
 
+
+        new_order_button = new JButton("Create New Order");
+        new_order_button.setBounds(30, SimSettings.DIMENSION + 10, 100, 80);
+        control_panel.add(new_order_button, BorderLayout.WEST);
+        new_order_button.addActionListener(this);
         this.setVisible(true);
     }
 
@@ -49,5 +57,12 @@ public class Window extends JFrame {
 
     public void addNewPinToMap(int x, int y) {
         tMap.addPinLocation(new int[]{x, y});
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == new_order_button){
+            OrderInterface o = new OrderInterface();
+        }
     }
 }
