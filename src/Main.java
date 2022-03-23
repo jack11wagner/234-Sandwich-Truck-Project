@@ -12,9 +12,19 @@ public class Main {
 //        Truck truck = new Truck(simWindow, new DistanceBasedStrategy(ol), new RightTurnNavigationStrategy());
 
         while (!simWindow.isReady()) {
-            SimSettings.cycle();
+            sleep();
         }
         truck.start();
+    }
 
+    private static void sleep() {
+        try
+        {
+            Thread.sleep(100);
+        }
+        catch(InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
+        }
     }
 }
