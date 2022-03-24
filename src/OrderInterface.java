@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -24,12 +25,14 @@ public class OrderInterface extends JFrame implements ActionListener {
     private final JTextArea summary;
     private final JLabel res;
     private final JTextArea resadd;
+    private OrderList orderList;
 
     private final String[] sandwiches = {"Italian", "Bologna", "Roast Beef"};
 
     // constructor, to initialize the components
     // with default values.
     public OrderInterface() {
+
         setTitle("Order Form");
         setBounds(0, 0, 450, 550);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -116,7 +119,7 @@ public class OrderInterface extends JFrame implements ActionListener {
         c.add(summary);
 
         res = new JLabel("");
-        res.setFont(new Font("Arial", Font.PLAIN, 20));
+        res.setFont(new Font("Arial", Font.PLAIN, 15));
         res.setSize(500, 25);
         res.setLocation(75, 300);
         c.add(res);
@@ -128,6 +131,11 @@ public class OrderInterface extends JFrame implements ActionListener {
         resadd.setLineWrap(true);
         c.add(resadd);
 
+        try {
+            orderList = new OrderList("orders.txt");
+        } catch (IOException | FileFormatException e) {
+            e.printStackTrace();
+        }
         setVisible(true);
     }
 
@@ -140,21 +148,29 @@ public class OrderInterface extends JFrame implements ActionListener {
             if (e.getSource() == submitButton) {
 
                     String currTime = LocalDate.now() +" "+ LocalTime.now().toString();
-//                    System.out.println(currTime);
                     String orderTime = Timestamp.valueOf(currTime.substring(0,currTime.length()-7)).toString();
                     String data
                             = "Name : "
                             + name.getText() + "\n"
                             + "Address : "
-                            + orderAddress.getText() + "\n"
+                            + orderAddress.getText().strip() + "\n"
                             + "Sandwich Order : "
                             + sandwichOrder.getSelectedItem() + "\n"
+                            + "Notes : "
+                            + additionalNotes.getText().strip() + "\n"
                             + "Order Time : "
                             + orderTime + "\n";
 
                     summary.setText(data);
                     summary.setEditable(false);
-                    res.setText("Registration Successfully..");
+                    orderList.addOrder(new Order(orderTime.strip(), orderAddress.getText().strip(), sandwichOrder.getSelectedItem().toString()));
+                try {
+                    orderList.writeOrdersToFile();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                res.setText("Order Confirmed...");
+
                 }
 
             else if (e.getSource() == resetButton) {
