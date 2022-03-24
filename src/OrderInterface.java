@@ -11,23 +11,13 @@ public class OrderInterface extends JFrame implements ActionListener {
 
     // Components of the Form
     private final Container c;
-    private final JLabel title;
-    private final JLabel nameLabel;
-    private final JTextField name;
-    private final JLabel orderAddressLabel;
-    private final JTextField orderAddress;
-    private final JLabel sandwichLabel;
+    private final JLabel title, nameLabel,orderAddressLabel, sandwichLabel, extrasLabel, confirmationLabel;
+    private final JTextField name, orderAddress;
     private final JComboBox sandwichOrder;
-    private final JLabel extrasLabel;
-    private final JButton submitButton;
-    private final JButton resetButton;
+    private final JButton submitButton, resetButton;
     private final JTextArea summary;
-    private final JLabel confirmationLabel;
     private final JTextArea resadd;
-    private final JRadioButton Lettuce;
-    private final JRadioButton Mustard;
-    private final JRadioButton Mayo;
-    private final JRadioButton Tomato;
+    private final JRadioButton Lettuce, Mustard, Mayo, Tomato;
     private final JRadioButton[] extrasList;
     private OrderList orderList;
     private final String[] sandwiches = {"choose...", "Italian", "Bologna", "Roast Beef", "BMT", "Ham & Cheese"};
