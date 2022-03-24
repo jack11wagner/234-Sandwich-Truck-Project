@@ -15,19 +15,22 @@ public class OrderInterface extends JFrame implements ActionListener {
     private final JLabel nameLabel;
     private final JTextField name;
     private final JLabel orderAddressLabel;
-    private final JTextArea orderAddress;
+    private final JTextField orderAddress;
     private final JLabel sandwichLabel;
     private final JComboBox sandwichOrder;
-    private final JLabel additionalNotesLabel;
-    private final JTextArea additionalNotes;
+    private final JLabel extrasLabel;
     private final JButton submitButton;
     private final JButton resetButton;
     private final JTextArea summary;
-    private final JLabel res;
+    private final JLabel confirmationLabel;
     private final JTextArea resadd;
+    private final JRadioButton Lettuce;
+    private final JRadioButton Mustard;
+    private final JRadioButton Mayo;
+    private final JRadioButton Tomato;
+    private final JRadioButton[] extrasList;
     private OrderList orderList;
-
-    private final String[] sandwiches = {"Italian", "Bologna", "Roast Beef"};
+    private final String[] sandwiches = {"choose...", "Italian", "Bologna", "Roast Beef", "BMT", "Ham & Cheese"};
 
     // constructor, to initialize the components
     // with default values.
@@ -35,80 +38,41 @@ public class OrderInterface extends JFrame implements ActionListener {
 
         setTitle("Order Form");
         setBounds(0, 0, 450, 550);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         setResizable(false);
         c = getContentPane();
         c.setLayout(null);
+//        c.setBackground(Color.getHSBColor(49, 33, 92));
 
-        title = new JLabel("Order Form");
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
-        title.setSize(250, 30);
-        title.setLocation(125, 10);
-        c.add(title);
+        createJLabel(title = new JLabel("Enter your order below"),22, 400,30, 100,5);
 
-        nameLabel = new JLabel("Name");
-        nameLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        nameLabel.setSize(80, 20);
-        nameLabel.setLocation(75, 50);
-        c.add(nameLabel);
+        // creates Name Label and TextField for Name
+        createJLabel(nameLabel = new JLabel("Name"), 20, 80, 20, 75, 50);
+        createJTextField(name = new JTextField(),160,20,175,50 );
 
-        name = new JTextField();
-        name.setFont(new Font("Arial", Font.PLAIN, 15));
-        name.setSize(190, 20);
-        name.setLocation(175, 50);
-        c.add(name);
+        // creates Address Label and TextField for Address
+        createJLabel(orderAddressLabel = new JLabel("Address"), 20, 100, 20, 55, 90);
+        createJTextField(orderAddress = new JTextField(), 160, 20, 175, 90);
 
-        orderAddressLabel = new JLabel("Address");
-        orderAddressLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        orderAddressLabel.setSize(100, 20);
-        orderAddressLabel.setLocation(55, 90);
-        c.add(orderAddressLabel);
-
-        orderAddress = new JTextArea();
-        orderAddress.setFont(new Font("Arial", Font.PLAIN, 15));
-        orderAddress.setSize(200, 75);
-        orderAddress.setLocation(175, 90);
-        orderAddress.setLineWrap(true);
-        c.add(orderAddress);
-
-        sandwichLabel = new JLabel("Sandwich");
-        sandwichLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        sandwichLabel.setSize(100, 20);
-        sandwichLabel.setLocation(55, 180);
-        c.add(sandwichLabel);
-
+        // creates Sandwich Label and Dropdown for Sandwich Choice
+        createJLabel(sandwichLabel = new JLabel("Sandwich"), 20, 100, 20, 55, 140);
         sandwichOrder = new JComboBox(sandwiches);
         sandwichOrder.setFont(new Font("Arial", Font.PLAIN, 15));
         sandwichOrder.setSize(175, 20);
-        sandwichOrder.setLocation(175, 180);
+        sandwichOrder.setLocation(175, 140);
         c.add(sandwichOrder);
 
-        additionalNotesLabel = new JLabel("Notes");
-        additionalNotesLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        additionalNotesLabel.setSize(100, 20);
-        additionalNotesLabel.setLocation(55, 210);
-        c.add(additionalNotesLabel);
+        // creates Extras Label and RadioButtons for the various Extras
+        createJLabel(extrasLabel = new JLabel("Extras"), 20, 100, 20, 55, 180);
+        createJRadioButton(Lettuce = new JRadioButton("Lettuce"), 0, 0);
+        createJRadioButton(Mustard = new JRadioButton("Mustard"), 95, 0);
+        createJRadioButton(Mayo = new JRadioButton("Mayo"), 195, 0);
+        createJRadioButton(Tomato = new JRadioButton("Tomato"), 0, 30);
 
-        additionalNotes = new JTextArea();
-        additionalNotes.setFont(new Font("Arial", Font.PLAIN, 15));
-        additionalNotes.setSize(200, 50);
-        additionalNotes.setLocation(175, 210);
-        additionalNotes.setLineWrap(true);
-        c.add(additionalNotes);
 
-        submitButton = new JButton("Submit");
-        submitButton.setFont(new Font("Arial", Font.PLAIN, 15));
-        submitButton.setSize(100, 20);
-        submitButton.setLocation(125, 280);
-        submitButton.addActionListener(this);
-        c.add(submitButton);
-
-        resetButton = new JButton("Reset");
-        resetButton.setFont(new Font("Arial", Font.PLAIN, 15));
-        resetButton.setSize(100, 20);
-        resetButton.setLocation(245, 280);
-        resetButton.addActionListener(this);
-        c.add(resetButton);
+        // creates Submit and Reset Button
+        createJButton(submitButton = new JButton("Submit"), 100,20, 125, 265);
+        createJButton(resetButton = new JButton("Reset"), 100, 20, 245, 265);
 
         summary = new JTextArea();
         summary.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -118,11 +82,7 @@ public class OrderInterface extends JFrame implements ActionListener {
         summary.setEditable(false);
         c.add(summary);
 
-        res = new JLabel("");
-        res.setFont(new Font("Arial", Font.PLAIN, 15));
-        res.setSize(500, 25);
-        res.setLocation(75, 300);
-        c.add(res);
+        createJLabel(confirmationLabel = new JLabel(""), 15, 500, 25, 150, 300);
 
         resadd = new JTextArea();
         resadd.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -137,39 +97,86 @@ public class OrderInterface extends JFrame implements ActionListener {
             e.printStackTrace();
         }
         setVisible(true);
+        extrasList = new JRadioButton[]{Lettuce, Mayo, Tomato, Mustard};
     }
 
-    // method actionPerformed()
+    private JButton createJButton(JButton e, int sizeWidth, int sizeHeight, int locX, int locY) {
+        e.setFont(new Font("Arial", Font.PLAIN, 15));
+        e.setSize(sizeWidth, sizeHeight);
+        e.setLocation(locX, locY);
+        e.addActionListener(this);
+        c.add(e);
+        return e;
+    }
+
+    private JTextField createJTextField(JTextField e, int sizeWidth, int sizeHeight, int locX, int locY) {
+        e.setFont(new Font("Arial", Font.PLAIN, 15));
+        e.setSize(sizeWidth, sizeHeight);
+        e.setLocation(locX, locY);
+        c.add(e);
+        return e;
+    }
+
+
+    private JLabel createJLabel(JLabel e, int fontSize, int sizeWidth, int sizeHeight, int locX, int locY) {
+        e.setFont(new Font("Arial", Font.PLAIN, fontSize));
+        e.setSize(sizeWidth, sizeHeight);
+        e.setLocation(locX, locY);
+        c.add(e);
+        return e;
+    }
+
+    private JRadioButton createJRadioButton(JRadioButton e, int xoffset, int yoffset) {
+        e.setFont(new Font("Arial", Font.PLAIN, 15));
+        e.setSelected(false);
+        e.setSize(100, 20);
+        e.setLocation(125+xoffset, 180+yoffset);
+        c.add(e);
+        return e;
+    }
+
         // to get the action performed
         // by the user and act accordingly
     @Override
     public void actionPerformed(ActionEvent e)
         {
             if (e.getSource() == submitButton) {
-
                     String currTime = LocalDate.now() +" "+ LocalTime.now().toString();
                     String orderTime = Timestamp.valueOf(currTime.substring(0,currTime.length()-7)).toString();
+                    String extrasString = "";
+                for (JRadioButton jRadioButton : extrasList) {
+                    if (jRadioButton.isSelected()) {
+                        extrasString += jRadioButton.getText() + " ";
+                    }
+                }
                     String data
                             = "Name : "
                             + name.getText() + "\n"
                             + "Address : "
                             + orderAddress.getText().strip() + "\n"
-                            + "Sandwich Order : "
+                            + "Sandwich: "
                             + sandwichOrder.getSelectedItem() + "\n"
-                            + "Notes : "
-                            + additionalNotes.getText().strip() + "\n"
+                            + "Extras : "
+                            + extrasString.strip() + "\n"
                             + "Order Time : "
                             + orderTime + "\n";
 
                     summary.setText(data);
                     summary.setEditable(false);
-                    orderList.addOrder(new Order(orderTime.strip(), orderAddress.getText().strip(), sandwichOrder.getSelectedItem().toString()));
+
+                    String orderContents = sandwichOrder.getSelectedItem().toString();
+                    if (extrasString.length()>0){
+                        orderContents+= " with " +extrasString;
+                    }
+
+                    orderList.addOrder(new Order(orderTime.strip(), orderAddress.getText().strip(),
+                            orderContents));
                 try {
                     orderList.writeOrdersToFile();
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                res.setText("Order Confirmed...");
+                confirmationLabel.setText("Order Confirmed...");
 
                 }
 
@@ -177,9 +184,13 @@ public class OrderInterface extends JFrame implements ActionListener {
                 String def = "";
                 name.setText(def);
                 orderAddress.setText(def);
-                res.setText(def);
+                confirmationLabel.setText(def);
                 summary.setText(def);
                 resadd.setText(def);
+                for (JRadioButton jRadioButton : extrasList) {
+                    jRadioButton.setSelected(false);
+                }
+
             }
         }
 }
