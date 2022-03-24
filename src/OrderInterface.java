@@ -79,7 +79,7 @@ public class OrderInterface extends JFrame implements ActionListener {
 
         sandwichOrder = new JComboBox(sandwiches);
         sandwichOrder.setFont(new Font("Arial", Font.PLAIN, 15));
-        sandwichOrder.setSize(100, 20);
+        sandwichOrder.setSize(175, 20);
         sandwichOrder.setLocation(175, 180);
         c.add(sandwichOrder);
 
