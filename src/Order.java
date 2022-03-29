@@ -18,9 +18,11 @@ public class Order {
     private Timestamp orderTimestamp;
     private String orderDate;
     private String orderAddress;
-    private String orderContents;
+    private String sandwichOrder;
+    private double orderCost;
     private String fullOrderDetails;
     private HashSet<String> addressesUsed = new HashSet<>();
+    // orders have a customer
 
     public Order(String date) {
         /**
@@ -30,21 +32,42 @@ public class Order {
          */
         this.orderDate = date;
         this.orderTimestamp = Timestamp.valueOf("2000-01-01 0:0:0");
-        this.orderContents = "";
+        this.sandwichOrder = "";
         this.fullOrderDetails = "";
         this.orderAddress = "";
     }
 
-    public Order(String timestamp, String address, String orderContents) {
+    public Order(String timestamp, String address, Sandwich sandwich){
         /**
          * Constructor for Order Class
          * Instantiates all instance variables to default values
-         * @param : String date - The date all timestamps will have since all orders should be on a certain day
+         * @param : String timestamp - The timestamp of an order
+         * @param : String address the address of the customer
+         * @param : Sandwich sandwich the sandwich object to set the description to
+         *
          */
         this.orderDate = "";
         this.orderTimestamp = Timestamp.valueOf(timestamp);
-        this.orderContents = orderContents;
-        this.fullOrderDetails = timestamp + ", " + address + ", " + orderContents;
+        this.sandwichOrder = sandwich.getDescription();
+        this.orderCost = sandwich.cost();
+        this.fullOrderDetails = timestamp + "," + address + "," + sandwichOrder + ',' + String.format("%.2f",orderCost);
+        this.orderAddress = address;
+    }
+
+
+    public Order(String timestamp, String address, String orderContents, double cost) {
+        /**
+         * Constructor for Order Class
+         * Instantiates all instance variables to default values
+         * @param : String timestamp - The timestamp of an order
+         * @param : String address the address of the customer
+         *
+         */
+        this.orderDate = "";
+        this.orderTimestamp = Timestamp.valueOf(timestamp);
+        this.sandwichOrder = orderContents;
+        this.orderCost = cost;
+        this.fullOrderDetails = timestamp + "," + address + "," + orderContents + "," + cost;
         this.orderAddress = address;
     }
 
@@ -54,8 +77,26 @@ public class Order {
          */
         setRandomTimestamp();
         setRandomAddress(addressesUsed);
-        setRandomOrderContents();
+        setRandomSandwichOrder();
         setFullOrderDetails();
+    }
+
+    // TODO
+    public Sandwich getRandomSandwichChoice(){
+         /**
+         * Selects a random Sandwich using the Decorator Pattern
+         * Still looking for better randomization ways but with the Decorator pattern it is tough to randomize
+         */
+       int randomSandwichChoice = new Random().nextInt(4)+1;
+
+       // 4 random Sandwich Choice options
+       switch (randomSandwichChoice) {
+           case 1: return new Mayo(new Lettuce(new Mustard(new Pastrami())));
+           case 2: return new Mustard(new Bacon(new Tomato(new Ham())));
+           case 3: return new Tomato(new WhiteBread(new Lettuce(new Italian())));
+           case 4: return new WholeWheatBread(new Tomato(new Mustard(new Pastrami())));
+           default: return new Italian();
+       }
     }
 
 
@@ -122,13 +163,14 @@ public class Order {
         this.orderTimestamp = Timestamp.valueOf(fullTimestamp);
     }
 
-    public void setRandomOrderContents()
+    public void setRandomSandwichOrder()
     {
         /**
          * Selects random element from orderList and sets instance variable orderContents to it
          */
-        String[] orderList = {"Italian Sandwich", "Ham and Cheese", "Bologna Sandwich", "Salami Sandwich"};
-        orderContents = orderList[new Random().nextInt(orderList.length)];
+        Sandwich RandomSandwich = getRandomSandwichChoice();
+        sandwichOrder = RandomSandwich.getDescription();
+        orderCost = RandomSandwich.cost();
     }
 
     public void setFullOrderDetails()
@@ -136,15 +178,18 @@ public class Order {
         /**
          * Sets fullOrderDetails to the concatenated string of orderTimestamp, orderAddress and OrderContents
          */
-        fullOrderDetails= this.getOrderTimestamp() + "," + this.orderAddress +  "," + this.orderContents;
+        fullOrderDetails= this.getOrderTimestamp() + "," + this.orderAddress +  "," + this.sandwichOrder +","+ String.format("%.2f",this.orderCost);
     }
 
+    public void setSandwichOrder(Sandwich sandwich) {
+        this.sandwichOrder = sandwich.getDescription();
+    }
 
-    public String getOrderContents() {
+    public String getSandwichOrder() {
         /**
          * @returns orderContents instance variable
          */
-        return orderContents;
+        return sandwichOrder;
     }
 
     public String getFullOrderDetails() {

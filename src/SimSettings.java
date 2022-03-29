@@ -19,6 +19,18 @@ public class SimSettings {
     public static final int INITIAL_TRUCK_X = initial_truck_xy[0];
     public static final int INITIAL_TRUCK_Y = initial_truck_xy[1];
 
+    // Pricing for Menu
+    public static final double HAM_SANDWICH_COST = 4.50;
+    public static final double ITALIAN_SANDWICH_COST = 5.00;
+    public static final double PASTRAMI_SANDWICH_COST = 4.75;
+    public static final double MAYO_CONDIMENT_COST = .25;
+    public static final double MUSTARD_CONDIMENT_COST = .35;
+    public static final double LETTUCE_CONDIMENT_COST = .50;
+    public static final double BACON_CONDIMENT_COST = .95;
+    public static final double TOMATO_CONDIMENT_COST = .55;
+    public static final double WHITE_BREAD_CONDIMENT_COST = 1.00;
+    public static final double WHOLE_WHEAT_BREAD_CONDIMENT_COST = 1.00;
+
 
     public static void cycle() {
         try
