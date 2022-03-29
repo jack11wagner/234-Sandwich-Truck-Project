@@ -63,15 +63,27 @@ public class Window extends JFrame implements ActionListener {
     }
 
     public void addNewPinToMap(int x, int y) {
+        /**
+         * Adds a new pin to the Truck Map denoting an order's location
+         *
+         */
         tMap.addPinLocation(new int[]{x, y});
     }
 
     public void removePin() {
+        /**
+         * Removes a pin if the truck has visited this location already
+         *
+         */
         tMap.removePin();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        /**
+         * Listener method which awaits buttons on our GUI window to be pressed
+         *
+         */
 //        if (e.getSource() == new_order_button){
 //            OrderInterface myFrame = new OrderInterface();
 //        }
@@ -81,6 +93,11 @@ public class Window extends JFrame implements ActionListener {
 
     }
     public boolean isReady() {
+        /**
+         * Helper function for main to denote that the start button has
+         * been pressed and the simulation will now begin
+         *
+         */
         return isReady;
     }
 

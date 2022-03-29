@@ -6,6 +6,7 @@ random information for each order component including a ordertime, address and o
 Edits by:
 */
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 import java.sql.Timestamp;
 
@@ -13,15 +14,15 @@ public class Order {
     /**
      * Stores information about an Order
      * Details such as timestamps, OrderContents, address are all randomly generated
-     *
      */
     private Timestamp orderTimestamp;
     private String orderDate;
     private String orderAddress;
     private String orderContents;
     private String fullOrderDetails;
+    private HashSet<String> addressesUsed = new HashSet<>();
 
-    public Order(String date){
+    public Order(String date) {
         /**
          * Constructor for Order Class
          * Instantiates all instance variables to default values
@@ -34,7 +35,7 @@ public class Order {
         this.orderAddress = "";
     }
 
-    public Order(String timestamp, String address, String orderContents){
+    public Order(String timestamp, String address, String orderContents) {
         /**
          * Constructor for Order Class
          * Instantiates all instance variables to default values
@@ -47,18 +48,17 @@ public class Order {
         this.orderAddress = address;
     }
 
-    public void generateRandomFields()
-    {
+    public void generateRandomFields(HashSet<String> addressesUsed) {
         /**
          * Calls methods to create random values for each of the instance variables
          */
         setRandomTimestamp();
-        setRandomAddress();
+        setRandomAddress(addressesUsed);
         setRandomOrderContents();
-        setRandomAddress();
         setFullOrderDetails();
-
     }
+
+
 
     private int getRandomNumber(int min , int max)
     {
@@ -96,14 +96,17 @@ public class Order {
         return houseNumbers.get(new Random().nextInt(houseNumbers.size()));
     }
 
-    public void setRandomAddress() {
+    public void setRandomAddress(HashSet<String> addressesUsed) {
         /**
          * Calls private helper methods to generate random house number/ street name
          * This method just concatenates the two and assigns the result to the instance variable address
          */
-        String houseNumber = this.getRandomHouseNumber();
-        String street = this.getRandomStreetName();
-        this.orderAddress = houseNumber + " " + street + " St.";
+        String orderAddress =  this.getRandomHouseNumber() + " " + this.getRandomStreetName() + " St.";
+        while (addressesUsed.contains(orderAddress)) {
+            orderAddress = this.getRandomHouseNumber() + " " + this.getRandomStreetName() + " St.";
+        }
+        this.orderAddress = orderAddress;
+
     }
     public void setRandomTimestamp()
     {

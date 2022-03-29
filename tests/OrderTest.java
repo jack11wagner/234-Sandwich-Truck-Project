@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -67,7 +68,7 @@ class OrderTest {
         String[] streetNamesTestList = {"1","2","3", "4","5","6", "7", "8", "9","10", "A","B", "C","D", "E", "F", "G","H","I", "J"};
         ArrayList<String> houseNumberTestList = createHouseNumberTestList();
         Order o = new Order("2022-01-01");
-        o.setRandomAddress();
+        o.setRandomAddress(new HashSet<>());
         String address = o.getOrderAddress();
 
         String[] address_components = address.split(" ");

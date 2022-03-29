@@ -7,12 +7,15 @@ Edits by:
 import org.junit.jupiter.api.Test;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class OrderListTest {
     @Test
     public void testOrderListIsFilledWhenReadingFromValidFile() throws IOException, FileFormatException {
+        OrderList o = new OrderList();
+        o.generateOrders(100);
         OrderList ol = new OrderList("orders.txt");
         assertEquals(100, ol.getNumberOfOrders());
     }
@@ -30,6 +33,20 @@ class OrderListTest {
         assertThrows(FileFormatException.class, ()-> new OrderList("tests/badFileFormat.txt"));
 
     }
+
+    @Test
+    public void testGenerating100OrdersAllOrderAddressesAreUnique()
+    {
+        OrderList ol = new OrderList();
+        HashSet<String> addressesUsed = new HashSet<>();
+        ol.generateOrders(100);
+        for (Order o: ol.getOrderList()){
+            addressesUsed.add(o.getOrderAddress());
+        }
+        assertEquals(100, addressesUsed.size());
+
+    }
+
 
 
 
