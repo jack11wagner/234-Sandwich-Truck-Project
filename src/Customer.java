@@ -12,9 +12,11 @@ public class Customer implements Observer {
     private AddressConverter converter;
     public HashMap<int[], String> letterAddresses;
     public HashMap<int[], String> numberAddresses;
+    private Truck truck;
 
     public Customer(String name) {
         //this.orderlist = orderList;
+        //this.truck = truck;
         this.customerName = name;
         this.converter = new AddressConverter();
         this.letterAddresses = new HashMap<>();

@@ -81,6 +81,7 @@ public class Truck {
          */
         for (int[] instruction : navInstructions) {
             if (instruction[1] == -1) {
+                SimSettings.pauseAtDestination();
                 window.removePin();
                 continue;
             }
