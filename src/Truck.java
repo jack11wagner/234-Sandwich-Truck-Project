@@ -12,13 +12,17 @@ Edits by: Michael Shimer (added splitOrder method)
 public class Truck {
     private int x = SimSettings.INITIAL_TRUCK_X;
     private int y = SimSettings.INITIAL_TRUCK_Y;
-    private int truckDir = 3;
+    private int direction = -1;
     private final Window window;
     private final AddressConverter addConverter = new AddressConverter();
     private final OrderStrategy orderStrat;
     private final NavigationStrategy navStrat;
 
     Truck(Window window, OrderStrategy orderStrat, NavigationStrategy navStrat) {
+        /**
+         * Truck constructor which initializes the instance variables based on the Main instantiation
+         * Also sets the navigation strategy as well
+         */
         this.window = window;
         this.orderStrat = orderStrat;
         this.orderStrat.createOrderQueue();
@@ -29,6 +33,9 @@ public class Truck {
     public void start() {
         /**
          * This method is to be called when the start button is pressed in the window
+         * This method goes through the general process of a Truck and the steps it must complete to move to each order
+         * This method gets the nextOrder, adds all the Order destinations to the map, and creates the navigation instructions
+         * for the Truck to move around
          */
         ArrayList<int[]> orderDestinationsInOrder = new ArrayList<>();
         Order nextOrder;
@@ -42,17 +49,29 @@ public class Truck {
             //foodOrder = splittedOrder[1]; // food order commented out until future
             orderDestinationsInOrder.add(addConverter.convert(address)); // convert the address into a pair of coordinates and append
         }
+        addPinsToMap(orderDestinationsInOrder);
+        Collection<int[]> navInstructions = navStrat.calculateNavInstructions(direction, getTruckLocation(), orderDestinationsInOrder);
+        window.repaintTruck(x,y);
+        try
+        {
+            Thread.sleep(750);
+        }
+        catch(InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
+        }
+        move(navInstructions);
+    }
 
+    private void addPinsToMap(ArrayList<int[]> orderDestinationsInOrder) {
+        /**
+         * Helper function for adding all the pins to the Truck Map
+         */
         for (int[] orderCoords : orderDestinationsInOrder) {
             int newX = orderCoords[0];
             int newY = orderCoords[1];
             window.addNewPinToMap(newX, newY);
-
         }
-
-
-        Collection<int[]> navInstructions = navStrat.calculateNavInstructions(truckDir, getTruckLocation(), orderDestinationsInOrder);
-        move(navInstructions);
     }
 
     private void move(Collection<int[]> navInstructions) {
@@ -61,7 +80,15 @@ public class Truck {
          * truck x, y coordinates to move the truck
          */
         for (int[] instruction : navInstructions) {
-            int direction = instruction[0]; // 0 - right, 1 - down, 2 - left, 3 - up
+            if (instruction[1] == -1) {
+                window.setDeliveryText("Delivering Order");
+                window.repaint();
+                SimSettings.pauseAtDestination();
+                window.removePin();
+                continue;
+            }
+            window.setDeliveryText("");
+            direction = instruction[0]; // 0 - right, 1 - down, 2 - left, 3 - up
             int distance = instruction[1];
 
             // how many steps the truck has to take to reach dest (or partial dest),
@@ -86,7 +113,7 @@ public class Truck {
     private int[] getTruckLocation() {
         /**
          * Gets the current location coordinates of the truck
-         * :return: array of coordinates
+         * @return: array of coordinates
          */
         return new int[]{x,y};
     }
@@ -96,7 +123,7 @@ public class Truck {
          * spilts the order into individual strings for the address and food order, given in the whole order string,
          * so that the address and food order can be used separately
          * @param: String order - the whole string order that contains the time, address, and food order
-         * @returns: an array of two strings corresponding to the address string and the food order string
+         * @return: an array of two strings corresponding to the address string and the food order string
          */
         String[] splitOrderArray;
         String address;

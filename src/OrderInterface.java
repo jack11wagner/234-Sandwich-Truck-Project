@@ -159,8 +159,8 @@ public class OrderInterface extends JFrame implements ActionListener {
                         orderContents+= " with " +extrasString;
                     }
 
-                    orderList.addOrder(new Order(orderTime.strip(), orderAddress.getText().strip(),
-                            orderContents));
+//                    orderList.addOrder(new Order(orderTime.strip(), orderAddress.getText().strip(),
+//                            orderContents));
                 try {
                     orderList.writeOrdersToFile();
                 } catch (IOException ex) {

@@ -9,18 +9,20 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class OrderList {
     /**
      * Class which holds Orders in a Data structure
      */
     private ArrayList<Order> orderList;
-
+    private HashSet<String> addressesUsed;
     public OrderList(){
         /**
          * Instantiates the orderList to a new ArrayList
          */
         orderList = new ArrayList<>();
+        addressesUsed = new HashSet<>();
     }
     public OrderList(String filename) throws IOException, FileFormatException {
         /**
@@ -33,9 +35,10 @@ public class OrderList {
         while ( (line = in.readLine())!=null){
             line = line.trim();
             String[] orderLine = line.split(",");
-            if (orderLine.length!=3) throw new FileFormatException("Invalid file format");
-            this.addOrder(new Order(orderLine[0], orderLine[1], orderLine[2]));
+            if (orderLine.length!=4) throw new FileFormatException("Invalid file format");
+            this.addOrder(new Order(orderLine[0], orderLine[1], orderLine[2], Double.parseDouble(orderLine[3])));
         }
+        addressesUsed = new HashSet<>();
     }
 
 
@@ -57,7 +60,7 @@ public class OrderList {
          */
         FileWriter writer = new FileWriter("orders.txt");
         for(Order o : orderList) {
-            writer.write(o.getOrderTimestamp()+","+ o.getOrderAddress() + "," + o.getOrderContents() + System.lineSeparator());
+            writer.write(o.getFullOrderDetails() + System.lineSeparator());
         }
         writer.close();
     }
@@ -69,10 +72,12 @@ public class OrderList {
          * Method also calls writeOrdersToFile to generate a txt file of the orderList
          * @param: int numOrders - the number of orders to make
          */
+
         for(int i =0;i<numOrders;i++){
             Order o = new Order("2022-01-01");
-            o.generateRandomFields();
+            o.generateRandomFields(addressesUsed);
             this.addOrder(o);
+            this.addressesUsed.add(o.getOrderAddress());
         }
         try {
             this.writeOrdersToFile();

@@ -11,23 +11,28 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 
 public class TruckMap extends JPanel {
     private static BufferedImage truckImage;
     private static BufferedImage pinImage;
+    private static BufferedImage nextPinImage;
     private int truckX;
     private int truckY;
-    private Collection<int[]> pinLocations;
-    private ArrayList<int[]> roadCoords;
+    private LinkedList<int[]> pinLocations;
+    private String deliveryText = "";
 
 
     TruckMap() {
+        /**
+         * Constructor for the TruckMap mainly just reading in our image files and setting Map settings
+         */
         this.setPreferredSize(new Dimension(SimSettings.DIMENSION, SimSettings.DIMENSION));
 
-        pinLocations = new ArrayList<>();
-        roadCoords = new ArrayList<>();
+        pinLocations = new LinkedList<>();
 
         // load the truck image
         try {
@@ -43,12 +48,23 @@ public class TruckMap extends JPanel {
             setBackupImage(pinImage);
         }
 
+        // load next_destination_pin.png
+        try {
+            nextPinImage = ImageIO.read(new File("images/next_destination_pin.png"));
+        } catch (IOException e) {
+            setBackupImage(pinImage);
+        }
+
         // Truck begins at the intersection of roads E5
         truckX = SimSettings.INITIAL_TRUCK_X;
         truckY = SimSettings.INITIAL_TRUCK_Y;
     }
 
+
     private void setBackupImage(BufferedImage image) {
+        /**
+         * This method sets a colored square as the backup image if the file cannot be found
+         */
         image = new BufferedImage(1, 1, 1);
         int rgb = new Color(255, 0, 255).getRGB();
         image.setRGB(0, 0, rgb);
@@ -84,16 +100,29 @@ public class TruckMap extends JPanel {
         // draw the truck image with the new, adjusted coordinates
         g2D.drawImage(truckImage, truckX, truckY, SimSettings.TRUCK_SIZE, SimSettings.TRUCK_SIZE, null);
 
-        // draw all location pins with number
-//        int i = 0;
-        for (int[] pinCoords : pinLocations) {
-            pinCoords = adjustPinCoords(pinCoords);
+
+        boolean firstPin = true;
+        for (int i =0; i<pinLocations.size();i++) {
+            int [] pinCoords = adjustPinCoords(pinLocations.get(i));
             int pinX = pinCoords[0];
             int pinY = pinCoords[1];
 
-            g2D.drawImage(pinImage, pinX, pinY, SimSettings.PIN_SIZE, SimSettings.PIN_SIZE, null);
-//            g2D.drawString(Integer.toString(i + 1), pinX + SimSettings.PIN_SIZE / 4, SimSettings.PIN_SIZE / 4);
+            if (firstPin) {
+                g2D.drawImage(nextPinImage, pinX, pinY, SimSettings.PIN_SIZE, SimSettings.PIN_SIZE, null);
+                firstPin = false;
+            } else {
+                g2D.drawImage(pinImage, pinX, pinY, SimSettings.PIN_SIZE, SimSettings.PIN_SIZE, null);
+            }
         }
+        g2D.setPaint(Color.GREEN);
+        if (truckX <= 10)
+            g2D.drawString(deliveryText, truckX + 5, truckY - 3);
+        else if (truckX >= SimSettings.DIMENSION - 10)
+            g2D.drawString(deliveryText, truckX - 15, truckY - 3);
+        else if (truckY <= 10)
+            g2D.drawString(deliveryText, truckX, truckY + 5);
+        else
+            g2D.drawString(deliveryText, truckX, truckY + 5);
     }
 
 
@@ -148,6 +177,14 @@ public class TruckMap extends JPanel {
 
     public void addPinLocation(int[] coords) {
         pinLocations.add(coords);
+    }
+
+    public void removePin() {
+        pinLocations.remove(0);
+    }
+
+    public void setDeliveryText(String text){
+        deliveryText = text;
     }
 }
 

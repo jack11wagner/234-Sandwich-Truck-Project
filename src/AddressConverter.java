@@ -7,6 +7,8 @@ display locations on the truck map
 Edits by: Jackson Wagner, Nikolas Kovacs
 */
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class AddressConverter {
@@ -15,12 +17,15 @@ public class AddressConverter {
     private String street;
     private String address;
     private int[] coordinates;
-    private int[] defaultCoordinate;
+    private final int[] defaultCoordinate;
     private final HashMap<String, Integer> letterStreets;
     private final HashMap<String, Integer> numberStreets;
     private final double spacing = SimSettings.ROAD_SPACING;
+    private final double roadWidth = SimSettings.ROAD_WIDTH;
+    private final double houseSpacing = (spacing - roadWidth) / 9;
     private int xCoordinate;
     private int yCoordinate;
+    private int[] houseBuckets;
 
     /**
      * Constructor for the AddressConverter Class
@@ -33,6 +38,37 @@ public class AddressConverter {
         letterStreets = new HashMap<>();
         numberStreets = new HashMap<>();
         fillAddressMaps();
+        houseBuckets = new int[SimSettings.NUM_HOUSES_PER_BLOCK];
+        generateHousingBuckets();
+    }
+
+    private int pinch(int coordinate) {
+        /**
+         * This method takes a coordinate and makes sure that it falls within a block
+         * Made especially to make sure that destinations do not fall directly in the middle of intersections
+         */
+        int closest = 0;
+        int block = coordinate / SimSettings.ROAD_SPACING;
+        int[] houseBucketsCopy = Arrays.copyOf(houseBuckets, houseBuckets.length);
+        for (int i = 0; i < houseBucketsCopy.length; i++)
+            houseBucketsCopy[i] += SimSettings.ROAD_SPACING * block;
+        for (int i = 0; i < houseBucketsCopy.length; i++) {
+            if (Math.abs(coordinate - houseBucketsCopy[i]) < (coordinate - houseBucketsCopy[closest]))
+                closest = i;
+        }
+        return houseBucketsCopy[closest];
+    }
+
+    private void generateHousingBuckets() {
+        /**
+         * This method sets up the housingBuckets array which will be used by the pinch method
+         */
+        int lower = SimSettings.ROAD_WIDTH / 2;
+        int upper = SimSettings.ROAD_SPACING - SimSettings.ROAD_WIDTH / 2;
+        int numBuckets = SimSettings.NUM_HOUSES_PER_BLOCK;
+        int step = (upper - lower) / numBuckets;
+        for (int i = 0; i < numBuckets; i++)
+            houseBuckets[i] = lower + (step * (i + 1));
     }
 
 
@@ -82,8 +118,12 @@ public class AddressConverter {
         int horizontalBlockNumber = addrNum / 100;
         int horizontalStreetNumber = (addrNum % 100) / 10;
 
-        xCoordinate = (int)(spacing * (horizontalBlockNumber - 1) + (spacing / 11) * horizontalStreetNumber);
-        yCoordinate = (int)(spacing * (10 - numberStreets.get(street) - 1));
+        xCoordinate = (int)(spacing * (horizontalBlockNumber - 1) + (spacing / (SimSettings.NUM_ROADS + 1) * horizontalStreetNumber));
+        yCoordinate = (int)(spacing * (SimSettings.NUM_ROADS - numberStreets.get(street) - 1));
+        xCoordinate = pinch(xCoordinate);
+        //xCoordinate = (int)(spacing * (horizontalBlockNumber-1)) + (int)roadWidth + (int)((horizontalStreetNumber)*houseSpacing);
+        //yCoordinate = (int)(spacing * (10 - numberStreets.get(street) -1)) + 10;
+
     }
 
     // FIXME
@@ -97,7 +137,11 @@ public class AddressConverter {
         int verticalStreetNumber = (addrNum % 100) / 10;
 
         xCoordinate = (int)(spacing * (letterStreets.get(street)));
-        yCoordinate = (int)(spacing * (10 - verticalBlockNumber - 1) + (spacing / 11) * (10 - verticalStreetNumber + 1)-10);
+        yCoordinate = (int)(spacing * (SimSettings.NUM_ROADS - verticalBlockNumber - 1) + (spacing / (SimSettings.NUM_ROADS + 1)) * (SimSettings.NUM_ROADS - verticalStreetNumber + 1)-SimSettings.NUM_ROADS);
+        yCoordinate = pinch(yCoordinate);
+
+        //xCoordinate = (int)(spacing * (letterStreets.get(street))) + 10;
+        //yCoordinate = (int)(spacing * (10-verticalBlockNumber-1)) + (int)roadWidth + (int)(houseSpacing * (10-verticalStreetNumber-1));
     }
 
 

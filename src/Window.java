@@ -13,8 +13,14 @@ public class Window extends JFrame implements ActionListener {
     private TruckMap tMap = new TruckMap();
     private JButton start_button;
     private JButton new_order_button;
+    private boolean isReady = false;
+
 
     Window() {
+        /**
+         * Handles the basic settings of the window including dimensions of the window, default closing,
+         * This Constructor also adds the buttons, titles, and various panels seen on the Window GUI
+         */
         super();
         this.setSize(SimSettings.DIMENSION, SimSettings.DIMENSION + 100);
         this.setTitle("Sandwich Truck Simulator");
@@ -36,7 +42,6 @@ public class Window extends JFrame implements ActionListener {
         control_panel.add(start_button, BorderLayout.WEST);
         start_button.addActionListener(this);
 
-
         new_order_button = new JButton("Create New Order");
         new_order_button.setBounds(30, SimSettings.DIMENSION + 10, 100, 80);
         control_panel.add(new_order_button, BorderLayout.WEST);
@@ -56,13 +61,44 @@ public class Window extends JFrame implements ActionListener {
     }
 
     public void addNewPinToMap(int x, int y) {
+        /**
+         * Adds a new pin to the Truck Map denoting an order's location
+         *
+         */
         tMap.addPinLocation(new int[]{x, y});
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == new_order_button){
+        /**
+         * Listener method which awaits buttons on our GUI window to be pressed
+         *
+         */
+        if (e.getSource() == new_order_button) {
             OrderInterface o = new OrderInterface();
+        } else if (e.getSource() == start_button) {
+            isReady = true;
         }
+    }
+
+    public void removePin() {
+        /**
+         * Removes a pin if the truck has visited this location already
+         *
+         */
+        tMap.removePin();
+    }
+
+    public boolean isReady() {
+        /**
+         * Helper function for main to denote that the start button has
+         * been pressed and the simulation will now begin
+         *
+         */
+        return isReady;
+    }
+
+    public void setDeliveryText(String text) {
+        tMap.setDeliveryText(text);
     }
 }
