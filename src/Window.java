@@ -101,5 +101,7 @@ public class Window extends JFrame implements ActionListener {
         return isReady;
     }
 
-
+    public void setDeliveryText(String text) {
+        tMap.setDeliveryText(text);
+    }
 }

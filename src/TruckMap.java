@@ -23,6 +23,7 @@ public class TruckMap extends JPanel {
     private int truckX;
     private int truckY;
     private LinkedList<int[]> pinLocations;
+    private String deliveryText = "";
 
 
     TruckMap() {
@@ -113,6 +114,15 @@ public class TruckMap extends JPanel {
                 g2D.drawImage(pinImage, pinX, pinY, SimSettings.PIN_SIZE, SimSettings.PIN_SIZE, null);
             }
         }
+        g2D.setPaint(Color.GREEN);
+        if (truckX <= 10)
+            g2D.drawString(deliveryText, truckX + 5, truckY - 3);
+        else if (truckX >= SimSettings.DIMENSION - 10)
+            g2D.drawString(deliveryText, truckX - 15, truckY - 3);
+        else if (truckY <= 10)
+            g2D.drawString(deliveryText, truckX, truckY + 5);
+        else
+            g2D.drawString(deliveryText, truckX, truckY + 5);
     }
 
 
@@ -171,6 +181,10 @@ public class TruckMap extends JPanel {
 
     public void removePin() {
         pinLocations.remove(0);
+    }
+
+    public void setDeliveryText(String text){
+        deliveryText = text;
     }
 }
 
