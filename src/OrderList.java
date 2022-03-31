@@ -35,8 +35,8 @@ public class OrderList {
         while ( (line = in.readLine())!=null){
             line = line.trim();
             String[] orderLine = line.split(",");
-            if (orderLine.length!=3) throw new FileFormatException("Invalid file format");
-            this.addOrder(new Order(orderLine[0], orderLine[1], orderLine[2]));
+            if (orderLine.length!=4) throw new FileFormatException("Invalid file format");
+            this.addOrder(new Order(orderLine[0], orderLine[1], orderLine[2], Double.parseDouble(orderLine[3])));
         }
         addressesUsed = new HashSet<>();
     }
@@ -60,7 +60,7 @@ public class OrderList {
          */
         FileWriter writer = new FileWriter("orders.txt");
         for(Order o : orderList) {
-            writer.write(o.getOrderTimestamp()+","+ o.getOrderAddress() + "," + o.getOrderContents() + System.lineSeparator());
+            writer.write(o.getFullOrderDetails() + System.lineSeparator());
         }
         writer.close();
     }

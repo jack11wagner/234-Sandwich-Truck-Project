@@ -14,10 +14,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class OrderTest {
     private ArrayList<String> makeOrderList() {
         ArrayList<String> orderList = new ArrayList<>();
-        orderList.add("Italian Sandwich");
-        orderList.add("Ham and Cheese");
-        orderList.add("Bologna Sandwich");
-        orderList.add("Salami Sandwich");
+        orderList.add(new Mayo(new Lettuce(new Mustard(new Pastrami()))).getDescription());
+        orderList.add(new Mustard(new Bacon(new Tomato(new Ham()))).getDescription());
+        orderList.add(new Tomato(new WhiteBread(new Lettuce(new Italian()))).getDescription());
+        orderList.add(new WholeWheatBread(new Tomato(new Mustard(new Pastrami()))).getDescription());
         return orderList;
     }
 
@@ -55,9 +55,10 @@ class OrderTest {
         ArrayList<String> orderList = makeOrderList();
         Order o = new Order("2022-01-01");
 
-        o.setRandomOrderContents();
+        o.setRandomSandwichOrder();
         assertTrue(o.getOrderDate().equals("2022-01-01"));
-        assertTrue(orderList.contains(o.getOrderContents()));
+        System.out.println(o.getSandwichOrder());
+        assertTrue(orderList.contains(o.getSandwichOrder()));
 
     }
 
@@ -77,6 +78,25 @@ class OrderTest {
         assertTrue(Arrays.asList(streetNamesTestList).contains(address_components[1]));
 
     }
+
+    @Test
+    public void testCreatingASandwichObject()
+    {
+        Sandwich pastrami = new Bacon(new Mustard(new Lettuce(new Mayo(new Pastrami()))));
+
+        Order o = new Order("2021-01-01 10:00:00", "110 A St.", pastrami);
+        System.out.println(o.getFullOrderDetails());
+        assertEquals(o.getSandwichOrder(), "Pastrami Sandwich w/ Mayo Lettuce Mustard Bacon");
+    }
+
+    @Test
+    public void testGettingRandomSandwich()
+    {
+        Order o = new Order("2022-01-01");
+        assertTrue(o.getRandomSandwichChoice() instanceof Sandwich);
+    }
+
+
 
 
 }
