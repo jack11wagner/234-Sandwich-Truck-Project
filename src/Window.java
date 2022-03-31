@@ -15,6 +15,7 @@ public class Window extends JFrame implements ActionListener {
     private JButton new_order_button;
     private boolean isReady = false;
 
+
     Window() {
         /**
          * Handles the basic settings of the window including dimensions of the window, default closing,
@@ -41,13 +42,10 @@ public class Window extends JFrame implements ActionListener {
         control_panel.add(start_button, BorderLayout.WEST);
         start_button.addActionListener(this);
 
-
         new_order_button = new JButton("Create New Order");
         new_order_button.setBounds(30, SimSettings.DIMENSION + 10, 100, 80);
         control_panel.add(new_order_button, BorderLayout.WEST);
         new_order_button.addActionListener(this);
-
-
         this.setVisible(true);
     }
 
@@ -70,6 +68,19 @@ public class Window extends JFrame implements ActionListener {
         tMap.addPinLocation(new int[]{x, y});
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        /**
+         * Listener method which awaits buttons on our GUI window to be pressed
+         *
+         */
+        if (e.getSource() == new_order_button) {
+            OrderInterface o = new OrderInterface();
+        } else if (e.getSource() == start_button) {
+            isReady = true;
+        }
+    }
+
     public void removePin() {
         /**
          * Removes a pin if the truck has visited this location already
@@ -78,20 +89,6 @@ public class Window extends JFrame implements ActionListener {
         tMap.removePin();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        /**
-         * Listener method which awaits buttons on our GUI window to be pressed
-         *
-         */
-//        if (e.getSource() == new_order_button){
-//            OrderInterface myFrame = new OrderInterface();
-//        }
-        if (e.getSource() == start_button){
-            isReady = true;
-        }
-
-    }
     public boolean isReady() {
         /**
          * Helper function for main to denote that the start button has
