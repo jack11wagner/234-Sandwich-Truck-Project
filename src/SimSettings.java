@@ -13,6 +13,7 @@ public class SimSettings {
     public static final int PIN_SIZE = DIMENSION / 25;
     public static final int NUMBER_OF_ORDERS = 100;
     public static final int NUM_HOUSES_PER_BLOCK = 10;
+    public static final int DELIVERY_TIME = 2000;
     public static final String SERVICE_CENTER = "550 5 St.";
 
     private static final int[] initial_truck_xy = new AddressConverter().convert(SERVICE_CENTER);
@@ -36,6 +37,17 @@ public class SimSettings {
         try
         {
             Thread.sleep(SIM_SPEED);
+        }
+        catch(InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    public static void pauseAtDestination() {
+        try
+        {
+            Thread.sleep(DELIVERY_TIME);
         }
         catch(InterruptedException ex)
         {

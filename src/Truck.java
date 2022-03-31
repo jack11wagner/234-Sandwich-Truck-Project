@@ -81,9 +81,13 @@ public class Truck {
          */
         for (int[] instruction : navInstructions) {
             if (instruction[1] == -1) {
+                window.setDeliveryText("Delivering Order");
+                window.repaint();
+                SimSettings.pauseAtDestination();
                 window.removePin();
                 continue;
             }
+            window.setDeliveryText("");
             direction = instruction[0]; // 0 - right, 1 - down, 2 - left, 3 - up
             int distance = instruction[1];
 
