@@ -9,7 +9,7 @@ as access to the window to update its position
 Edits by: Michael Shimer (added splitOrder method)
  */
 
-public class Truck {
+public class Truck implements Subject{
     private int x = SimSettings.INITIAL_TRUCK_X;
     private int y = SimSettings.INITIAL_TRUCK_Y;
     private int direction = -1;
@@ -80,6 +80,7 @@ public class Truck {
          * truck x, y coordinates to move the truck
          */
         for (int[] instruction : navInstructions) {
+            notifyCustomers();
             if (instruction[1] == -1) {
                 window.setDeliveryText("Delivering Order");
                 window.repaint();
@@ -87,6 +88,7 @@ public class Truck {
                 window.removePin();
                 continue;
             }
+
             window.setDeliveryText("");
             direction = instruction[0]; // 0 - right, 1 - down, 2 - left, 3 - up
             int distance = instruction[1];
@@ -135,4 +137,20 @@ public class Truck {
     }
 
 
+    @Override
+    public void notifyCustomers() {
+        for (Customer customer : SimSettings.customerList) {
+            customer.update(new int[] {x, y});
+        }
+    }
+
+    @Override
+    public void removeCustomer(Customer customer) {
+        SimSettings.customerList.remove(customer);
+    }
+
+    @Override
+    public void registerCustomer(Customer customer) {
+        SimSettings.customerList.add(customer);
+    }
 }
