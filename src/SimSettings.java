@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
 Author: Nikolas Kovacs
 Any project-wide variables are stored here
@@ -19,6 +21,10 @@ public class SimSettings {
     private static final int[] initial_truck_xy = new AddressConverter().convert(SERVICE_CENTER);
     public static final int INITIAL_TRUCK_X = initial_truck_xy[0];
     public static final int INITIAL_TRUCK_Y = initial_truck_xy[1];
+    //public static Customer[] customerList;
+
+    // list of customers that are observing the truck and waiting for an order to be delivered
+    public static ArrayList<Customer> customerList = new ArrayList<>();
 
     // Pricing for Menu
     public static final double HAM_SANDWICH_COST = 4.50;
