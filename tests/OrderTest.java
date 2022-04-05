@@ -84,7 +84,7 @@ class OrderTest {
     {
         Sandwich pastrami = new Bacon(new Mustard(new Lettuce(new Mayo(new Pastrami()))));
 
-        Order o = new Order("2021-01-01 10:00:00", "110 A St.", pastrami);
+        Order o = new Order("2021-01-01 10:00:00", "110 A St.", pastrami, new Customer("Test"));
         System.out.println(o.getFullOrderDetails());
         assertEquals(o.getSandwichOrder(), "Pastrami Sandwich w/ Mayo Lettuce Mustard Bacon");
     }

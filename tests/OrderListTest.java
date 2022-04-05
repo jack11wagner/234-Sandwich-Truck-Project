@@ -51,7 +51,7 @@ class OrderListTest {
     public void testCreatingSandwichObjectAddsToOrdersFile() throws IOException {
         OrderList ol = new OrderList();
         Sandwich italian = new Mustard(new Mayo(new Lettuce(new Italian())));
-        Order testOrder = new Order("2020-01-01 12:01:00", "110 A St.", italian);
+        Order testOrder = new Order("2020-01-01 12:01:00", "110 A St.", italian, new Customer("Test"));
         ol.addOrder(testOrder);
         ol.writeOrdersToFile();
 

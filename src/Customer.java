@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Customer implements Observer {
@@ -13,6 +12,7 @@ public class Customer implements Observer {
     public HashMap<int[], String> letterAddresses;
     public HashMap<int[], String> numberAddresses;
     private Truck truck;
+    private Order order;
 
     public Customer(String name) {
         //this.orderlist = orderList;
@@ -23,7 +23,14 @@ public class Customer implements Observer {
         this.numberAddresses = new HashMap<>();
         fillLetterAddresses();
         fillNumberAddresses();
+        this.order = null;
     }
+
+    public void registerOrder(Order order)
+    {
+        this.order = order;
+    }
+
 
     @Override
     public void update(int[] truckCoordinates) {

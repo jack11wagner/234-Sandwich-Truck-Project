@@ -17,10 +17,10 @@ public class OrderInterface extends JFrame implements ActionListener {
     private final JButton submitButton, resetButton;
     private final JTextArea summary;
     private final JTextArea resadd;
-    private final JRadioButton Lettuce, Mustard, Mayo, Tomato;
+    private final JRadioButton Lettuce, Mustard, Mayo, Tomato, WholeWheatBread, WhiteBread, Bacon;
     private final JRadioButton[] extrasList;
     private OrderList orderList;
-    private final String[] sandwiches = {"choose...", "Italian", "Bologna", "Roast Beef", "BMT", "Ham & Cheese"};
+    private final String[] sandwiches = {"choose...", "Italian", "Ham", "Pastrami"};
 
     // constructor, to initialize the components
     // with default values.
@@ -58,11 +58,15 @@ public class OrderInterface extends JFrame implements ActionListener {
         createJRadioButton(Mustard = new JRadioButton("Mustard"), 95, 0);
         createJRadioButton(Mayo = new JRadioButton("Mayo"), 195, 0);
         createJRadioButton(Tomato = new JRadioButton("Tomato"), 0, 30);
+        createJRadioButton(WholeWheatBread = new JRadioButton("Whole Wheat"), 95, 30);
+        createJRadioButton(WhiteBread = new JRadioButton("White Bread"), 195, 30);
+        createJRadioButton(Bacon = new JRadioButton("Bacon"), 0 , 60);
+
 
 
         // creates Submit and Reset Button
-        createJButton(submitButton = new JButton("Submit"), 100,20, 125, 265);
-        createJButton(resetButton = new JButton("Reset"), 100, 20, 245, 265);
+        createJButton(submitButton = new JButton("Submit"), 100,20, 125, 275);
+        createJButton(resetButton = new JButton("Reset"), 100, 20, 245, 275);
 
         summary = new JTextArea();
         summary.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -87,7 +91,7 @@ public class OrderInterface extends JFrame implements ActionListener {
             e.printStackTrace();
         }
         setVisible(true);
-        extrasList = new JRadioButton[]{Lettuce, Mayo, Tomato, Mustard};
+        extrasList = new JRadioButton[]{Lettuce, Mayo, Tomato, Mustard, Bacon, WholeWheatBread, WhiteBread};
     }
 
     private JButton createJButton(JButton e, int sizeWidth, int sizeHeight, int locX, int locY) {
@@ -117,13 +121,37 @@ public class OrderInterface extends JFrame implements ActionListener {
     }
 
     private JRadioButton createJRadioButton(JRadioButton e, int xoffset, int yoffset) {
-        e.setFont(new Font("Arial", Font.PLAIN, 15));
+        e.setFont(new Font("Arial", Font.PLAIN, 12));
         e.setSelected(false);
-        e.setSize(100, 20);
+        e.setSize(115, 20);
         e.setLocation(125+xoffset, 180+yoffset);
         c.add(e);
         return e;
     }
+
+    private Sandwich generateSandwichObject(String sandwich){
+        return switch (sandwich){
+            case "Italian" -> new Italian();
+            case "Pastrami" -> new Pastrami();
+            case "Ham" -> new Ham();
+            default -> null;
+        };
+    }
+
+    public Sandwich addCondiment(Sandwich sandwich, String condiment)
+    {
+        return switch (condiment){
+            case "Tomato" -> new Tomato(sandwich);
+            case "Lettuce" -> new Lettuce(sandwich);
+            case "Bacon" -> new Bacon(sandwich);
+            case "Mayo" -> new Mayo(sandwich);
+            case "Mustard" -> new Mustard(sandwich);
+            case "Whole Wheat" -> new WholeWheatBread(sandwich);
+            case "White Bread" -> new WhiteBread(sandwich);
+            default -> null;
+        };
+    }
+
 
         // to get the action performed
         // by the user and act accordingly
@@ -133,10 +161,12 @@ public class OrderInterface extends JFrame implements ActionListener {
             if (e.getSource() == submitButton) {
                     String currTime = LocalDate.now() +" "+ LocalTime.now().toString();
                     String orderTime = Timestamp.valueOf(currTime.substring(0,currTime.length()-7)).toString();
-                    String extrasString = "";
+                String extrasString ="";
+                Sandwich sandwich = generateSandwichObject(sandwichOrder.getSelectedItem().toString().strip());
                 for (JRadioButton jRadioButton : extrasList) {
                     if (jRadioButton.isSelected()) {
-                        extrasString += jRadioButton.getText() + " ";
+                        extrasString+= jRadioButton.getText() + " ";
+                        sandwich = addCondiment(sandwich, jRadioButton.getText());
                     }
                 }
                     String data
@@ -154,13 +184,17 @@ public class OrderInterface extends JFrame implements ActionListener {
                     summary.setText(data);
                     summary.setEditable(false);
 
-                    String orderContents = sandwichOrder.getSelectedItem().toString();
-                    if (extrasString.length()>0){
-                        orderContents+= " with " +extrasString;
+                    Customer customer = new Customer(name.getText());
+                    Order order = new Order(orderTime, orderAddress.getText().strip(), sandwich, customer);
+                    customer.registerOrder(order);
+                    orderList.addOrder(order);
+
+                    try {
+                        orderList.writeOrdersToFile();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
                     }
 
-//                    orderList.addOrder(new Order(orderTime.strip(), orderAddress.getText().strip(),
-//                            orderContents));
                 try {
                     orderList.writeOrdersToFile();
                 } catch (IOException ex) {

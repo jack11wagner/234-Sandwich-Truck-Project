@@ -22,6 +22,7 @@ public class Order {
     private double orderCost;
     private String fullOrderDetails;
     private HashSet<String> addressesUsed = new HashSet<>();
+    private Customer customer;
     // orders have a customer
 
     public Order(String date) {
@@ -37,7 +38,7 @@ public class Order {
         this.orderAddress = "";
     }
 
-    public Order(String timestamp, String address, Sandwich sandwich){
+    public Order(String timestamp, String address, Sandwich sandwich, Customer customer){
         /**
          * Constructor for Order Class
          * Instantiates all instance variables to default values
@@ -52,6 +53,8 @@ public class Order {
         this.orderCost = sandwich.cost();
         this.fullOrderDetails = timestamp + "," + address + "," + sandwichOrder + ',' + String.format("%.2f",orderCost);
         this.orderAddress = address;
+        this.customer = customer;
+
     }
 
 
