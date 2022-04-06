@@ -8,13 +8,36 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class Window extends JFrame implements ActionListener {
     private TruckMap tMap = new TruckMap();
     private JButton start_button;
+    private JComboBox order_strategy_dropdown;
+    private JComboBox navigation_strategy_dropdown;
     private JButton new_order_button;
     private boolean isReady = false;
+    private boolean strategySelected = false;
+    private OrderStrategy orderStrategy;
+    private NavigationStrategy navigationStrategy;
+    private String[] order_strategies = new String[] {"select strategy...", "Distance Based Strategy", "Time Based Strategy"};
+    private String[] navigation_strategies = new String[] {"select strategy...", "Standard Navigation", "Right Turn Navigation"};
+    OrderList ol;
+    {
+        try {
+            ol = new OrderList("orders.txt");
+        } catch (IOException | FileFormatException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public OrderStrategy getOrderStrategy() {
+        return orderStrategy;
+    }
+
+    public NavigationStrategy getNavigationStrategy() {
+        return navigationStrategy;
+    }
 
     Window() {
         /**
@@ -34,13 +57,25 @@ public class Window extends JFrame implements ActionListener {
         map_panel.add(tMap);
         this.add(map_panel);
 
-        // Set up Control Panel (contains start button)
+
+
+        // Set up Control Panel (contains start button, Strategy selection dropdown button, create new order)
         JPanel control_panel = new JPanel();
         this.add(control_panel, BorderLayout.SOUTH);
         start_button = new JButton("Start");
-        start_button.setBounds(10, SimSettings.DIMENSION + 10, 100, 80);
+        start_button.setBounds(0,SimSettings.DIMENSION - 10, 70, 80);
         control_panel.add(start_button, BorderLayout.WEST);
         start_button.addActionListener(this);
+
+        order_strategy_dropdown = new JComboBox(order_strategies);
+        order_strategy_dropdown.setBounds(0, SimSettings.DIMENSION + 10, 70, 80);
+        control_panel.add(order_strategy_dropdown, BorderLayout.WEST);
+        order_strategy_dropdown.addActionListener(this);
+
+        navigation_strategy_dropdown = new JComboBox(navigation_strategies);
+        navigation_strategy_dropdown.setBounds(0, SimSettings.DIMENSION+20, 70, 80);
+        control_panel.add(navigation_strategy_dropdown, BorderLayout.WEST);
+        navigation_strategy_dropdown.addActionListener(this);
 
         new_order_button = new JButton("Create New Order");
         new_order_button.setBounds(30, SimSettings.DIMENSION + 10, 100, 80);
@@ -76,7 +111,27 @@ public class Window extends JFrame implements ActionListener {
          */
         if (e.getSource() == new_order_button) {
             OrderInterface o = new OrderInterface();
-        } else if (e.getSource() == start_button) {
+        } else if (e.getSource() == order_strategy_dropdown) {
+            switch (order_strategy_dropdown.getSelectedItem().toString()) {
+                case "Distance Based Strategy" -> orderStrategy = new DistanceBasedStrategy(ol);
+                case "Time Based Strategy" -> orderStrategy= new TimeBasedStrategy(ol);
+
+            }
+            System.out.println("Order Strategy Selected");
+         }
+
+        else if (e.getSource() == navigation_strategy_dropdown) {
+            switch (navigation_strategy_dropdown.getSelectedItem().toString()) {
+                case "Standard Navigation" -> navigationStrategy = new StandardNavigationStrategy();
+                case "Right Turn Navigation" -> navigationStrategy = new RightTurnNavigationStrategy();
+            }
+            System.out.println("Navigation Strategy Selected");
+        }
+        if ((navigationStrategy!= null) && (orderStrategy != null)){
+            strategySelected = true;
+        }
+
+        if (e.getSource() == start_button){
             isReady = true;
         }
     }
@@ -96,6 +151,9 @@ public class Window extends JFrame implements ActionListener {
          *
          */
         return isReady;
+    }
+    public boolean isStrategySelected(){
+        return strategySelected;
     }
 
     public void setDeliveryText(String text) {
