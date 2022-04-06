@@ -3,18 +3,14 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws FileFormatException, IOException {
-        OrderList ol = new OrderList("orders.txt");
+        OrderList ol = new OrderList();
 
-//        ol.generateOrders(SimSettings.NUMBER_OF_ORDERS);
+        ol.generateOrders(SimSettings.NUMBER_OF_ORDERS);
 
         Window simWindow = new Window();
-
-        Truck truck = new Truck(simWindow, new TimeBasedStrategy(ol), new StandardNavigationStrategy());
-        //Truck truck = new Truck(simWindow, new DistanceBasedStrategy(ol), new RightTurnNavigationStrategy());
-
-        while (!simWindow.isReady()) {
-            sleep();
-        }
+        // checks that start button and strategies are selected
+        while (!simWindow.isReady() || !simWindow.isStrategySelected()) sleep();
+        Truck truck = new Truck(simWindow, simWindow.getOrderStrategy(), simWindow.getNavigationStrategy());
         truck.start();
     }
 
