@@ -24,6 +24,7 @@ public class SimSettings {
     //public static Customer[] customerList;
 
     // list of customers that are observing the truck and waiting for an order to be delivered
+    public static OrderList orderList;
     public static ArrayList<Customer> customerList = new ArrayList<>();
 
     // Pricing for Menu

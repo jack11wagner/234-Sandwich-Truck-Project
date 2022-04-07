@@ -22,14 +22,8 @@ public class Window extends JFrame implements ActionListener {
     private NavigationStrategy navigationStrategy;
     private String[] order_strategies = new String[] {"select strategy...", "Distance Based Strategy", "Time Based Strategy"};
     private String[] navigation_strategies = new String[] {"select strategy...", "Standard Navigation", "Right Turn Navigation"};
-    OrderList ol;
-    {
-        try {
-            ol = new OrderList("orders.txt");
-        } catch (IOException | FileFormatException e) {
-            e.printStackTrace();
-        }
-    }
+    OrderList ol = SimSettings.orderList;
+
 
     public OrderStrategy getOrderStrategy() {
         return orderStrategy;

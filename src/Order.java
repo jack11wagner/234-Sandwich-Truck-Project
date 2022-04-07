@@ -13,11 +13,15 @@ import java.sql.Timestamp;
 public class Order {
     /**
      * Stores information about an Order
-     * Details such as timestamps, OrderContents, address are all randomly generated
+     * Orders can be randomly generated, customized or read from a file
      */
     private Timestamp orderTimestamp;
     private String orderDate;
     private String orderAddress;
+
+
+
+    private Sandwich sandwichObject;
     private String sandwichOrder;
     private double orderCost;
     private String fullOrderDetails;
@@ -27,29 +31,32 @@ public class Order {
 
     public Order(String date) {
         /**
-         * Constructor for Order Class
+         * Constructor for Order Class to create a random Order on a certain day
          * Instantiates all instance variables to default values
          * @param : String date - The date all timestamps will have since all orders should be on a certain day
          */
         this.orderDate = date;
         this.orderTimestamp = Timestamp.valueOf("2000-01-01 0:0:0");
-        this.sandwichOrder = "";
+        this.sandwichObject= new Italian();
+        this.sandwichOrder = sandwichObject.getDescription();
         this.fullOrderDetails = "";
         this.orderAddress = "";
     }
 
     public Order(String timestamp, String address, Sandwich sandwich, Customer customer){
         /**
-         * Constructor for Order Class
-         * Instantiates all instance variables to default values
+         * Constructor for Order used by the Order Interface, where Custom orders take place
+         * Instantiates all instance variables parameters passed
          * @param : String timestamp - The timestamp of an order
          * @param : String address the address of the customer
-         * @param : Sandwich sandwich the sandwich object to set the description to
+         * @param : Sandwich sandwich - the custom Sandwich specified by the customer
+         * @param : Customer customer the customer who placed the order
          *
          */
         this.orderDate = "";
         this.orderTimestamp = Timestamp.valueOf(timestamp);
-        this.sandwichOrder = sandwich.getDescription();
+        this.sandwichObject = sandwich;
+        this.sandwichOrder = this.sandwichObject.getDescription();
         this.orderCost = sandwich.cost();
         this.fullOrderDetails = timestamp + "," + address + "," + sandwichOrder + ',' + String.format("%.2f",orderCost);
         this.orderAddress = address;
@@ -60,11 +67,11 @@ public class Order {
 
     public Order(String timestamp, String address, String orderContents, double cost) {
         /**
-         * Constructor for Order Class
-         * Instantiates all instance variables to default values
+         * Constructor for Order Class used for when reading a premade file
          * @param : String timestamp - The timestamp of an order
-         * @param : String address the address of the customer
-         *
+         * @param : String address - the address of the customer
+         * @param : Sandwich sandwich - the custom Sandwich specified by the customer
+         * @param : double cost - the cost of the sandwich
          */
         this.orderDate = "";
         this.orderTimestamp = Timestamp.valueOf(timestamp);
@@ -84,7 +91,6 @@ public class Order {
         setFullOrderDetails();
     }
 
-    // TODO
     public Sandwich getRandomSandwichChoice(){
          /**
          * Selects a random Sandwich using the Decorator Pattern
@@ -172,8 +178,9 @@ public class Order {
          * Selects random element from orderList and sets instance variable orderContents to it
          */
         Sandwich RandomSandwich = getRandomSandwichChoice();
-        sandwichOrder = RandomSandwich.getDescription();
-        orderCost = RandomSandwich.cost();
+        this.sandwichObject = RandomSandwich;
+        this.sandwichOrder = RandomSandwich.getDescription();
+        this.orderCost = RandomSandwich.cost();
     }
 
     public void setFullOrderDetails()
@@ -185,12 +192,22 @@ public class Order {
     }
 
     public void setSandwichOrder(Sandwich sandwich) {
+        /**
+         * Sets Sandwich Order to be the description of the Decorator Pattern used
+         */
         this.sandwichOrder = sandwich.getDescription();
+    }
+    public Sandwich getSandwichObject() {
+        /**
+         * @returns Sandwich sandwichObject instance variable
+         * used when Truck is going to orders
+         */
+        return this.sandwichObject;
     }
 
     public String getSandwichOrder() {
         /**
-         * @returns orderContents instance variable
+         * @returns String sandwichOrder  instance variable
          */
         return sandwichOrder;
     }
