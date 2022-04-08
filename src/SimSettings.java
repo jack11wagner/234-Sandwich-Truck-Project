@@ -13,7 +13,7 @@ public class SimSettings {
     public static final int TRUCK_SPEED = 1; // unit = pixels per cycle (defined below)
     public static final int SIM_SPEED = 10; // unit = milliseconds: how often the cycle repeats (defined below)
     public static final int PIN_SIZE = DIMENSION / 25;
-    public static final int NUMBER_OF_ORDERS = 100;
+    public static final int NUMBER_OF_ORDERS = 5;
     public static final int NUM_HOUSES_PER_BLOCK = 10;
     public static final int DELIVERY_TIME = 2000;
     public static final String SERVICE_CENTER = "550 5 St.";
@@ -24,6 +24,7 @@ public class SimSettings {
     //public static Customer[] customerList;
 
     // list of customers that are observing the truck and waiting for an order to be delivered
+    public static OrderList orderList;
     public static ArrayList<Customer> customerList = new ArrayList<>();
 
     // Pricing for Menu
