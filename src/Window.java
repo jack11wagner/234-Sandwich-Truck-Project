@@ -146,7 +146,26 @@ public class Window extends JFrame implements ActionListener {
          */
         return isReady;
     }
+    public void triggerSandwichModelingPanel(Order currOrder)
+    {
+        /**
+         * Called whenever the truck reaches its destination this will create a new window that
+         * displays the modeling of the sandwich making
+         */
+        //set up Sandwich Modeling Panel
+        try {
+            SandwichPrepInterface sandPrepInterface = new SandwichPrepInterface(currOrder);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     public boolean isStrategySelected(){
+        /**
+         * @returns the value of strategyselected
+         */
         return strategySelected;
     }
 

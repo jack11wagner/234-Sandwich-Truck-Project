@@ -20,7 +20,7 @@ public class WhiteBread extends CondimentDecorator{
          * Modeling the adding of a condiment by printing out the status of
          * the condiments
          */
-        super.prepare();
+        sandwich.prepare();
         System.out.println("Adding " + condimentType);
     }
 

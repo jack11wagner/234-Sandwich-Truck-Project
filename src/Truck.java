@@ -49,6 +49,7 @@ public class Truck implements Subject{
         while ((nextOrder = orderStrat.getNextOrder()) != null) {// fetch next order, null means empty
             String[] splittedOrder = splitOrder(nextOrder.toString()); // split the order into the address and food order
             address = splittedOrder[0];
+
             orderDestinationsInOrder.add(addConverter.convert(address)); // convert the address into a pair of coordinates and append
         }
         addPinsToMap(orderDestinationsInOrder);
@@ -93,8 +94,13 @@ public class Truck implements Subject{
                 System.out.print(currOrder.getOrderTimestamp() + " : ");
                 currOrder.getSandwichObject().prepare();
                 currOrderIndex++;
+                window.triggerSandwichModelingPanel(currOrder);
 
                 window.setDeliveryText("Delivering Order");
+                System.out.println("Delivered Order " + currOrderIndex + "/" +orderQueueCopy.size());
+                if (currOrderIndex == orderQueueCopy.size()){
+                    System.out.println("No more orders...");
+                }
                 window.repaint();
                 SimSettings.pauseAtDestination();
                 window.removePin();

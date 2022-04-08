@@ -96,14 +96,17 @@ public class Order {
          * Selects a random Sandwich using the Decorator Pattern
          * Still looking for better randomization ways but with the Decorator pattern it is tough to randomize
          */
-       int randomSandwichChoice = new Random().nextInt(4)+1;
+       int randomSandwichChoice = new Random().nextInt(6)+1;
 
        // 4 random Sandwich Choice options
        switch (randomSandwichChoice) {
            case 1: return new Mayo(new Lettuce(new Mustard(new Pastrami())));
            case 2: return new Mustard(new Bacon(new Tomato(new Ham())));
-           case 3: return new Tomato(new WhiteBread(new Lettuce(new Italian())));
+           case 3: return new Tomato(new Lettuce(new WhiteBread(new Italian())));
            case 4: return new WholeWheatBread(new Tomato(new Mustard(new Pastrami())));
+           case 5: return new Bacon(new Mayo(new Mustard(new Lettuce(new Italian()))));
+           case 6: return new Lettuce(new Mustard(new Bacon(new Mayo(new Pastrami()))));
+
            default: return new Italian();
        }
     }
@@ -231,6 +234,12 @@ public class Order {
          * @returns address instance variable
          */
         return orderAddress;
+    }
+    public double getOrderCost() {
+        /**
+         * @returns cost of order
+         */
+        return orderCost;
     }
 
     public String getOrderDate() {
