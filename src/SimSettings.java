@@ -22,6 +22,9 @@ public class SimSettings {
     public static final int INITIAL_TRUCK_X = initial_truck_xy[0];
     public static final int INITIAL_TRUCK_Y = initial_truck_xy[1];
     //public static Customer[] customerList;
+    public static final OrderStrategy[] allOrderStrategies = new OrderStrategy[]{new TimeBasedStrategy(), new DistanceBasedStrategy()};
+    public static final NavigationStrategy[] allNavStrategies = new NavigationStrategy[]{new StandardNavigationStrategy(), new RightTurnNavigationStrategy()};
+
 
     // list of customers that are observing the truck and waiting for an order to be delivered
     public static OrderList orderList;

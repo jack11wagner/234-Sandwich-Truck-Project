@@ -13,19 +13,37 @@ public class TimeBasedStrategy implements OrderStrategy{
      */
     private PriorityQueue<Order> orderQueue;
     private ArrayList<Order> orderList;
+    private OrderList orderListObj;
 
     public TimeBasedStrategy(OrderList orderList){
+        /**
+         * PRIMARY CONSTRUCTOR
+         * Constructor for the TimeBasedStrategy
+         * Strategies are used to determine the order the truck will use for delivery
+         * The orderQueue is based on comparison of Time of Order placement
+         */
+        orderQueue = new PriorityQueue<>(new TimeComparator());
+        this.orderList = orderList.getOrderList();
+        orderListObj = orderList;
+    }
+
+    public TimeBasedStrategy() {
         /**
          * Constructor for the TimeBasedStrategy
          * Strategies are used to determine the order the truck will use for delivery
          * The orderQueue is based on comparison of Time of Order placement
-         *
          */
         orderQueue = new PriorityQueue<>(new TimeComparator());
-        this.orderList = orderList.getOrderList();
-
-
     }
+
+    public void setOrderList(OrderList orderList){
+        /**
+         * Used when using the alternate constructor
+         */
+        this.orderList = orderList.getOrderList();
+        orderListObj = orderList;
+    }
+
     public PriorityQueue<Order> getOrderQueue()
     {
         /**
@@ -33,8 +51,6 @@ public class TimeBasedStrategy implements OrderStrategy{
          */
         return orderQueue;
     }
-
-
 
     @Override
     public void createOrderQueue() {
@@ -67,6 +83,14 @@ public class TimeBasedStrategy implements OrderStrategy{
         return this.orderQueue.size();
     }
 
+    @Override
+    public OrderList getOrderListCopy() {
+        /**
+         * Returns a copy of the OrderList
+         */
+        return new OrderList(orderListObj);
+    }
+
 
     @Override
     public boolean queueIsEmpty() {
@@ -75,4 +99,9 @@ public class TimeBasedStrategy implements OrderStrategy{
          */
         return getNumberOfRemainingOrders()==0;
     }
+
+    public String toString(){
+        return "TimeBasedStrategy";
+    }
+
 }

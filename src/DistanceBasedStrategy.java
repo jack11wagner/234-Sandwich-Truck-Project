@@ -15,10 +15,12 @@ public class DistanceBasedStrategy implements OrderStrategy{
     private ArrayList<Order> orderList;
     private int simTruckX;
     private int simTruckY;
+    private OrderList orderListObj;
 
 
     public DistanceBasedStrategy(OrderList orderList) {
         /**
+         * PRIMARY CONSTRUCTOR
          * Constructor for the DistanceBasedStrategy
          * Strategies are used to determine the order the truck will use for delivery
          * The orderQueue is based on the original truck location, and order is based on least distance to
@@ -29,6 +31,25 @@ public class DistanceBasedStrategy implements OrderStrategy{
         this.orderList = orderList.getOrderList();
         simTruckX = SimSettings.INITIAL_TRUCK_X;
         simTruckY = SimSettings.INITIAL_TRUCK_Y;
+        orderListObj = orderList;
+    }
+
+    public DistanceBasedStrategy() {
+        /**
+         * Alternate constructor for the DistanceBasedStrategy
+         * Used when the orderList is not passed in as a parameter
+         *
+         */
+        this.orderQueue = new LinkedList<>();
+        simTruckX = SimSettings.INITIAL_TRUCK_X;
+        simTruckY = SimSettings.INITIAL_TRUCK_Y;
+    }
+
+    public void setOrderList(OrderList orderList){
+        /**
+         * Used when using the alternate constructor
+         */
+        this.orderList = orderList.getOrderList();
     }
 
     private Order getClosestOrder()
@@ -120,5 +141,18 @@ public class DistanceBasedStrategy implements OrderStrategy{
          * Function to get the status of the orderQueue
          */
         return getNumberOfRemainingOrders()==0;
+    }
+
+    @Override
+    public OrderList getOrderListCopy() {
+        /**
+         * Returns a copy of the orderList
+         *
+         */
+        return new OrderList(orderListObj);
+    }
+
+    public String toString(){
+        return "DistanceBasedStrategy";
     }
 }

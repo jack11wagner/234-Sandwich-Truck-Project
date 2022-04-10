@@ -1,6 +1,7 @@
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+
 /**
 Made by: Jackson Wagner
 Abstract class which handles strategies that the truck should select when
@@ -13,4 +14,6 @@ public interface OrderStrategy {
     public Order getNextOrder();
     public boolean queueIsEmpty();
     public int getNumberOfRemainingOrders();
+    public OrderList getOrderListCopy();
+    public void setOrderList(OrderList orderList);
 }

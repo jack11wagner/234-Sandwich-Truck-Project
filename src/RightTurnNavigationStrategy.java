@@ -650,6 +650,10 @@ public class RightTurnNavigationStrategy implements NavigationStrategy {
         return (this.direction == 4.71);
     }
 
+    public String toString() {
+        return "RightTurnNavigationStrategy";
+    }
+
 
 }
 
