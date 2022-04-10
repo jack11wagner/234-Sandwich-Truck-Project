@@ -304,4 +304,8 @@ public class StandardNavigationStrategy implements NavigationStrategy {
         return destY - currY;
     }
 
+    public String toString() {
+        return "StandardNavigationStrategy";
+    }
+
 }
