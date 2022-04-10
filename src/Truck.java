@@ -1,6 +1,6 @@
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collection;
-
 /**
 Author: Nikolas Kovacs
 This class serves as the Truck in the simulator and contains the functionality of the sandwich truck as well
@@ -18,7 +18,7 @@ public class Truck implements Subject{
     private final OrderStrategy orderStrat;
     private final NavigationStrategy navStrat;
 
-    Truck(Window window, OrderStrategy orderStrat, NavigationStrategy navStrat) {
+    public Truck(Window window, OrderStrategy orderStrat, NavigationStrategy navStrat) {
         /**
          * Truck constructor which initializes the instance variables based on the Main instantiation
          * Also sets the navigation strategy as well
@@ -30,6 +30,41 @@ public class Truck implements Subject{
         this.navStrat = navStrat;
     }
 
+    public Truck(OrderStrategy orderStrat, NavigationStrategy navStrat) {
+        /**
+         * This constructor should be used CAREFULLY. It is used strictly for calculating distances
+         * NOT meant for the actual simulation
+         */
+        this.window = null;
+        this.orderStrat = orderStrat;
+        this.orderStrat.createOrderQueue();
+        this.navStrat = navStrat;
+    }
+
+    private void setupQuickestTime() {
+        /**
+         * This method sets the quickest time for the truck to complete the order
+         */
+        DistanceComparer distanceComparer = new DistanceComparer(orderStrat.getOrderListCopy());
+        AbstractMap<String, Integer> times = distanceComparer.getStrategyTimes();
+        // iterate over the times and find the quickest time
+        int quickestTime = Integer.MAX_VALUE;
+        String quickestKey = "";
+        for (String key : times.keySet()) {
+            int time = times.get(key);
+            if (time < quickestTime) {
+                quickestTime = time;
+                quickestKey = key;
+            }
+        }
+        String[] indexes = quickestKey.split(" ");
+        int navKey = Integer.parseInt(indexes[1]);
+        int orderKey = Integer.parseInt(indexes[0]);
+
+        window.setShortestDistanceText("Quickest - " + SimSettings.allOrderStrategies[orderKey].toString() + ", " +
+                SimSettings.allNavStrategies[navKey].toString() + ": " + quickestTime + " miles");
+    }
+
     public void start() {
         /**
          * This method is to be called when the start button is pressed in the window
@@ -37,6 +72,7 @@ public class Truck implements Subject{
          * This method gets the nextOrder, adds all the Order destinations to the map, and creates the navigation instructions
          * for the Truck to move around
          */
+        setupQuickestTime();
         ArrayList<int[]> orderDestinationsInOrder = new ArrayList<>();
         Order nextOrder;
         String address;
