@@ -11,17 +11,16 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class Window extends JFrame implements ActionListener {
-    private TruckMap tMap = new TruckMap();
-    private JButton start_button;
-    private JComboBox order_strategy_dropdown;
-    private JComboBox navigation_strategy_dropdown;
-    private JButton new_order_button;
+    private final TruckMap tMap = new TruckMap();
+    private final JButton start_button;
+    private final JComboBox order_strategy_dropdown;
+    private final JComboBox navigation_strategy_dropdown;
+    private final JButton new_order_button;
+    private final DisplayTextBox displayTextField;
     private boolean isReady = false;
     private boolean strategySelected = false;
     private OrderStrategy orderStrategy;
     private NavigationStrategy navigationStrategy;
-    private String[] order_strategies = new String[] {"select strategy...", "Distance Based Strategy", "Time Based Strategy"};
-    private String[] navigation_strategies = new String[] {"select strategy...", "Standard Navigation", "Right Turn Navigation"};
     OrderList ol;
     {
         try {
@@ -57,8 +56,6 @@ public class Window extends JFrame implements ActionListener {
         map_panel.add(tMap);
         this.add(map_panel);
 
-
-
         // Set up Control Panel (contains start button, Strategy selection dropdown button, create new order)
         JPanel control_panel = new JPanel();
         this.add(control_panel, BorderLayout.SOUTH);
@@ -67,11 +64,13 @@ public class Window extends JFrame implements ActionListener {
         control_panel.add(start_button, BorderLayout.WEST);
         start_button.addActionListener(this);
 
+        String[] order_strategies = new String[]{"select strategy...", "Distance Based Strategy", "Time Based Strategy"};
         order_strategy_dropdown = new JComboBox(order_strategies);
         order_strategy_dropdown.setBounds(0, SimSettings.DIMENSION + 10, 70, 80);
         control_panel.add(order_strategy_dropdown, BorderLayout.WEST);
         order_strategy_dropdown.addActionListener(this);
 
+        String[] navigation_strategies = new String[]{"select strategy...", "Standard Navigation", "Right Turn Navigation"};
         navigation_strategy_dropdown = new JComboBox(navigation_strategies);
         navigation_strategy_dropdown.setBounds(0, SimSettings.DIMENSION+20, 70, 80);
         control_panel.add(navigation_strategy_dropdown, BorderLayout.WEST);
@@ -81,6 +80,12 @@ public class Window extends JFrame implements ActionListener {
         new_order_button.setBounds(30, SimSettings.DIMENSION + 10, 100, 80);
         control_panel.add(new_order_button, BorderLayout.WEST);
         new_order_button.addActionListener(this);
+
+        // set up DisplayTextBox
+        displayTextField = new DisplayTextBox();
+        displayTextField.setText("Welcome to the Sandwich Truck Simulator!");
+        this.add(displayTextField, BorderLayout.NORTH);
+
         this.setVisible(true);
     }
 
@@ -158,5 +163,10 @@ public class Window extends JFrame implements ActionListener {
 
     public void setDeliveryText(String text) {
         tMap.setDeliveryText(text);
+    }
+
+    public void setShortestDistanceText(String text) {
+        displayTextField.setText(text);
+        displayTextField.repaint();
     }
 }
