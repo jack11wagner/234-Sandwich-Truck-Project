@@ -21,14 +21,9 @@ public class Window extends JFrame implements ActionListener {
     private boolean strategySelected = false;
     private OrderStrategy orderStrategy;
     private NavigationStrategy navigationStrategy;
-    OrderList ol;
-    {
-        try {
-            ol = new OrderList("orders.txt");
-        } catch (IOException | FileFormatException e) {
-            e.printStackTrace();
-        }
-    }
+    private String[] order_strategies = new String[] {"select strategy...", "Distance Based Strategy", "Time Based Strategy"};
+    private String[] navigation_strategies = new String[] {"select strategy...", "Standard Navigation", "Right Turn Navigation"};
+    OrderList ol = SimSettings.orderList;
 
     public OrderStrategy getOrderStrategy() {
         return orderStrategy;
@@ -157,7 +152,26 @@ public class Window extends JFrame implements ActionListener {
          */
         return isReady;
     }
+    public void triggerSandwichModelingPanel(Order currOrder)
+    {
+        /**
+         * Called whenever the truck reaches its destination this will create a new window that
+         * displays the modeling of the sandwich making
+         */
+        //set up Sandwich Modeling Panel
+        try {
+            SandwichPrepInterface sandPrepInterface = new SandwichPrepInterface(currOrder);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     public boolean isStrategySelected(){
+        /**
+         * @returns the value of strategyselected
+         */
         return strategySelected;
     }
 

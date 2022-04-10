@@ -1,6 +1,7 @@
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 /**
 Author: Nikolas Kovacs
 This class serves as the Truck in the simulator and contains the functionality of the sandwich truck as well
@@ -16,7 +17,8 @@ public class Truck implements Subject{
     private final Window window;
     private final AddressConverter addConverter = new AddressConverter();
     private final OrderStrategy orderStrat;
-    private final NavigationStrategy navStrat;
+    private NavigationStrategy navStrat;
+    private List orderQueueCopy;
 
     public Truck(Window window, OrderStrategy orderStrat, NavigationStrategy navStrat) {
         /**
@@ -26,6 +28,7 @@ public class Truck implements Subject{
         this.window = window;
         this.orderStrat = orderStrat;
         this.orderStrat.createOrderQueue();
+        orderQueueCopy =  orderStrat.getOrderQueue().stream().toList();
 
         this.navStrat = navStrat;
     }
@@ -76,13 +79,13 @@ public class Truck implements Subject{
         ArrayList<int[]> orderDestinationsInOrder = new ArrayList<>();
         Order nextOrder;
         String address;
-        //String foodOrder; // food order commented out until future
+
 
         // populate orderDestinationsInOrder list according to the OrderStrategy
-        while ((nextOrder = orderStrat.getNextOrder()) != null) { // fetch next order, null means empty
+        while ((nextOrder = orderStrat.getNextOrder()) != null) {// fetch next order, null means empty
             String[] splittedOrder = splitOrder(nextOrder.toString()); // split the order into the address and food order
             address = splittedOrder[0];
-            //foodOrder = splittedOrder[1]; // food order commented out until future
+
             orderDestinationsInOrder.add(addConverter.convert(address)); // convert the address into a pair of coordinates and append
         }
         addPinsToMap(orderDestinationsInOrder);
@@ -103,7 +106,9 @@ public class Truck implements Subject{
         /**
          * Helper function for adding all the pins to the Truck Map
          */
+
         for (int[] orderCoords : orderDestinationsInOrder) {
+
             int newX = orderCoords[0];
             int newY = orderCoords[1];
             window.addNewPinToMap(newX, newY);
@@ -115,10 +120,23 @@ public class Truck implements Subject{
          * Calls the repaintTruck method repreatedly from the window class with the current or new
          * truck x, y coordinates to move the truck
          */
+        int currOrderIndex = 0;
+        Order currOrder;
         for (int[] instruction : navInstructions) {
             notifyCustomers();
             if (instruction[1] == -1) {
+                // modeling goes on here
+                currOrder = (Order) orderQueueCopy.get(currOrderIndex);
+                System.out.print(currOrder.getOrderTimestamp() + " : ");
+                currOrder.getSandwichObject().prepare();
+                currOrderIndex++;
+                window.triggerSandwichModelingPanel(currOrder);
+
                 window.setDeliveryText("Delivering Order");
+                System.out.println("Delivered Order " + currOrderIndex + "/" +orderQueueCopy.size());
+                if (currOrderIndex == orderQueueCopy.size()){
+                    System.out.println("No more orders...");
+                }
                 window.repaint();
                 SimSettings.pauseAtDestination();
                 window.removePin();

@@ -1,4 +1,6 @@
 import java.util.PriorityQueue;
+import java.util.Queue;
+
 
 /**
 Made by: Jackson Wagner
@@ -8,6 +10,7 @@ Edits by:
 */
 public interface OrderStrategy {
     public void createOrderQueue();
+    public Queue getOrderQueue();
     public Order getNextOrder();
     public boolean queueIsEmpty();
     public int getNumberOfRemainingOrders();

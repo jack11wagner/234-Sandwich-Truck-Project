@@ -6,6 +6,7 @@ public class Main {
         OrderList ol = new OrderList();
 
         ol.generateOrders(SimSettings.NUMBER_OF_ORDERS);
+        SimSettings.orderList = ol;
 
         Window simWindow = new Window();
         // checks that start button and strategies are selected

@@ -8,9 +8,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class OrderInterface extends JFrame implements ActionListener {
-
+    /**
+     * This Class Represents the Window that pops up when Sandwiches are being made
+     *
+     */
     // Components of the Form
-    private final Container c;
+    private final Container orderWindow;
     private final JLabel title, nameLabel,orderAddressLabel, sandwichLabel, extrasLabel, confirmationLabel;
     private final JTextField name, orderAddress;
     private final JComboBox sandwichOrder;
@@ -19,20 +22,21 @@ public class OrderInterface extends JFrame implements ActionListener {
     private final JTextArea resadd;
     private final JRadioButton Lettuce, Mustard, Mayo, Tomato, WholeWheatBread, WhiteBread, Bacon;
     private final JRadioButton[] extrasList;
-    private OrderList orderList;
+    private OrderList orderList = SimSettings.orderList;
     private final String[] sandwiches = {"choose...", "Italian", "Ham", "Pastrami"};
 
     // constructor, to initialize the components
-    // with default values.
     public OrderInterface() {
+        /**
+         * This Class Represents the Window that pops up when a customer wants to create a new order
+         */
 
         setTitle("Order Form");
         setBounds(0, 0, 450, 550);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setResizable(false);
-        c = getContentPane();
-        c.setLayout(null);
-//        c.setBackground(Color.getHSBColor(49, 33, 92));
+        orderWindow = getContentPane();
+        orderWindow.setLayout(null);
 
         createJLabel(title = new JLabel("Enter your order below"),22, 400,30, 100,5);
 
@@ -50,7 +54,7 @@ public class OrderInterface extends JFrame implements ActionListener {
         sandwichOrder.setFont(new Font("Arial", Font.PLAIN, 15));
         sandwichOrder.setSize(175, 20);
         sandwichOrder.setLocation(175, 140);
-        c.add(sandwichOrder);
+        orderWindow.add(sandwichOrder);
 
         // creates Extras Label and RadioButtons for the various Extras
         createJLabel(extrasLabel = new JLabel("Extras"), 20, 100, 20, 55, 180);
@@ -74,7 +78,7 @@ public class OrderInterface extends JFrame implements ActionListener {
         summary.setLocation(75, 330);
         summary.setLineWrap(true);
         summary.setEditable(false);
-        c.add(summary);
+        orderWindow.add(summary);
 
         createJLabel(confirmationLabel = new JLabel(""), 15, 500, 25, 150, 300);
 
@@ -83,53 +87,67 @@ public class OrderInterface extends JFrame implements ActionListener {
         resadd.setSize(200, 75);
         resadd.setLocation(545, 300);
         resadd.setLineWrap(true);
-        c.add(resadd);
-
-        try {
-            orderList = new OrderList("orders.txt");
-        } catch (IOException | FileFormatException e) {
-            e.printStackTrace();
-        }
+        orderWindow.add(resadd);
         setVisible(true);
         extrasList = new JRadioButton[]{Lettuce, Mayo, Tomato, Mustard, Bacon, WholeWheatBread, WhiteBread};
     }
 
     private JButton createJButton(JButton e, int sizeWidth, int sizeHeight, int locX, int locY) {
+        /**
+         * Helper function for reducing the code in the constructor, used to create a generic JButton
+         *
+         */
         e.setFont(new Font("Arial", Font.PLAIN, 15));
         e.setSize(sizeWidth, sizeHeight);
         e.setLocation(locX, locY);
         e.addActionListener(this);
-        c.add(e);
+        orderWindow.add(e);
         return e;
     }
 
     private JTextField createJTextField(JTextField e, int sizeWidth, int sizeHeight, int locX, int locY) {
+        /**
+         * Helper function for reducing the code in the constructor, used to create a generic JTextField
+         *
+         */
         e.setFont(new Font("Arial", Font.PLAIN, 15));
         e.setSize(sizeWidth, sizeHeight);
         e.setLocation(locX, locY);
-        c.add(e);
+        orderWindow.add(e);
         return e;
     }
 
 
     private JLabel createJLabel(JLabel e, int fontSize, int sizeWidth, int sizeHeight, int locX, int locY) {
+        /**
+         * Helper function for reducing the code in the constructor, used to create a generic JLabel
+         *
+         */
         e.setFont(new Font("Arial", Font.PLAIN, fontSize));
         e.setSize(sizeWidth, sizeHeight);
         e.setLocation(locX, locY);
-        c.add(e);
+        orderWindow.add(e);
         return e;
     }
 
     private JRadioButton createJRadioButton(JRadioButton e, int xoffset, int yoffset) {
+        /**
+         * Helper function for reducing the code in the constructor, used to create a generic JRadioButton
+         *
+         */
         e.setFont(new Font("Arial", Font.PLAIN, 12));
         e.setSelected(false);
         e.setSize(115, 20);
         e.setLocation(125+xoffset, 180+yoffset);
-        c.add(e);
+        orderWindow.add(e);
         return e;
     }
 
     private Sandwich generateSandwichObject(String sandwich){
+        /**
+         * This turns a string choice made from the order interface into a class representation of the Sandwich Object
+         *
+         */
         return switch (sandwich){
             case "Italian" -> new Italian();
             case "Pastrami" -> new Pastrami();
@@ -140,6 +158,10 @@ public class OrderInterface extends JFrame implements ActionListener {
 
     public Sandwich addCondiment(Sandwich sandwich, String condiment)
     {
+        /**
+         * Applies condiments to the base sandwich object using the decorator pattern
+         * This is called repeatedly to make sure all condiments are attached to the Sandwich
+         */
         return switch (condiment){
             case "Tomato" -> new Tomato(sandwich);
             case "Lettuce" -> new Lettuce(sandwich);
@@ -158,17 +180,24 @@ public class OrderInterface extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e)
         {
+            /**
+             * Action performed monitors the window for clicks on the interface,
+             * this handles submitting and resetting the order form
+             *
+             */
             if (e.getSource() == submitButton) {
                     String currTime = LocalDate.now() +" "+ LocalTime.now().toString();
                     String orderTime = Timestamp.valueOf(currTime.substring(0,currTime.length()-7)).toString();
                 String extrasString ="";
                 Sandwich sandwich = generateSandwichObject(sandwichOrder.getSelectedItem().toString().strip());
+
                 for (JRadioButton jRadioButton : extrasList) {
                     if (jRadioButton.isSelected()) {
                         extrasString+= jRadioButton.getText() + " ";
                         sandwich = addCondiment(sandwich, jRadioButton.getText());
                     }
                 }
+                double orderCost = sandwich.cost();
                     String data
                             = "Name : "
                             + name.getText() + "\n"
@@ -179,7 +208,8 @@ public class OrderInterface extends JFrame implements ActionListener {
                             + "Extras : "
                             + extrasString.strip() + "\n"
                             + "Order Time : "
-                            + orderTime + "\n";
+                            + orderTime + "\n"
+                            + "Order Cost: $" + String.format("%.2f", orderCost) +"\n";
 
                     summary.setText(data);
                     summary.setEditable(false);
