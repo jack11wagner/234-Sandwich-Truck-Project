@@ -24,6 +24,14 @@ public class OrderList {
         orderList = new ArrayList<>();
         addressesUsed = new HashSet<>();
     }
+    public OrderList(OrderList orderList) {
+        /**
+         * Copy constructor for OrderList
+         * @param: OrderList orderList - an instance of an OrderList
+         */
+        this.orderList = orderList.getOrderList();
+        addressesUsed = new HashSet<>();
+    }
     public OrderList(String filename) throws IOException, FileFormatException {
         /**
          * Reads an order file and adds each order to the order list from a file
