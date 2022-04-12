@@ -36,7 +36,7 @@ public class Truck implements Subject{
     public Truck(OrderStrategy orderStrat, NavigationStrategy navStrat) {
         /**
          * This constructor should be used CAREFULLY. It is used strictly for calculating distances
-         * NOT meant for the actual simulation
+         * NOT meant to be used for the actual simulation
          */
         this.window = null;
         this.orderStrat = orderStrat;

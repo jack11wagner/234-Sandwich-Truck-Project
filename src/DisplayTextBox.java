@@ -10,6 +10,10 @@ public class DisplayTextBox extends JPanel {
     }
 
     public void paint(Graphics g) {
+        /**
+         * Draws the text in the text box
+         * Roughly on center
+         */
         Graphics2D g2 = (Graphics2D) g;
         g2.setPaint(Color.BLACK);
         g2.setFont(new Font("Arial", Font.PLAIN, 11));
@@ -17,6 +21,9 @@ public class DisplayTextBox extends JPanel {
     }
 
     public void setText(String text) {
+        /**
+         * Sets the text to be displayed in the text box
+         */
         this.text = text;
     }
 }
