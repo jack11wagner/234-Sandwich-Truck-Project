@@ -137,7 +137,7 @@ public class Truck implements Subject{
                 if (currOrderIndex == orderQueueCopy.size()){
                     System.out.println("No more orders...");
                 }
-                window.repaint();
+                window.repaintTruck(x, y);
                 SimSettings.pauseAtDestination();
                 window.removePin();
                 continue;
