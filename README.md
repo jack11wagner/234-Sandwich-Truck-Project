@@ -39,6 +39,8 @@ CSCI 234 (Introduction to Software Engineering) - Spring 2022
    -  Create a route for the truck based on the closest distance to the Truck (minimizing Truck distance)
    -  Creating a route for the truck with only right hand turns allowed
 
+--- 
+
 ### Sprint 3:
 *Documents*:
  - [Sprint 3 Backlog Spreadsheet](https://docs.google.com/spreadsheets/d/1dCywnvdkOuftok5vNE39xSt9anSWkck5EAbAx4W9aYU/edit?usp=sharing)
