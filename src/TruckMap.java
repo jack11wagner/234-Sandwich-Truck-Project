@@ -80,6 +80,10 @@ public class TruckMap extends JPanel {
         int verticalRoadName = SimSettings.NUM_ROADS;
         char horizontalRoadName = 'A';
 
+        // paint the background light gray
+        g2D.setColor(new Color(200, 200, 200));
+        g2D.fillRect(0, 0, SimSettings.DIMENSION, SimSettings.DIMENSION);
+
         for (int i = 0; i < SimSettings.NUM_ROADS; i++) {
             // draw roads
             g2D.setPaint(Color.BLACK);
