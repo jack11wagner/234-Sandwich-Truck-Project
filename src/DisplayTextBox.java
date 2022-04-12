@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This class is used to display text in a text box on the top of the screen
+ */
 public class DisplayTextBox extends JPanel {
     String text = "";
 
