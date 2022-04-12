@@ -176,10 +176,17 @@ public class Window extends JFrame implements ActionListener {
     }
 
     public void setDeliveryText(String text) {
+        /**
+         * This method serves the purpose of setting the delivery text when delivering an order
+         */
         tMap.setDeliveryText(text);
     }
 
     public void setShortestDistanceText(String text) {
+        /**
+         * This method serves the purpose of setting the text of the shortest distance label
+         * then repainting the text field
+         */
         displayTextField.setText(text);
         displayTextField.repaint();
     }
