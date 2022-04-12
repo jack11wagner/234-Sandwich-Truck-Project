@@ -3,6 +3,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
+/**
+ * This class compares all distances for all combinations of navigation and order strategies and returns a
+ * hashmap with the results.
+ */
 public class DistanceComparer {
 
     private OrderList ol;
