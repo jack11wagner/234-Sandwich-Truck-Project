@@ -41,6 +41,7 @@ public class Order {
         this.sandwichOrder = sandwichObject.getDescription();
         this.fullOrderDetails = "";
         this.orderAddress = "";
+        this.customer = new Customer("new Customer");
     }
 
     public Order(String timestamp, String address, Sandwich sandwich, Customer customer){
@@ -79,6 +80,7 @@ public class Order {
         this.orderCost = cost;
         this.fullOrderDetails = timestamp + "," + address + "," + orderContents + "," + cost;
         this.orderAddress = address;
+        this.customer = new Customer("new Customer");
     }
 
     public void generateRandomFields(HashSet<String> addressesUsed) {
