@@ -48,5 +48,10 @@ CSCI 234 (Introduction to Software Engineering) - Spring 2022
 
 **Goals included:**
 
-   - 
+   - Add sandwich orders to the file containing destinations and time of order.
+   - Model the making of sandwich orders
+   - Model the delivery of the order
+   - User can select a Routing Strategy
+   - Customers who have made orders should be able to keep track of the sandwich trucks location 
+   - Compare the distances traveled for each strategy on the same set of orders
 
