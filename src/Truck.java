@@ -36,7 +36,7 @@ public class Truck implements Subject{
     public Truck(OrderStrategy orderStrat, NavigationStrategy navStrat) {
         /**
          * This constructor should be used CAREFULLY. It is used strictly for calculating distances
-         * NOT meant for the actual simulation
+         * NOT meant to be used for the actual simulation
          */
         this.window = null;
         this.orderStrat = orderStrat;
@@ -137,7 +137,7 @@ public class Truck implements Subject{
                 if (currOrderIndex == orderQueueCopy.size()){
                     System.out.println("No more orders...");
                 }
-                window.repaint();
+                window.repaintTruck(x, y);
                 SimSettings.pauseAtDestination();
                 window.removePin();
                 continue;
@@ -191,6 +191,9 @@ public class Truck implements Subject{
     }
 
 
+    /**
+     * method updates every customer everytime the truck moves with the new coordinates of the truck
+     */
     @Override
     public void notifyCustomers() {
         for (Customer customer : SimSettings.customerList) {
@@ -198,11 +201,21 @@ public class Truck implements Subject{
         }
     }
 
+
+    /**
+     * method to remove a customer from the list of customers
+     * @param: a customer object noting the customer to remove from the list of customers
+     */
     @Override
     public void removeCustomer(Customer customer) {
         SimSettings.customerList.remove(customer);
     }
 
+
+    /**
+     * method to add a customer to the list of customers
+     * @param: a customer object noting the customer to add to the list of customers
+     */
     @Override
     public void registerCustomer(Customer customer) {
         SimSettings.customerList.add(customer);
