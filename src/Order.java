@@ -18,9 +18,6 @@ public class Order {
     private Timestamp orderTimestamp;
     private String orderDate;
     private String orderAddress;
-
-
-
     private Sandwich sandwichObject;
     private String sandwichOrder;
     private double orderCost;
