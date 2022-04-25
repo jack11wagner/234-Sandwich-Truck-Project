@@ -29,6 +29,7 @@ public class DistanceBasedStrategy implements OrderStrategy{
 
         this.orderQueue = new LinkedList<>();
         this.orderList = orderList.getOrderList();
+        //SimSettings.distanceOrderQueue = this.orderQueue;
         simTruckX = SimSettings.INITIAL_TRUCK_X;
         simTruckY = SimSettings.INITIAL_TRUCK_Y;
         orderListObj = orderList;
@@ -100,6 +101,7 @@ public class DistanceBasedStrategy implements OrderStrategy{
          */
         for(int i=0 ;i< orderList.size();i++){
             orderQueue.add(getClosestOrder());
+            SimSettings.distanceOrderQueue.add(getClosestOrder());
         }
     }
 

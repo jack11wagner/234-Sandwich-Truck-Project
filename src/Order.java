@@ -39,6 +39,7 @@ public class Order {
         this.fullOrderDetails = "";
         this.orderAddress = "";
         this.customer = new Customer("new Customer");
+        SimSettings.customerList.add(this.customer);
     }
 
     public Order(String timestamp, String address, Sandwich sandwich, Customer customer){

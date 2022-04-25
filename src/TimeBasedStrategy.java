@@ -23,6 +23,7 @@ public class TimeBasedStrategy implements OrderStrategy{
          * The orderQueue is based on comparison of Time of Order placement
          */
         orderQueue = new PriorityQueue<>(new TimeComparator());
+        //SimSettings.timeOrderQueue = this.orderQueue;
         this.orderList = orderList.getOrderList();
         orderListObj = orderList;
     }
@@ -64,6 +65,13 @@ public class TimeBasedStrategy implements OrderStrategy{
 
          */
         orderQueue.addAll(orderList);
+        if (SimSettings.counter == 1) {
+            SimSettings.timeOrderQueue.addAll(orderQueue);
+            System.out.println(orderQueue.size());
+        }
+        SimSettings.counter +=1;
+        //SimSettings.removeDuplicates(SimSettings.timeOrderQueue);
+        //System.out.println(orderQueue.size());
     }
 
     @Override

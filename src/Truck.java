@@ -123,7 +123,6 @@ public class Truck implements Subject{
         int currOrderIndex = 0;
         Order currOrder;
         for (int[] instruction : navInstructions) {
-            notifyCustomers();
             if (instruction[1] == -1) {
                 // modeling goes on here
                 currOrder = (Order) orderQueueCopy.get(currOrderIndex);
@@ -140,6 +139,9 @@ public class Truck implements Subject{
                 window.repaintTruck(x, y);
                 SimSettings.pauseAtDestination();
                 window.removePin();
+
+                SimSettings.distanceOrderQueue.remove(currOrder);
+                SimSettings.timeOrderQueue.remove(currOrder);
                 continue;
             }
 
@@ -161,6 +163,8 @@ public class Truck implements Subject{
                     y -= SimSettings.TRUCK_SPEED;
                 }
                 window.repaintTruck(x, y);
+                window.updateOrderPanel();
+                notifyCustomers();
                 SimSettings.cycle();
             }
         }
