@@ -46,7 +46,7 @@ public class DistanceComparer {
 
                 Collection<int[]> navInstructions = navStrat.calculateNavInstructions(-1, new int[]{SimSettings.INITIAL_TRUCK_X, SimSettings.INITIAL_TRUCK_Y}, orderDestinationsInOrder);
                 int distance = sumDistances(navInstructions);
-                quickestStrategies.put(i + " " + j, distance / SimSettings.ROAD_SPACING); // one block 1 mile, so road spacing = 1 mile
+                quickestStrategies.put(i + " " + j, (int) ((distance / SimSettings.ROAD_SPACING) * 0.1)); // one block 1 mile, so road spacing = 1 mile
             }
         }
         return quickestStrategies;
