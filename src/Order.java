@@ -38,7 +38,7 @@ public class Order {
         this.sandwichOrder = sandwichObject.getDescription();
         this.fullOrderDetails = "";
         this.orderAddress = "";
-        this.customer = new Customer("new Customer");
+        this.customer = new Customer();
     }
 
     public Order(String timestamp, String address, Sandwich sandwich, Customer customer){
@@ -56,14 +56,15 @@ public class Order {
         this.sandwichObject = sandwich;
         this.sandwichOrder = this.sandwichObject.getDescription();
         this.orderCost = sandwich.cost();
-        this.fullOrderDetails = timestamp + "," + address + "," + sandwichOrder + ',' + String.format("%.2f",orderCost);
-        this.orderAddress = address;
         this.customer = customer;
+        this.fullOrderDetails = timestamp + "," + address + "," + sandwichOrder + ',' + String.format("%.2f",orderCost) + ',' + customer.getCustomerName();
+        this.orderAddress = address;
+
 
     }
 
 
-    public Order(String timestamp, String address, String orderContents, double cost) {
+    public Order(String timestamp, String address, String orderContents, double cost, String customerName) {
         /**
          * Constructor for Order Class used for when reading a premade file
          * @param : String timestamp - The timestamp of an order
@@ -75,9 +76,9 @@ public class Order {
         this.orderTimestamp = Timestamp.valueOf(timestamp);
         this.sandwichOrder = orderContents;
         this.orderCost = cost;
-        this.fullOrderDetails = timestamp + "," + address + "," + orderContents + "," + cost;
+        this.fullOrderDetails = timestamp + "," + address + "," + orderContents + "," + cost +',' + customerName;
         this.orderAddress = address;
-        this.customer = new Customer("new Customer");
+        this.customer = new Customer(customerName);
     }
 
     public void generateRandomFields(HashSet<String> addressesUsed) {
@@ -89,6 +90,7 @@ public class Order {
         setRandomSandwichOrder();
         setFullOrderDetails();
     }
+
 
     public Sandwich getRandomSandwichChoice(){
          /**
@@ -109,9 +111,6 @@ public class Order {
            default: return new Italian();
        }
     }
-
-
-
     private int getRandomNumber(int min , int max)
     {
         /**
@@ -190,7 +189,7 @@ public class Order {
         /**
          * Sets fullOrderDetails to the concatenated string of orderTimestamp, orderAddress and OrderContents
          */
-        fullOrderDetails= this.getOrderTimestamp() + "," + this.orderAddress +  "," + this.sandwichOrder +","+ String.format("%.2f",this.orderCost);
+        fullOrderDetails= this.getOrderTimestamp() + "," + this.orderAddress +  "," + this.sandwichOrder +","+ String.format("%.2f",this.orderCost) +"," + this.customer.getCustomerName();
     }
 
     public void setSandwichOrder(Sandwich sandwich) {
@@ -257,4 +256,10 @@ public class Order {
     }
 
 
+    public Customer getCustomer() {
+        /**
+         * @returns customer which is a Customer object
+         */
+        return customer;
+    }
 }

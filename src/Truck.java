@@ -29,7 +29,6 @@ public class Truck implements Subject{
         this.orderStrat = orderStrat;
         this.orderStrat.createOrderQueue();
         orderQueueCopy =  orderStrat.getOrderQueue().stream().toList();
-
         this.navStrat = navStrat;
     }
 
