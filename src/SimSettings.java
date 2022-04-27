@@ -18,6 +18,7 @@ public class SimSettings {
     public static final int NUM_HOUSES_PER_BLOCK = 10;
     public static final int DELIVERY_TIME = 2000;
     public static final String SERVICE_CENTER = "550 5 St.";
+    public static final ArrayList<Order> newOrders = new ArrayList<>();
 
     private static final int[] initial_truck_xy = new AddressConverter().convert(SERVICE_CENTER);
     public static final int INITIAL_TRUCK_X = initial_truck_xy[0];

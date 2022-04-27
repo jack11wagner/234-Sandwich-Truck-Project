@@ -1,7 +1,5 @@
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+
 /**
 Author: Nikolas Kovacs
 This class serves as the Truck in the simulator and contains the functionality of the sandwich truck as well

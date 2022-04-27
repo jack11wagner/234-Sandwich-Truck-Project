@@ -219,6 +219,7 @@ public class OrderInterface extends JFrame implements ActionListener {
                     customer.registerOrder(order);
                     orderList.addOrder(order);
                     SimSettings.orderList = orderList;
+                    SimSettings.newOrders.add(order);
 
                     try {
                         orderList.writeOrdersToFile();
