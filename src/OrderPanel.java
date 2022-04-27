@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class OrderPanel extends JFrame {
     /**
@@ -15,6 +16,7 @@ public class OrderPanel extends JFrame {
     private final JTextArea ordersTextArea;
     private String sandwich;
     private ArrayList<String> condiments = new ArrayList<>();
+    private PriorityQueue<Order> orderQueue;
 
 
     OrderPanel() {
@@ -41,6 +43,8 @@ public class OrderPanel extends JFrame {
         orderFrame.setLayout(new FlowLayout());
         //this.add(scroll);
         this.setVisible(true);
+
+        orderQueue = new PriorityQueue<>();
     }
 
 
@@ -76,47 +80,27 @@ public class OrderPanel extends JFrame {
         String orders = "";
         String truckLocation = SimSettings.customerList.get(99).getCurrentTruckAddress();
         if (orderStrategy instanceof TimeBasedStrategy) {
+            fillOrderQueue();
             for (Order order : SimSettings.timeOrderQueue) {
-//            orders += order.toString() + "\n";
                 orders += buildOrderString(order);
             }
         }
         if (orderStrategy instanceof DistanceBasedStrategy) {
             for (Order order : SimSettings.distanceOrderQueue) {
-//            orders += order.toString() + "\n";
                 orders += buildOrderString(order);
             }
         }
         ordersTextArea.setText("Truck Location: " + truckLocation + " \n\nNext Orders: \n" + orders);
     }
 
-//    public void update(OrderStrategy orderStrategy) {
-//        String orders = "";
-//        String truckLocation = SimSettings.customerList.get(99).getCurrentTruckAddress();
-//
-//        for (Object order : orderStrategy.getOrderQueue().stream().toList()) {
-//            orders += order.toString();
-//            //orders += buildOrderString(order);
-//        }
-//
-//        if (orderStrategy instanceof TimeBasedStrategy) {
-//            for (Order order : SimSettings.timeOrderQueue) {
-////            orders += order.toString() + "\n";
-//                orders += buildOrderString(order);
-//            }
-//        }
-//        if (orderStrategy instanceof DistanceBasedStrategy) {
-//            for (Order order : SimSettings.distanceOrderQueue) {
-////            orders += order.toString() + "\n";
-//                orders += buildOrderString(order);
-//            }
-//        }
-//        ordersTextArea.setText("Truck Location: " + truckLocation + " \n\nNext Orders: \n" + orders);
-//    }
-
-
     private String buildOrderString(Order order) {
         return order.getOrderTimestamp() + " " + order.getOrderAddress() + "\t\n" + order.getSandwichOrder() + "\n\n";
+    }
+
+    private void fillOrderQueue() {
+        while(SimSettings.staticTimeOrderQueue.size() > 0) {
+            SimSettings.timeOrderQueue.add(SimSettings.staticTimeOrderQueue.poll());
+        }
     }
 
 

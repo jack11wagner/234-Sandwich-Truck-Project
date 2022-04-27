@@ -30,7 +30,8 @@ public class SimSettings {
 
     // list of customers that are observing the truck and waiting for an order to be delivered
     public static OrderList orderList;
-    public static PriorityQueue<Order> timeOrderQueue = new PriorityQueue<>(new TimeComparator());
+    public static ArrayList<Order> timeOrderQueue = new ArrayList<>();
+    public static PriorityQueue<Order> staticTimeOrderQueue = new PriorityQueue<>(new TimeComparator());
     public static Queue<Order> distanceOrderQueue = new LinkedList<>();
     public static ArrayList<Customer> customerList = new ArrayList<>();
 

@@ -66,8 +66,10 @@ public class TimeBasedStrategy implements OrderStrategy{
          */
         orderQueue.addAll(orderList);
         if (SimSettings.counter == 1) {
-            SimSettings.timeOrderQueue.addAll(orderQueue);
-            System.out.println(orderQueue.size());
+            //SimSettings.timeOrderQueue.addAll(orderQueue);
+            SimSettings.staticTimeOrderQueue.addAll(orderQueue);
+            //Arrays.sort(SimSettings.timeOrderQueue.toArray());
+            //System.out.println(orderQueue.size());
         }
         SimSettings.counter +=1;
         //SimSettings.removeDuplicates(SimSettings.timeOrderQueue);
