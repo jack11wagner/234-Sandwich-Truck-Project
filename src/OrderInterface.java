@@ -218,6 +218,8 @@ public class OrderInterface extends JFrame implements ActionListener {
                     Order order = new Order(orderTime, orderAddress.getText().strip(), sandwich, customer);
                     customer.registerOrder(order);
                     orderList.addOrder(order);
+                    SimSettings.orderList = orderList;
+                    SimSettings.newOrders.add(order);
 
                     try {
                         orderList.writeOrdersToFile();
@@ -231,9 +233,7 @@ public class OrderInterface extends JFrame implements ActionListener {
                     ex.printStackTrace();
                 }
                 confirmationLabel.setText("Order Confirmed...");
-
                 }
-
             else if (e.getSource() == resetButton) {
                 String def = "";
                 name.setText(def);

@@ -1,5 +1,8 @@
 import java.sql.Timestamp;
 import java.util.*;
+import java.util.ArrayList;
+import java.util.Queue;
+
 
 /**
 Author: Nikolas Kovacs
@@ -15,10 +18,11 @@ public class SimSettings {
     public static final int TRUCK_SPEED = 1; // unit = pixels per cycle (defined below)
     public static final int SIM_SPEED = 10; // unit = milliseconds: how often the cycle repeats (defined below)
     public static final int PIN_SIZE = DIMENSION / 25;
-    public static final int NUMBER_OF_ORDERS = 100;
+    public static final int NUMBER_OF_ORDERS = 5;
     public static final int NUM_HOUSES_PER_BLOCK = 10;
     public static final int DELIVERY_TIME = 2000;
     public static final String SERVICE_CENTER = "550 5 St.";
+    public static final ArrayList<Order> newOrders = new ArrayList<>();
 
     private static final int[] initial_truck_xy = new AddressConverter().convert(SERVICE_CENTER);
     public static final int INITIAL_TRUCK_X = initial_truck_xy[0];

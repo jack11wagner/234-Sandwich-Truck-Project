@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Random;
 
 public class Customer implements Observer {
 
@@ -17,6 +18,15 @@ public class Customer implements Observer {
      * the necessary variables and objects for the customer object
      * @param: a string noting the customers name
      */
+    public Customer() {
+        this.customerName = getRandomCustomerName();
+        this.converter = new AddressConverter();
+        this.letterAddresses = new HashMap<>();
+        this.numberAddresses = new HashMap<>();
+        fillLetterAddresses();
+        fillNumberAddresses();
+        this.order = null;
+    }
     public Customer(String name) {
         this.customerName = name;
         this.converter = new AddressConverter();
@@ -25,6 +35,28 @@ public class Customer implements Observer {
         fillLetterAddresses();
         fillNumberAddresses();
         this.order = null;
+    }
+    private String getRandomCustomerName(){
+        return getRandomCustomerFirstName() +" "+ getRandomCustomerLastName();
+    }
+    private String getRandomCustomerLastName(){
+        String[] lastnames = new String[] { "Anderson", "Ashwoon", "Aikin", "Bateman", "Bongard", "Bowers",
+                "Boyd", "Cannon", "Cast", "Deitz", "Dewalt", "Ebner", "Frick", "Hancock", "Haworth",
+                "Hesch", "Hoffman", "Kassing", "Knutson", "Lawless", "Lawicki", "Mccord", "McCormack",
+                "Miller", "Myers", "Nugent", "Ortiz", "Orwig", "Ory", "Paiser", "Pak", "Pettigrew",
+                "Quinn", "Quizoz", "Ramachandran", "Resnick", "Sagar", "Schickowski", "Schiebel", "Sellon",};
+        return lastnames[new Random().nextInt(lastnames.length)];
+    }
+
+    private String getRandomCustomerFirstName(){
+        String[] firstnames = new String[] {"Michael",
+                "Christopher", "Jessica", "Matthew" ,"Ashley" ,"Jennifer" ,
+                "Joshua" ,"Amanda" ,"Daniel" ,"David" ,"James" ,"Robert" ,"John" ,"Joseph" ,"Andrew" ,
+                "Ryan" ,"Brandon" ,"Jason" ,"Justin" ,"Sarah" ,"William" ,"Jonathan" ,"Stephanie" ,
+                "Brian" ,"Nicole" ,"Nicholas" ,"Anthony" ,"Heather" ,"Eric" ,"Elizabeth" ,"Adam",
+                "Megan" ,"Melissa" ,"Kevin", "Steven" ,"Thomas" ,"Timothy" ,"Christina" ,
+                "Kyle" ,"Rachel" ,"Laura" ,"Lauren" ,"Amber" ,"Brittany" ,"Danielle"};
+        return firstnames[new Random().nextInt(firstnames.length)];
     }
 
     /**
@@ -131,5 +163,9 @@ public class Customer implements Observer {
         else {
             return false;
         }
+    }
+
+    public String getCustomerName() {
+        return customerName;
     }
 }

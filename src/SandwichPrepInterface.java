@@ -34,6 +34,7 @@ public class SandwichPrepInterface extends JFrame {
         this.extractSandwichAndCondiments(currOrder.getSandwichOrder().split(" "));
         String sandwichPrepString =
                 "Time : " + currOrder.getOrderTimestamp() + "\n" +
+                "Customer Name : " + currOrder.getCustomer().getCustomerName() + "\n"+
                 "Making " + this.sandwich +
                 "\nAdding condiments:  ";
         for(String condiment : condiments){
@@ -45,7 +46,7 @@ public class SandwichPrepInterface extends JFrame {
         sandwichPrepFrame.setLayout(new FlowLayout());
         this.setVisible(true);
         fill(progBar);
-        Thread.sleep(1250);
+        Thread.sleep(1000);
         this.dispose();
 
     }
