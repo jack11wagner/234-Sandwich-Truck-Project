@@ -1,3 +1,5 @@
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.sql.Timestamp;
@@ -8,8 +10,8 @@ import java.util.Queue;
 
 public class OrderPanel extends JFrame {
     /**
-     * This Class Represents the Window that pops up when Sandwiches are being made
-     *
+     * This Class Represents the Window that pops up to display the upcoming orders and the
+     * current location of the truck
      */
     private final Container orderFrame;
     private final JLabel headinglabel;
@@ -21,9 +23,8 @@ public class OrderPanel extends JFrame {
 
     OrderPanel() {
         /**
-         * Constructor for SandwichPrepInterface which handles all the components of the Frame
-         * Adds a Text bar displaying the current time, a progress bar, and the sandwich order/condiments
-         * This is triggered when the truck reaches an order destination
+         * Constructor for OrderPanel which handles all the components of the Frame
+         * Adds a Text bar displaying the upcoming orders and location of the truck
          */
         setTitle("Orders");
         setBounds(10, 0, 350, 700);
@@ -35,8 +36,6 @@ public class OrderPanel extends JFrame {
         ordersTextArea = getjTextArea();
         //JScrollPane scroll = new JScrollPane (ordersTextArea);
         //scroll.setSize(325, 600);
-
-
 
         ordersTextArea.setText("Truck Location: \n\nOrders: \n\n");
 
@@ -76,6 +75,12 @@ public class OrderPanel extends JFrame {
     }
 
 
+    /**
+     * A method that updates the data output to the text area as the truck moves
+     * and delivers orders
+     * @param: this method takes an order strategy as a parameter to determine the
+     * order in which the customers orders are displayed
+     */
     public void update(OrderStrategy orderStrategy) {
         String orders = "";
         String truckLocation = SimSettings.customerList.get(99).getCurrentTruckAddress();
@@ -93,15 +98,27 @@ public class OrderPanel extends JFrame {
         ordersTextArea.setText("Truck Location: " + truckLocation + " \n\nNext Orders: \n" + orders);
     }
 
+
+    /**
+     * A helper method that builds the string (gets order information in a nice format)
+     * to output to the text area for each order
+     * @param: this method takes an order as a parameter to pull order information
+     * from and format it for the display
+     * @returns: this method returns a string of nicely formatted order data
+     */
     private String buildOrderString(Order order) {
         return order.getOrderTimestamp() + " " + order.getOrderAddress() + "\t\n" + order.getSandwichOrder() + "\n\n";
     }
 
+
+    /**
+     * A helper method that gets the customer orders in the correct order for
+     * the time based delivery strategy
+     */
     private void fillOrderQueue() {
         while(SimSettings.staticTimeOrderQueue.size() > 0) {
             SimSettings.timeOrderQueue.add(SimSettings.staticTimeOrderQueue.poll());
         }
     }
-
 
 }

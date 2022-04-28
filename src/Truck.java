@@ -10,7 +10,7 @@ as access to the window to update its position
 Edits by: Michael Shimer (added splitOrder method)
  */
 
-public class Truck implements Subject{
+public class Truck implements Subject {
     private int x = SimSettings.INITIAL_TRUCK_X;
     private int y = SimSettings.INITIAL_TRUCK_Y;
     private int direction = -1;
@@ -18,7 +18,7 @@ public class Truck implements Subject{
     private final AddressConverter addConverter = new AddressConverter();
     private final OrderStrategy orderStrat;
     private NavigationStrategy navStrat;
-    private List orderQueueCopy;
+    private ArrayList<Order> orderQueueCopy;
 
     public Truck(Window window, OrderStrategy orderStrat, NavigationStrategy navStrat) {
         /**
@@ -28,7 +28,9 @@ public class Truck implements Subject{
         this.window = window;
         this.orderStrat = orderStrat;
         this.orderStrat.createOrderQueue();
-        orderQueueCopy =  orderStrat.getOrderQueue().stream().toList();
+
+        orderQueueCopy = new ArrayList<Order>(orderStrat.getOrderQueue().stream().toList());
+        orderQueueCopy.sort(new TimeComparator());
 
         this.navStrat = navStrat;
     }
@@ -42,6 +44,8 @@ public class Truck implements Subject{
         this.orderStrat = orderStrat;
         this.orderStrat.createOrderQueue();
         this.navStrat = navStrat;
+        orderQueueCopy = new ArrayList<>();
+
     }
 
     private void setupQuickestTime() {
@@ -90,13 +94,10 @@ public class Truck implements Subject{
         }
         addPinsToMap(orderDestinationsInOrder);
         Collection<int[]> navInstructions = navStrat.calculateNavInstructions(direction, getTruckLocation(), orderDestinationsInOrder);
-        window.repaintTruck(x,y);
-        try
-        {
+        window.repaintTruck(x, y);
+        try {
             Thread.sleep(750);
-        }
-        catch(InterruptedException ex)
-        {
+        } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
         move(navInstructions);
@@ -132,8 +133,8 @@ public class Truck implements Subject{
                 window.triggerSandwichModelingPanel(currOrder);
 
                 window.setDeliveryText("Delivering Order");
-                System.out.println("Delivered Order " + currOrderIndex + "/" +orderQueueCopy.size());
-                if (currOrderIndex == orderQueueCopy.size()){
+                System.out.println("Delivered Order " + currOrderIndex + "/" + orderQueueCopy.size());
+                if (currOrderIndex == orderQueueCopy.size()) {
                     System.out.println("No more orders...");
                 }
                 window.repaintTruck(x, y);
@@ -175,7 +176,7 @@ public class Truck implements Subject{
          * Gets the current location coordinates of the truck
          * @return: array of coordinates
          */
-        return new int[]{x,y};
+        return new int[]{x, y};
     }
 
     private String[] splitOrder(String order) {
@@ -189,7 +190,7 @@ public class Truck implements Subject{
         String address;
         String foodOrder;
         splitOrderArray = order.split(",");
-        address =  splitOrderArray[1];
+        address = splitOrderArray[1];
         foodOrder = splitOrderArray[2];
         return new String[]{address, foodOrder};
     }
@@ -201,13 +202,14 @@ public class Truck implements Subject{
     @Override
     public void notifyCustomers() {
         for (Customer customer : SimSettings.customerList) {
-            customer.update(new int[] {x, y});
+            customer.update(new int[]{x, y});
         }
     }
 
 
     /**
      * method to remove a customer from the list of customers
+     *
      * @param: a customer object noting the customer to remove from the list of customers
      */
     @Override
@@ -218,10 +220,12 @@ public class Truck implements Subject{
 
     /**
      * method to add a customer to the list of customers
+     *
      * @param: a customer object noting the customer to add to the list of customers
      */
     @Override
     public void registerCustomer(Customer customer) {
         SimSettings.customerList.add(customer);
     }
+
 }
