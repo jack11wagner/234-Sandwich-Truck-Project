@@ -69,6 +69,11 @@ public class Customer implements Observer {
     }
 
 
+    public String getCurrentTruckAddress() {
+        return currentTruckAddress;
+
+    }
+
     /**
      * method updates the customer everytime the truck moves with the new coordinates of the truck
      * @param: an array of two integers, the first being the trucks x coordinate and the second the y
@@ -78,8 +83,7 @@ public class Customer implements Observer {
     public void update(int[] truckCoordinates) {
         xTruckCoord = truckCoordinates[0];
         yTruckCoord = truckCoordinates[1];
-        currentTruckAddress = getCurrentTruckAddress();
-        System.out.println("Address: " + currentTruckAddress);
+        currentTruckAddress = findCurrentTruckAddress();
 
     }
 
@@ -89,7 +93,7 @@ public class Customer implements Observer {
      * address the truck is at as it moves about the map
      * @returns: a string which corresponds to the current address of the truck
      */
-    private String getCurrentTruckAddress() {
+    private String findCurrentTruckAddress() {
 
         for (int[] coordinate : letterAddresses.keySet()) {
             if (isNearAddress(coordinate)) {

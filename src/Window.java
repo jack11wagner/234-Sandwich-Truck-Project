@@ -12,6 +12,7 @@ import java.io.IOException;
 
 public class Window extends JFrame implements ActionListener {
     private final TruckMap tMap = new TruckMap();
+    private OrderPanel orderPanel;
     private final JButton start_button;
     private final JComboBox order_strategy_dropdown;
     private final JComboBox navigation_strategy_dropdown;
@@ -44,6 +45,7 @@ public class Window extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+
 
         // Set up Map Panel (contains TruckMap)
         JPanel map_panel = new JPanel();
@@ -80,6 +82,9 @@ public class Window extends JFrame implements ActionListener {
         displayTextField = new DisplayTextBox();
         displayTextField.setText("Welcome to the Sandwich Truck Simulator!");
         this.add(displayTextField, BorderLayout.NORTH);
+
+        // Set up Order List Panel (contains OrderPanel)
+        orderPanel = new OrderPanel();
 
         this.setVisible(true);
     }
@@ -189,5 +194,9 @@ public class Window extends JFrame implements ActionListener {
          */
         displayTextField.setText(text);
         displayTextField.repaint();
+    }
+
+    public void updateOrderPanel() {
+        orderPanel.update(getOrderStrategy());
     }
 }

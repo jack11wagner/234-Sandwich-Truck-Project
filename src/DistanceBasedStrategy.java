@@ -100,6 +100,7 @@ public class DistanceBasedStrategy implements OrderStrategy{
          */
         for(int i=0 ;i< orderList.size();i++){
             orderQueue.add(getClosestOrder());
+            SimSettings.distanceOrderQueue.add(getClosestOrder());
         }
     }
 

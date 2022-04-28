@@ -64,6 +64,10 @@ public class TimeBasedStrategy implements OrderStrategy{
 
          */
         orderQueue.addAll(orderList);
+        if (SimSettings.counter == 1) {
+            SimSettings.staticTimeOrderQueue.addAll(orderQueue);
+        }
+        SimSettings.counter +=1;
     }
 
     @Override

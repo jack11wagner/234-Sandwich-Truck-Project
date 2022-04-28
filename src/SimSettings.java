@@ -1,11 +1,15 @@
+import java.sql.Timestamp;
+import java.util.*;
 import java.util.ArrayList;
 import java.util.Queue;
+
 
 /**
 Author: Nikolas Kovacs
 Any project-wide variables are stored here
  */
 public class SimSettings {
+    public static int counter = 0;
     public static final int DIMENSION = 700;
     public static final int NUM_ROADS = 10;
     public static final int ROAD_WIDTH = DIMENSION / 35;
@@ -30,6 +34,9 @@ public class SimSettings {
 
     // list of customers that are observing the truck and waiting for an order to be delivered
     public static OrderList orderList;
+    public static ArrayList<Order> timeOrderQueue = new ArrayList<>();
+    public static PriorityQueue<Order> staticTimeOrderQueue = new PriorityQueue<>(new TimeComparator());
+    public static Queue<Order> distanceOrderQueue = new LinkedList<>();
     public static ArrayList<Customer> customerList = new ArrayList<>();
 
     // Pricing for Menu
@@ -66,4 +73,17 @@ public class SimSettings {
             Thread.currentThread().interrupt();
         }
     }
+
+    public static void removeDuplicates(PriorityQueue<Order> queue) {
+        HashSet<Timestamp> orders = new HashSet<>();
+        for (Order order : queue) {
+            if (orders.contains(order.getOrderTimestamp())) {
+                queue.remove(order);
+            }
+            else {
+                orders.add(order.getOrderTimestamp());
+            }
+        }
+    }
+
 }
