@@ -83,7 +83,7 @@ public class OrderPanel extends JFrame {
      */
     public void update(OrderStrategy orderStrategy) {
         String orders = "";
-        String truckLocation = SimSettings.customerList.get(99).getCurrentTruckAddress();
+        String truckLocation = SimSettings.customerList.get(SimSettings.customerList.size()-1).getCurrentTruckAddress();
         if (orderStrategy instanceof TimeBasedStrategy) {
             fillOrderQueue();
             for (Order order : SimSettings.timeOrderQueue) {

@@ -16,7 +16,6 @@ public class Customer implements Observer {
     /**
      * constructor for the customer class which assigns the customer name, and instantiates
      * the necessary variables and objects for the customer object
-     * @param: a string noting the customers name
      */
     public Customer() {
         this.customerName = getRandomCustomerName();
@@ -28,6 +27,10 @@ public class Customer implements Observer {
         this.order = null;
     }
     public Customer(String name) {
+        /**
+         * Customer constructor if a name is specified
+         * @param: a string noting the customers name
+         */
         this.customerName = name;
         this.converter = new AddressConverter();
         this.letterAddresses = new HashMap<>();
@@ -37,9 +40,16 @@ public class Customer implements Observer {
         this.order = null;
     }
     private String getRandomCustomerName(){
+        /**
+         * method just calls the two private helper methods to create a random full name for a customer
+         **/
         return getRandomCustomerFirstName() +" "+ getRandomCustomerLastName();
     }
     private String getRandomCustomerLastName(){
+        /**
+         * private method which gets a random Last Name
+         * @returns: String from lastnames String array representing a customers last name
+         **/
         String[] lastnames = new String[] { "Anderson", "Ashwoon", "Aikin", "Bateman", "Bongard", "Bowers",
                 "Boyd", "Cannon", "Cast", "Deitz", "Dewalt", "Ebner", "Frick", "Hancock", "Haworth",
                 "Hesch", "Hoffman", "Kassing", "Knutson", "Lawless", "Lawicki", "Mccord", "McCormack",
@@ -49,6 +59,11 @@ public class Customer implements Observer {
     }
 
     private String getRandomCustomerFirstName(){
+        /**
+         * private method which gets a random First name
+         * @returns: String from firstnames String array representing a customers first name
+         **/
+
         String[] firstnames = new String[] {"Michael",
                 "Christopher", "Jessica", "Matthew" ,"Ashley" ,"Jennifer" ,
                 "Joshua" ,"Amanda" ,"Daniel" ,"David" ,"James" ,"Robert" ,"John" ,"Joseph" ,"Andrew" ,
@@ -59,17 +74,20 @@ public class Customer implements Observer {
         return firstnames[new Random().nextInt(firstnames.length)];
     }
 
-    /**
-     * method which takes assigns an order to a customer
-     * @param: an order object which corresponds to the order of the customer
-     */
+
     public void registerOrder(Order order)
     {
+        /**
+         * method which registers an order with a customer
+         **/
         this.order = order;
     }
 
 
     public String getCurrentTruckAddress() {
+        /**
+         * method which gets the current Truck Address as a string that has been converted
+         */
         return currentTruckAddress;
 
     }

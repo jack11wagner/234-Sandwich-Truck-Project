@@ -173,8 +173,6 @@ public class OrderInterface extends JFrame implements ActionListener {
             default -> null;
         };
     }
-
-
         // to get the action performed
         // by the user and act accordingly
     @Override
@@ -218,7 +216,6 @@ public class OrderInterface extends JFrame implements ActionListener {
                     Order order = new Order(orderTime, orderAddress.getText().strip(), sandwich, customer);
                     customer.registerOrder(order);
                     orderList.addOrder(order);
-                    SimSettings.orderList = orderList;
                     SimSettings.newOrders.add(order);
 
                     try {

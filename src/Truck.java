@@ -17,6 +17,7 @@ public class Truck implements Subject {
     private final OrderStrategy orderStrat;
     private NavigationStrategy navStrat;
     private ArrayList<Order> orderQueueCopy;
+    private int newOrders =SimSettings.newOrders.size();
 
     public Truck(Window window, OrderStrategy orderStrat, NavigationStrategy navStrat) {
         /**
@@ -119,6 +120,10 @@ public class Truck implements Subject {
          */
         int currOrderIndex = 0;
         Order currOrder;
+        if (SimSettings.newOrders.size()!=newOrders){
+            // We want to reorder the queue with the new order added
+            start();
+        }
         for (int[] instruction : navInstructions) {
             if (instruction[1] == -1) {
                 // modeling goes on here
