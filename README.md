@@ -55,3 +55,19 @@ CSCI 234 (Introduction to Software Engineering) - Spring 2022
    - Customers who have made orders should be able to keep track of the sandwich trucks location 
    - Compare the distances traveled for each strategy on the same set of orders
 
+
+--- 
+
+### Sprint 4:
+*Documents*:
+ - [Sprint 3 Backlog Spreadsheet](https://docs.google.com/spreadsheets/d/1dCywnvdkOuftok5vNE39xSt9anSWkck5EAbAx4W9aYU/edit?usp=sharing)
+ - [Sandwich Truck UML Diagram](https://lucid.app/lucidchart/932988ef-f22d-4d04-b39d-3a65a11236fe/edit?invitationId=inv_91029a7d-43b5-4ddf-94fe-f16673a04c81&page=0_0#)
+
+**Goals included:**
+
+   - Model delivery of an order
+   - Truck will return to Service Center when all orders are complete
+   - Change size of a block from 1 mile to 1/10
+   - Order Entry Interface
+   - Customers currently waiting for orders list
+
