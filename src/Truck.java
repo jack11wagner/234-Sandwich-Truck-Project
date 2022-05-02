@@ -90,6 +90,7 @@ public class Truck implements Subject {
             orderDestinationsInOrder.add(addConverter.convert(address)); // convert the address into a pair of coordinates and append
         }
         addPinsToMap(orderDestinationsInOrder);
+        orderDestinationsInOrder.add(addConverter.convert(SimSettings.SERVICE_CENTER));
         Collection<int[]> navInstructions = navStrat.calculateNavInstructions(direction, getTruckLocation(), orderDestinationsInOrder);
         window.repaintTruck(x, y);
         try {
@@ -127,24 +128,26 @@ public class Truck implements Subject {
         for (int[] instruction : navInstructions) {
             if (instruction[1] == -1) {
                 // modeling goes on here
-                currOrder = (Order) orderQueueCopy.get(currOrderIndex);
-                System.out.print(currOrder.getOrderTimestamp() + " : ");
-                currOrder.getSandwichObject().prepare();
-                currOrderIndex++;
-                window.triggerSandwichModelingPanel(currOrder);
+                if (instruction != navInstructions.toArray()[navInstructions.size() - 1]) {
+                    currOrder = (Order) orderQueueCopy.get(currOrderIndex);
+                    System.out.print(currOrder.getOrderTimestamp() + " : ");
+                    currOrder.getSandwichObject().prepare();
+                    currOrderIndex++;
+                    window.triggerSandwichModelingPanel(currOrder);
 
-                window.setDeliveryText("Delivering Order");
-                System.out.println("Delivered Order " + currOrderIndex + "/" + orderQueueCopy.size());
-                if (currOrderIndex == orderQueueCopy.size()) {
-                    System.out.println("No more orders...");
+                    window.setDeliveryText("Delivering Order");
+                    System.out.println("Delivered Order " + currOrderIndex + "/" + orderQueueCopy.size());
+                    if (currOrderIndex == orderQueueCopy.size()) {
+                        System.out.println("No more orders...");
+                    }
+                    window.repaintTruck(x, y);
+                    SimSettings.pauseAtDestination();
+                    window.removePin();
+
+                    SimSettings.distanceOrderQueue.remove(currOrder);
+                    SimSettings.timeOrderQueue.remove(currOrder);
+                    continue;
                 }
-                window.repaintTruck(x, y);
-                SimSettings.pauseAtDestination();
-                window.removePin();
-
-                SimSettings.distanceOrderQueue.remove(currOrder);
-                SimSettings.timeOrderQueue.remove(currOrder);
-                continue;
             }
 
             window.setDeliveryText("");
